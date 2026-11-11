@@ -5,9 +5,19 @@ import '../styles/bio.css';
 import config from '../../config.json';
 import { getPreset } from '../scripts/form-presets';
 
-// A bio atende todos os tipos de celebração, então usa o preset "social" (sem campo Empresa).
-// Para exigir a empresa, troque por 'corporativo'.
-const campos = getPreset('social');
+// A bio é geral (social + corporativo): usa o preset "corporativo" (empresa em 1º), mas o campo
+// Empresa só aparece, e só é obrigatório, quando o tipo de evento escolhido é corporativo.
+const campos = getPreset('corporativo');
+const tiposCorporativos = [
+  'Confraternizacao corporativa',
+  'Corporativo',
+  'Feiras e Exposicoes',
+  'Masterclass e Palestras',
+  'Mentorias e Treinamentos',
+  'Offsite corporativo',
+  'Reunioes de Networking',
+  'Workshops, Conferencias e Seminarios',
+];
 const webhook = config.forms['lead-form'].webhooks[0];
 const autoc: Record<string, string> = { nome: 'name', telefone: 'tel', email: 'email', empresa: 'organization' };
 // Colunas estreitas no celular: placeholders mais curtos que os do preset
@@ -64,10 +74,10 @@ const links = [
 
       <section class="bio__orcamento" id="orcamento-bio" aria-labelledby="orcamento-titulo">
         <h2 id="orcamento-titulo">Solicite orçamento</h2>
-        <form class="bio__form" id="orcamento" data-form-id="villa-mantova-bio" data-fonte="Landing page/bio" data-submit-url={webhook} data-grid-id="orcamento" data-success-id="orcamento-sucesso" novalidate>
+        <form class="bio__form" id="orcamento" data-form-id="villa-mantova-bio" data-fonte="Landing page/bio" data-submit-url={webhook} data-grid-id="orcamento" data-success-id="orcamento-sucesso" data-tipos-corporativos={JSON.stringify(tiposCorporativos)} novalidate>
           <input class="isca" type="text" name="website" aria-hidden="true" tabindex="-1" autocomplete="off" />
           {campos.map((c) => (
-            <div class:list={['campo', c.full && 'campo--todo']}>
+            <div class:list={['campo', c.full && 'campo--todo']} data-campo-empresa={c.name === 'empresa' ? '' : undefined} hidden={c.name === 'empresa'}>
               <label for={`form-field-${c.name}`}>{c.label}{c.hint && <span class="rotulo-hint"> ({c.hint})</span>}</label>
               {c.type === 'select' ? (
                 <select id={`form-field-${c.name}`} name={c.name} required={c.required}>
@@ -81,7 +91,8 @@ const links = [
                   name={c.name}
                   type={c.type}
                   placeholder={placeholders[c.name] ?? c.placeholder}
-                  required={c.required}
+                  required={c.required && c.name !== 'empresa'}
+                  disabled={c.name === 'empresa'}
                   autocomplete={autoc[c.name]}
                   inputmode={c.type === 'tel' || c.type === 'number' ? 'numeric' : undefined}
                   min={c.type === 'number' ? '1' : undefined}
@@ -115,6 +126,22 @@ const links = [
     import { initForms } from '../scripts/forms';
 
     initForms();
+
+    // Empresa: só para tipos de evento corporativos (aparece, vira obrigatória e entra no envio)
+    const formulario = document.querySelector<HTMLFormElement>('#orcamento');
+    const tipoEvento = formulario?.querySelector<HTMLSelectElement>('[name="tipo_evento"]');
+    const campoEmpresa = formulario?.querySelector<HTMLElement>('[data-campo-empresa]');
+    const empresa = campoEmpresa?.querySelector<HTMLInputElement>('input');
+    if (formulario && tipoEvento && campoEmpresa && empresa) {
+      const corporativos: string[] = JSON.parse(formulario.dataset.tiposCorporativos || '[]');
+      tipoEvento.addEventListener('change', () => {
+        const corporativo = corporativos.includes(tipoEvento.value);
+        campoEmpresa.hidden = !corporativo;
+        empresa.disabled = !corporativo;
+        empresa.required = corporativo;
+        if (!corporativo) empresa.value = '';
+      });
+    }
 
     const data = document.querySelector<HTMLInputElement>('[data-datepicker]');
     if (data) {
