@@ -1,0 +1,49 @@
+/* BIO · Villa Mantova — tokens e componentes iguais aos da LP /eventos-corporativos */
+:root{
+  --creme:#f5f1e8; --salvia:#d3dfcf; --salvia-viva:#a9c4a8; --musgo:#2f5a45; --verde:#1c3128; --verde-fundo:#14241d; --claro:#f5f1e8; --claro-suave:#c9d1ca;
+  --serifa:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif; --sans:"Mulish","Avenir Next","Avenir",Arial,sans-serif;
+  --font-display:var(--serifa); --font-body:var(--sans);
+}
+body{margin:0;background:var(--verde-fundo);color:var(--claro);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+h1{margin:0;font-family:var(--serifa);font-weight:500;font-optical-sizing:none;font-variation-settings:"opsz" 18;letter-spacing:.005em}
+ul{list-style:none;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--creme);outline-offset:3px}
+
+.bio{position:relative;display:flex;flex-direction:column;align-items:center;min-height:100svh;overflow:hidden;background:var(--verde-fundo)}
+
+/* Foto de fundo (LCP) com a mesma sobreposição escura do hero da LP */
+.bio__foto{position:absolute;inset:0;margin:0}
+.bio__foto img{display:block;width:100%;height:100%;object-fit:cover;object-position:64% 50%}
+.bio__foto::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(9,18,14,.92) 0%,rgba(9,18,14,.68) 45%,rgba(9,18,14,.38) 100%)}
+@media (min-width:861px) and (prefers-reduced-motion:no-preference){
+  .bio__foto img{transform-origin:50% 100%;animation:afasta 24s cubic-bezier(.3,.3,.55,1) both}
+}
+@keyframes afasta{from{transform:scale(1.09)}to{transform:scale(1)}}
+
+.bio__conteudo{position:relative;z-index:1;display:flex;flex:1;flex-direction:column;align-items:center;justify-content:center;gap:clamp(18px,3vh,28px);width:100%;max-width:480px;padding:clamp(40px,8vh,72px) 20px 24px;text-align:center}
+
+.marca{display:inline-flex;align-items:center;padding:10px 18px;background:var(--musgo);color:var(--claro);white-space:nowrap}
+.marca b{font:600 clamp(19px,5vw,24px)/1 var(--serifa);font-optical-sizing:none;font-variation-settings:"opsz" 11;letter-spacing:.14em}
+
+.bio h1{max-width:16em;font-size:clamp(24px,6.6vw,34px);line-height:1.16;text-wrap:balance}
+
+.bio__links{display:grid;gap:12px;width:100%;margin-top:clamp(8px,2vh,20px)}
+.bio__link{display:flex;align-items:center;gap:16px;width:100%;min-height:68px;padding:14px 18px;text-align:left;text-decoration:none;color:var(--claro);background:rgba(20,36,29,.55);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1px rgba(245,241,232,.4);transition:background-color .2s,color .2s,box-shadow .2s}
+.bio__link svg{box-sizing:content-box;flex:none;width:22px;height:22px;padding:11px;border-radius:50%;background:var(--salvia-viva);color:var(--verde);fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;transition:background-color .2s}
+.bio__texto{display:grid;gap:2px;min-width:0}
+.bio__texto b{font:600 17px/1.2 var(--sans)}
+.bio__texto small{font-size:14px;line-height:1.3;color:var(--claro-suave);text-wrap:balance;transition:color .2s}
+.bio__link:hover,.bio__link:focus-visible{background:var(--creme);color:var(--verde);box-shadow:inset 0 0 0 1px var(--creme)}
+.bio__link:hover small,.bio__link:focus-visible small{color:var(--musgo)}
+.bio__link:hover svg,.bio__link:focus-visible svg{background:var(--salvia)}
+
+.bio__rodape{position:relative;z-index:1;display:grid;justify-items:center;gap:10px;width:100%;padding:20px 20px 28px;font-size:12px;color:var(--claro);text-align:center}
+.bio__rodape p{margin:0;color:inherit}
+.bio__credito{display:flex;align-items:center;gap:8px}
+.bio__credito img{display:block;width:64px;height:auto}
+.bio__credito a{display:inline-flex}
+
+@media (prefers-reduced-motion:reduce){
+  .bio__foto img{animation:none}
+  .bio__link,.bio__link svg,.bio__texto small{transition:none}
+}
