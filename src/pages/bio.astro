@@ -2,6 +2,16 @@
 // BIO do Instagram · Villa Mantova. Mesma identidade da LP /eventos-corporativos.
 import Base from '../layouts/Base.astro';
 import '../styles/bio.css';
+import config from '../../config.json';
+import { getPreset } from '../scripts/form-presets';
+
+// A bio atende todos os tipos de celebração, então usa o preset "social" (sem campo Empresa).
+// Para exigir a empresa, troque por 'corporativo'.
+const campos = getPreset('social');
+const webhook = config.forms['lead-form'].webhooks[0];
+const autoc: Record<string, string> = { nome: 'name', telefone: 'tel', email: 'email', empresa: 'organization' };
+// Colunas estreitas no celular: placeholders mais curtos que os do preset
+const placeholders: Record<string, string> = { nome: 'Seu nome', email: 'seu@email.com' };
 
 const title = 'Villa Mantova | Links';
 const description = 'Natureza e versatilidade para diferentes celebrações e eventos.';
@@ -51,6 +61,45 @@ const links = [
           </li>
         ))}
       </ul>
+
+      <section class="bio__orcamento" id="orcamento-bio" aria-labelledby="orcamento-titulo">
+        <h2 id="orcamento-titulo">Solicite orçamento</h2>
+        <form class="bio__form" id="orcamento" data-form-id="villa-mantova-bio" data-fonte="Landing page/bio" data-submit-url={webhook} data-grid-id="orcamento" data-success-id="orcamento-sucesso" novalidate>
+          <input class="isca" type="text" name="website" aria-hidden="true" tabindex="-1" autocomplete="off" />
+          {campos.map((c) => (
+            <div class:list={['campo', c.full && 'campo--todo']}>
+              <label for={`form-field-${c.name}`}>{c.label}{c.hint && <span class="rotulo-hint"> ({c.hint})</span>}</label>
+              {c.type === 'select' ? (
+                <select id={`form-field-${c.name}`} name={c.name} required={c.required}>
+                  {c.options?.map((o) => <option value={o.value} disabled={o.disabled} selected={o.selected}>{o.label}</option>)}
+                </select>
+              ) : c.type === 'textarea' ? (
+                <textarea id={`form-field-${c.name}`} name={c.name} rows="3" required={c.required}></textarea>
+              ) : (
+                <input
+                  id={`form-field-${c.name}`}
+                  name={c.name}
+                  type={c.type}
+                  placeholder={placeholders[c.name] ?? c.placeholder}
+                  required={c.required}
+                  autocomplete={autoc[c.name]}
+                  inputmode={c.type === 'tel' || c.type === 'number' ? 'numeric' : undefined}
+                  min={c.type === 'number' ? '1' : undefined}
+                  maxlength={c.datepicker ? 10 : undefined}
+                  data-datepicker={c.datepicker ? '' : undefined}
+                />
+              )}
+            </div>
+          ))}
+          <button class="botao form-submit" type="submit">Solicitar Orçamento</button>
+          <p class="aviso" id="orcamentoFormMsg" role="status"></p>
+        </form>
+        <div class="sucesso" id="orcamento-sucesso" role="status">
+          <h3>Recebemos sua solicitação</h3>
+          <p>Em breve, nosso time entrará em contato com você.</p>
+        </div>
+        <p class="bio__privacidade">Usamos seus dados apenas para responder ao seu pedido de orçamento.</p>
+      </section>
     </div>
 
     <footer class="bio__rodape">
@@ -60,6 +109,23 @@ const links = [
   </main>
 
   <script>
+    import flatpickr from 'flatpickr';
+    import { Portuguese } from 'flatpickr/dist/l10n/pt.js';
+    import 'flatpickr/dist/flatpickr.min.css';
+    import { initForms } from '../scripts/forms';
+
+    initForms();
+
+    const data = document.querySelector<HTMLInputElement>('[data-datepicker]');
+    if (data) {
+      // máscara dd/mm/aaaa enquanto digita
+      data.addEventListener('input', () => {
+        const d = data.value.replace(/\D/g, '').slice(0, 8);
+        data.value = d.length > 4 ? d.slice(0, 2) + '/' + d.slice(2, 4) + '/' + d.slice(4) : d.length > 2 ? d.slice(0, 2) + '/' + d.slice(2) : d;
+      });
+      flatpickr(data, { locale: Portuguese, dateFormat: 'd/m/Y', minDate: 'today', allowInput: true });
+    }
+
     document.querySelectorAll('[data-ano]').forEach((el) => { el.textContent = String(new Date().getFullYear()); });
     // Clique nos botões da bio (fica no dataLayer para o GTM/GA4 quando houver container)
     document.querySelectorAll<HTMLAnchorElement>('[data-bio-link]').forEach((a) => {

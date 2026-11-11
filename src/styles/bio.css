@@ -37,6 +37,33 @@ ul{list-style:none;margin:0;padding:0}
 .bio__link:hover small,.bio__link:focus-visible small{color:var(--musgo)}
 .bio__link:hover svg,.bio__link:focus-visible svg{background:var(--salvia)}
 
+/* Cartão de orçamento (formulário padrão Dmove) */
+.bio__orcamento{width:100%;margin-top:clamp(8px,2vh,20px);padding:clamp(20px,5vw,28px) clamp(16px,4.5vw,24px);text-align:left;background:rgba(20,36,29,.72);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1px rgba(245,241,232,.4)}
+.bio__orcamento h2{margin:0 0 18px;font:500 clamp(22px,6vw,28px)/1.15 var(--serifa);font-optical-sizing:none;font-variation-settings:"opsz" 18;color:var(--claro)}
+.bio__form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 12px}
+.campo{display:grid;gap:4px;min-width:0}
+.campo--todo,.bio__form>.botao,.aviso{grid-column:1/-1}
+.campo label{font-size:12.5px;font-weight:600;color:var(--claro)}
+.rotulo-hint{font-weight:400;opacity:.8}
+.campo :is(input,select,textarea){width:100%;min-height:44px;padding:8px 10px;border:2px solid var(--creme);border-radius:0;background:var(--creme);color:var(--verde);font:400 15px var(--sans)}
+.campo :is(input,select,textarea)::placeholder{color:#6b776f;font-size:14px}
+.campo :is(input,select,textarea):focus{outline:none;border-color:var(--salvia-viva)}
+.campo select{appearance:none;-webkit-appearance:none;padding-right:34px;background:var(--creme) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%231c3128' stroke-width='1.8'%3E%3Cpath d='m5 8 5 5 5-5'/%3E%3C/svg%3E") no-repeat right 10px center/16px;cursor:pointer}
+.campo textarea{min-height:84px;resize:vertical;line-height:1.4}
+.botao{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:10px 24px;border:0;background:var(--salvia-viva);color:var(--verde);font:600 16px/1.2 var(--sans);cursor:pointer;transition:background-color .2s}
+.botao:hover{background:var(--salvia)}
+.botao:disabled{opacity:.7;cursor:wait}
+.aviso{margin:0;min-height:1.4em;font-size:14px;color:#f3b9a8}
+.aviso:empty{display:none}
+.isca{position:absolute;left:-9999px}
+.sucesso{display:none;padding:22px;background:var(--musgo);color:var(--claro)}
+.sucesso.active{display:block}
+.sucesso h3{margin:0;font:500 clamp(21px,5.5vw,26px)/1.2 var(--serifa);font-optical-sizing:none}
+.sucesso p{margin:8px 0 0;color:var(--claro-suave)}
+.bio__privacidade{margin:14px 0 0;font-size:12px;line-height:1.4;color:var(--claro-suave)}
+.flatpickr-calendar{font-family:var(--sans)}
+.flatpickr-day.selected,.flatpickr-day.selected:hover{background:var(--verde);border-color:var(--verde)}
+
 .bio__rodape{position:relative;z-index:1;display:grid;justify-items:center;gap:10px;width:100%;padding:20px 20px 28px;font-size:12px;color:var(--claro);text-align:center}
 .bio__rodape p{margin:0;color:inherit}
 .bio__credito{display:flex;align-items:center;gap:8px}
