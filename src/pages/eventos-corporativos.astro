@@ -1,0 +1,267 @@
+---
+// Landing page — Eventos corporativos · Villa Mantova
+// Gerada a partir do HTML do Claude Design (entrega original removida; histórico no git).
+import Base from '../layouts/Base.astro';
+import '../styles/eventos-corporativos.css';
+import config from '../../config.json';
+import { getPreset } from '../scripts/form-presets';
+
+const lead = config.forms['lead-form'];
+const campos = getPreset(lead.preset);
+const webhook = lead.webhooks[0];
+const autoc: Record<string, string> = { nome: 'name', telefone: 'tel', email: 'email', empresa: 'organization' };
+
+const title = 'Eventos corporativos perto de Alphaville | Villa Mantova';
+const description = 'Natureza integrada e ambientes versáteis para eventos corporativos de até 300 convidados, a 20 minutos de Alphaville, em Santana de Parnaíba.';
+const hero = 'https://media.dmove.com.br/clients/villa-mantova/photos/hero.webp';
+---
+
+<Base title={title} description={description} ogImage={hero} theme="light" hideWhatsApp={true}>
+  <script is:inline slot="head">document.documentElement.classList.add('js');</script>
+  <link rel="preload" as="image" href={hero} fetchpriority="high" slot="head" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" slot="head" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin slot="head" />
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600&family=Mulish:wght@300;400;600&display=swap" rel="stylesheet" slot="head" />
+
+<main id="topo">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__texto">
+    <a class="marca" href="#topo" aria-label="Villa Mantova, início da página"><b>VILLA MANTOVA</b></a>
+    <h1>Estrutura completa<br>para conectar pessoas<br>e impulsionar ideias</h1>
+    <p>Natureza integrada e ambientes versáteis para <br class="so-grande">eventos corporativos de diferentes formatos.</p>
+    <a class="botao" href="#contato">Solicite orçamento</a>
+  </div>
+  <figure class="hero__foto"><img src="https://media.dmove.com.br/clients/villa-mantova/photos/hero.webp" alt="Casa do Villa Mantova com varandas, jardim e céu azul" width="1537" height="1023" fetchpriority="high"></figure>
+</section>
+
+<!-- AUTORIDADE -->
+<div class="numeros">
+  <ul class="caixa">
+    <li><svg viewBox="0 0 32 32" aria-hidden="true"><path class="t" d="M4 7h24v21H4z"/><path d="M4 7h24v21H4zM4 13h24M11 3v7M21 3v7M11 21l3.500 3.500L21 18"/></svg><div><b>500+</b><span>Eventos realizados</span></div></li>
+    <li><svg viewBox="0 0 32 32" aria-hidden="true"><circle class="t" cx="16" cy="11" r="5"/><path class="t" d="M6 28v-3a10 10 0 0 1 20 0v3z"/></svg><div><b>Até 300</b><span>convidados</span></div></li>
+    <li><svg viewBox="0 0 32 32" aria-hidden="true"><path class="t" d="M16 29s10-8.500 10-16a10 10 0 0 0-20 0c0 7.500 10 16 10 16z"/><circle cx="16" cy="13" r="3.500"/></svg><div><b>Alphaville</b><span>a 20 minutos</span></div></li>
+    <li><svg viewBox="0 0 32 32" aria-hidden="true"><path class="t" d="M16 3l4 8.400 9.200 1.200-6.700 6.400 1.700 9.100L16 23.700l-8.200 4.400 1.700-9.100-6.700-6.400 9.200-1.200z"/></svg><div><b>4,9</b><span>Avaliação no Google</span></div></li>
+  </ul>
+  <div class="faixa-numeros" aria-hidden="true"><div class="faixa-numeros__trilho"><div class="faixa-numeros__grupo"><span><b>500+</b> Eventos realizados</span><span><b>Até 300</b> convidados</span><span><b>Alphaville</b> a 20 minutos</span><span><b>4,9</b> Avaliação no Google</span></div><div class="faixa-numeros__grupo"><span><b>500+</b> Eventos realizados</span><span><b>Até 300</b> convidados</span><span><b>Alphaville</b> a 20 minutos</span><span><b>4,9</b> Avaliação no Google</span></div></div></div>
+</div>
+
+<!-- EXPERIÊNCIA 360° -->
+<section class="secao" id="experiencia">
+  <div class="caixa">
+    <div class="duas surge">
+      <h2>Seu evento, <br class="so-celular">do planejamento <br class="so-celular">à execução, <br class="so-celular">em um só lugar</h2>
+      <p>No Villa Mantova, seu evento acontece em um <br class="so-grande">espaço onde natureza e estrutura trabalham juntas. <br class="so-grande">Os ambientes independentes permitem integrar <br class="so-grande">diferentes atividades, enquanto a infraestrutura <br class="so-grande">técnica e a equipe dedicada acompanham todas <br class="so-grande">as etapas da programação. Uma solução completa <br class="so-grande">para receber, conectar pessoas e proporcionar <br class="so-grande">experiências que vão além dos encontros tradicionais.</p>
+    </div>
+    <figure class="foto-larga surge"><img src="https://media.dmove.com.br/clients/villa-mantova/photos/experiencia.webp" alt="Coquetel corporativo sob o varal de luzes, em área coberta com bar" width="1376" height="768" loading="lazy"></figure>
+    <p class="sobre-cartao surge">Natureza e estrutura trabalham juntas no Villa Mantova. Ambientes independentes, infraestrutura técnica e equipe dedicada acompanham cada etapa.</p>
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section class="secao galeria" id="galeria">
+  <div class="caixa galeria__topo surge">
+    <h2>Veja como o espaço <br class="so-celular">se transforma para <br class="so-celular">cada evento</h2>
+    <div class="setas">
+      <button type="button" data-seta="-1" aria-label="Fotos anteriores"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.500 3 5.500 10l7 7"/></svg></button>
+      <button type="button" data-seta="1" aria-label="Próximas fotos"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7.500 3 7 7-7 7"/></svg></button>
+    </div>
+  </div>
+  <div class="carrossel" data-carrossel tabindex="0" role="region" aria-label="Galeria de fotos do Villa Mantova">
+    <figure><img src="https://media.dmove.com.br/clients/villa-mantova/photos/galeria-01.webp" alt="Grupo em almoço corporativo em mesas longas, sob a cobertura de lona" width="1600" height="1194" loading="lazy"></figure>
+    <figure><img src="https://media.dmove.com.br/clients/villa-mantova/photos/galeria-02.webp" alt="Entrada de confraternização com arco de flores e tapete vermelho" width="1195" height="1490" loading="lazy"></figure>
+    <figure><img src="https://media.dmove.com.br/clients/villa-mantova/photos/galeria-03.webp" alt="Área coberta com pergolado e jardim, vista a partir do deck de madeira" width="1440" height="960" loading="lazy"></figure>
+    <figure><img src="https://media.dmove.com.br/clients/villa-mantova/photos/galeria-04.webp" alt="Palestrante diante de plateia no salão coberto" width="1385" height="1800" loading="lazy"></figure>
+    <figure><img src="https://media.dmove.com.br/clients/villa-mantova/photos/galeria-05.webp" alt="Painel de conversa com palco, parede verde e plateia" width="1600" height="1194" loading="lazy"></figure>
+    <figure><img src="https://media.dmove.com.br/clients/villa-mantova/photos/galeria-06.webp" alt="Gramado sob as árvores, com a área coberta ao lado" width="1440" height="959" loading="lazy"></figure>
+    <figure><img src="https://media.dmove.com.br/clients/villa-mantova/photos/galeria-07.webp" alt="Salão com mesas redondas, cadeiras de madeira e parede de folhagens" width="731" height="914" loading="lazy"></figure>
+    <figure><img src="https://media.dmove.com.br/clients/villa-mantova/photos/galeria-08.webp" alt="Palestra ao ar livre sob tenda, com mesas e telão no jardim" width="1600" height="1073" loading="lazy"></figure>
+    <figure><img src="https://media.dmove.com.br/clients/villa-mantova/photos/galeria-09.webp" alt="Grande grupo reunido em foto no jardim" width="1440" height="1800" loading="lazy"></figure>
+    <figure><img src="https://media.dmove.com.br/clients/villa-mantova/photos/galeria-10.webp" alt="Palco com painel de LED e cadeiras de madeira no salão" width="1397" height="898" loading="lazy"></figure>
+    <figure><img src="https://media.dmove.com.br/clients/villa-mantova/photos/galeria-11.webp" alt="Recepção de evento corporativo com credenciamento sob a área coberta" width="1195" height="1490" loading="lazy"></figure>
+    <figure><img src="https://media.dmove.com.br/clients/villa-mantova/photos/galeria-12.webp" alt="Equipes em jogos e dinâmicas no gramado" width="1376" height="768" loading="lazy"></figure>
+    <figure><img src="https://media.dmove.com.br/clients/villa-mantova/photos/galeria-13.webp" alt="Palco montado com instrumentos, som e luz" width="1440" height="1800" loading="lazy"></figure>
+    <figure><img src="https://media.dmove.com.br/clients/villa-mantova/photos/galeria-14.webp" alt="Parede de luzes vermelhas com plataforma de vídeo 360" width="1440" height="959" loading="lazy"></figure>
+    <figure><img src="https://media.dmove.com.br/clients/villa-mantova/photos/galeria-15.webp" alt="Equipe em mesas de trabalho ao ar livre, em área coberta" width="1376" height="768" loading="lazy"></figure>
+  </div>
+  <div class="galeria__passar">
+    <button type="button" data-seta="-1" aria-label="Foto anterior"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.500 3 5.500 10l7 7"/></svg></button>
+    <span data-galeria-contador>1 / 15</span>
+    <button type="button" data-seta="1" aria-label="Próxima foto"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7.500 3 7 7-7 7"/></svg></button>
+  </div>
+</section>
+
+<!-- DIFERENCIAIS -->
+<section class="secao diferenciais" id="diferenciais">
+  <div class="caixa">
+    <h2 class="surge">Planejamento e estrutura para uma experiência completa</h2>
+    <div class="palco surge" data-palco>
+      <div class="palco__fotos">
+        <img class="ativa" src="https://media.dmove.com.br/clients/villa-mantova/photos/diferencial-infraestrutura.webp" alt="Palestra com telão e sistema de som em área coberta, com plateia sobre o gramado" style="object-position:50% 100%" width="1376" height="768" decoding="async">
+        <img src="https://media.dmove.com.br/clients/villa-mantova/photos/diferencial-ambientes.webp" alt="Coquetel ao ar livre ao entardecer, com mesas altas e piscina ao fundo" style="object-position:50% 82%" width="1600" height="1194" decoding="async">
+        <img src="https://media.dmove.com.br/clients/villa-mantova/photos/diferencial-casa-de-apoio.webp" alt="Convidados conversando na varanda e na sala da casa de apoio, com portas de madeira abertas" style="object-position:50% 55%" width="1536" height="1024" decoding="async">
+        <img src="https://media.dmove.com.br/clients/villa-mantova/photos/diferencial-personalizacao.webp" alt="Lounge com sofás de couro diante de painel de troncos e folhagens" style="object-position:50% 55%" width="937" height="1679" decoding="async">
+        <img src="https://media.dmove.com.br/clients/villa-mantova/photos/diferencial-localizacao.webp" alt="Jardim e área coberta do Villa Mantova, com a mata ao fundo" style="object-position:50% 80%" width="1536" height="1024" decoding="async">
+      </div>
+      <ul class="trilho">
+        <li class="ativo"><h3><button type="button" aria-expanded="true" aria-controls="dif-1">Infraestrutura técnica <br>e equipe dedicada</button></h3><img class="trilho__foto" src="https://media.dmove.com.br/clients/villa-mantova/photos/diferencial-infraestrutura.webp" alt="Palestra com telão e sistema de som em área coberta, com plateia sobre o gramado" style="object-position:50% 100%" width="1376" height="768" loading="lazy"><p id="dif-1">Som, projeção, wi-fi, iluminação e suporte técnico para acompanhar as necessidades do evento e garantir uma operação organizada.</p></li>
+        <li><h3><button type="button" aria-expanded="false" aria-controls="dif-2">Ambientes internos <br>e externos</button></h3><img class="trilho__foto" src="https://media.dmove.com.br/clients/villa-mantova/photos/diferencial-ambientes.webp" alt="Coquetel ao ar livre ao entardecer, com mesas altas e piscina ao fundo" style="object-position:50% 82%" width="1600" height="1194" loading="lazy"><p id="dif-2">Combine espaços fechados para palestras e apresentações com áreas ao ar livre para coffee breaks, pausas e momentos de interação.</p></li>
+        <li><h3><button type="button" aria-expanded="false" aria-controls="dif-3">Casa de apoio</button></h3><img class="trilho__foto" src="https://media.dmove.com.br/clients/villa-mantova/photos/diferencial-casa-de-apoio.webp" alt="Convidados conversando na varanda e na sala da casa de apoio, com portas de madeira abertas" style="object-position:50% 55%" width="1536" height="1024" loading="lazy"><p id="dif-3">Um ambiente reservado para preparação e <br class="so-grande">apoio de convidados, palestrantes e equipes.</p></li>
+        <li><h3><button type="button" aria-expanded="false" aria-controls="dif-4">Personalização</button></h3><img class="trilho__foto" src="https://media.dmove.com.br/clients/villa-mantova/photos/diferencial-personalizacao.webp" alt="Lounge com sofás de couro diante de painel de troncos e folhagens" style="object-position:50% 66%" width="937" height="1679" loading="lazy"><p id="dif-4">A disposição dos ambientes e a decoração podem ser adaptadas ao formato e aos objetivos de cada evento.</p></li>
+        <li><h3><button type="button" aria-expanded="false" aria-controls="dif-5">Localização estratégica</button></h3><img class="trilho__foto" src="https://media.dmove.com.br/clients/villa-mantova/photos/diferencial-localizacao.webp" alt="Jardim e área coberta do Villa Mantova, com a mata ao fundo" style="object-position:50% 80%" width="1536" height="1024" loading="lazy"><p id="dif-5">A 20 minutos de Alphaville, o Villa Mantova reúne praticidade de acesso, infraestrutura completa e contato com a natureza.</p></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTOS -->
+<section class="secao eventos" id="eventos">
+  <div class="caixa">
+    <h2 class="surge">Versatilidade para diferentes formatos de evento</h2>
+    <ul class="tiles surge">
+      <li class="tile"><svg viewBox="0 0 48 48" aria-hidden="true"><rect class="t" x="6" y="7" width="36" height="24" rx="2"/><path d="M12 25l7-7 6 4 10-9M24 31v4M15 42l9-7 9 7"/></svg><span>Treinamentos <br class="so-celular">e Workshops</span></li>
+      <li class="tile"><svg viewBox="0 0 48 48" aria-hidden="true"><path class="t" d="M13 22h22l-3 21H16z"/><path d="M9 22h30M24 22v-8M20 14h8M24 14a4 4 0 0 0 4-4V8a4 4 0 0 0-8 0v2a4 4 0 0 0 4 4zM19 43h10"/></svg><span>Congressos <br class="so-celular">e Palestras</span></li>
+      <li class="tile"><svg viewBox="0 0 48 48" aria-hidden="true"><path class="t" d="M24 4c7 5 9 13 9 20l-3 9H18l-3-9c0-7 2-15 9-20z"/><circle cx="24" cy="18" r="3.500"/><path d="M15 24l-6 8 8 2M33 24l6 8-8 2M20 37l1 5M28 37l-1 5M24 37v8"/></svg><span>Lançamentos <br class="so-celular">de Produtos</span></li>
+      <li class="tile"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M17 3l7 11 7-11"/><rect class="t" x="11" y="14" width="26" height="30" rx="2"/><circle cx="24" cy="25" r="4"/><path d="M17 38a7 7 0 0 1 14 0"/></svg>Convenções</li>
+      <li class="tile"><svg viewBox="0 0 48 48" aria-hidden="true"><g transform="rotate(-13 16 26)"><path class="t" d="M10 10h12l-1 11a5 5 0 0 1-10 0z"/><path d="M16 26v15M10.500 41h11"/></g><g transform="rotate(13 32 26)"><path class="t" d="M26 10h12l-1 11a5 5 0 0 1-10 0z"/><path d="M32 26v15M26.500 41h11"/></g><path d="M24 3v4M18 5l1.500 3M30 5l-1.500 3"/></svg>Confraternizações</li>
+      <li class="tile"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 12L10 35M24 12l14 23M10 37h28"/><circle class="t" cx="24" cy="10" r="6"/><circle class="t" cx="10" cy="37" r="6"/><circle class="t" cx="38" cy="37" r="6"/></svg>Team Building</li>
+    </ul>
+  </div>
+</section>
+
+<!-- GASTRONOMIA -->
+<section class="secao gastronomia" id="gastronomia">
+  <div class="caixa">
+    <div class="duas surge">
+      <figure><img src="https://media.dmove.com.br/clients/villa-mantova/photos/gastronomia.webp" alt="Coffee break com salgados em bandejas de metal" width="1200" height="800" loading="lazy"></figure>
+      <div class="gastronomia__texto">
+        <h2>Sabores que também fazem parte do seu evento</h2>
+        <p>O Villa Mantova conta com cozinha industrial e churrasqueira, <br class="so-largo">além de opções de catering que podem ser alinhadas ao formato <br class="so-largo">do evento, <br class="so-celular">à programação e às necessidades <br class="so-celular">dos participantes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS: trechos literais de avaliações do Google (ficha e site oficial). Confirmar com o cliente -->
+<section class="secao depoimentos" id="depoimentos">
+  <div class="caixa">
+    <h2 class="surge">A excelência percebida por quem escolheu o Villa Mantova</h2>
+    <div class="depo surge" data-depo>
+      <div class="depo__nota">
+        <div>
+          <b>4,9</b>
+          <svg class="estrelas" viewBox="0 0 100 18" aria-hidden="true"><path id="estrela" d="M9 0l2.300 5.600 6 .5-4.600 3.900 1.400 5.900L9 12.800 3.900 15.900l1.400-5.900L.7 6.100l6-.5z"/><use href="#estrela" x="20.500"/><use href="#estrela" x="41"/><use href="#estrela" x="61.500"/><use href="#estrela" x="82"/></svg>
+          <p>421 avaliações no Google</p>
+        </div>
+        <a href="https://maps.app.goo.gl/2MNL6t9TZynSQgs67" target="_blank" rel="noopener">Ver todas as avaliações</a>
+      </div>
+      <div class="depo__palco">
+        <svg class="depo__aspas" viewBox="0 0 56 40" aria-hidden="true"><path d="M0 40V24C0 10 8 2 22 0l2 6C15 8 11 13 11 20h11v20zm32 0V24c0-14 8-22 22-24l2 6c-9 2-13 7-13 14h11v20z"/></svg>
+        <ul class="depo__lista">
+          <li class="ativo"><blockquote>O Mantova possui uma estrutura incrível! A integração com a natureza deixa tudo ainda mais charmoso.</blockquote><p class="depo__autor"><i aria-hidden="true">L</i>Luciana Andrezza de Oliveira</p></li>
+          <li><blockquote>O espaço é encantador […] o serviço melhor do que o esperado.</blockquote><p class="depo__autor"><i aria-hidden="true">S</i>Sonia Soares</p></li>
+          <li><blockquote>Essa empresa é demais, desde o primeiro atendimento até a entrega da festa, impecáveis!</blockquote><p class="depo__autor"><i aria-hidden="true">P</i>Priscila Moraes</p></li>
+          <li><blockquote>O local é extremamente acolhedor […] Trecho asfaltado e ótima localização.</blockquote><p class="depo__autor"><i aria-hidden="true">I</i>Isabella Sales</p></li>
+          <li><blockquote>Espaço incrível, lindo, conservado, a divisão dos locais mto boas.</blockquote><p class="depo__autor"><i aria-hidden="true">C</i>Caroline Melo</p></li>
+          <li><blockquote>Desde o primeiro dia que estivemos no espaço sentimos calma e felicidades.</blockquote><p class="depo__autor"><i aria-hidden="true">B</i>Bia Oliveira Boscardini</p></li>
+        </ul>
+        <div class="depo__controle">
+          <span class="depo__contador" data-depo-contador aria-live="polite">1 / 6</span>
+          <button type="button" data-depo-seta="-1" aria-label="Depoimento anterior"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.500 3 5.500 10l7 7"/></svg></button>
+          <button type="button" data-depo-seta="1" aria-label="Próximo depoimento"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7.500 3 7 7-7 7"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCALIZAÇÃO -->
+<section class="secao localizacao" id="localizacao">
+  <div class="caixa">
+    <div class="duas surge">
+      <div class="localizacao__texto">
+        <h2>Localização estratégica, <br class="so-celular">cercada pela natureza</h2>
+        <address>R. Romênia, 21 - Maravilha lll,<br>Santana de Parnaíba - SP, 06523-045</address>
+        <a class="botao" href="https://maps.app.goo.gl/2MNL6t9TZynSQgs67" target="_blank" rel="noopener">Ver no mapa</a>
+      </div>
+      <div class="mapa"><a class="mapa__link" href="https://maps.app.goo.gl/2MNL6t9TZynSQgs67" target="_blank" rel="noopener" aria-label="Abrir a localização do Villa Mantova no Google Maps"></a><iframe title="Mapa com a localização do Villa Mantova" src="https://www.google.com/maps?q=Villa%20Mantova%20Eventos%2C%20R.%20Rom%C3%AAnia%2C%2021%2C%20Santana%20de%20Parna%C3%ADba%20-%20SP&amp;z=15&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO: formulário padrão Dmove (preset em config.json > forms.lead-form.preset) -->
+<section class="secao contato" id="contato">
+  <div class="caixa">
+    <div class="duas">
+      <div class="contato__texto surge">
+        <h2>Vamos planejar seu próximo evento corporativo?</h2>
+        <p>Preencha o formulário e, em breve, nosso time entrará em contato com você.</p>
+      </div>
+      <form class="formulario surge" id="orcamento" data-form-id="villa-mantova-corporativos" data-fonte="Landing page/eventos-corporativos" data-submit-url={webhook} data-grid-id="orcamento" data-success-id="orcamento-sucesso" novalidate>
+        <input class="isca" type="text" name="website" aria-hidden="true" tabindex="-1" autocomplete="off" />
+        {campos.map((c) => (
+          <div class:list={['campo', c.full && 'campo--todo']}>
+            <label for={`form-field-${c.name}`}>{c.label}{c.hint && <span class="rotulo-hint"> ({c.hint})</span>}</label>
+            {c.type === 'select' ? (
+              <select id={`form-field-${c.name}`} name={c.name} required={c.required}>
+                {c.options?.map((o) => <option value={o.value} disabled={o.disabled} selected={o.selected}>{o.label}</option>)}
+              </select>
+            ) : c.type === 'textarea' ? (
+              <textarea id={`form-field-${c.name}`} name={c.name} rows="4" required={c.required}></textarea>
+            ) : (
+              <input
+                id={`form-field-${c.name}`}
+                name={c.name}
+                type={c.type}
+                placeholder={c.placeholder}
+                required={c.required}
+                autocomplete={autoc[c.name]}
+                inputmode={c.type === 'tel' || c.type === 'number' ? 'numeric' : undefined}
+                min={c.type === 'number' ? '1' : undefined}
+                maxlength={c.datepicker ? 10 : undefined}
+                data-datepicker={c.datepicker ? '' : undefined}
+              />
+            )}
+          </div>
+        ))}
+        <button class="botao form-submit" type="submit">Solicitar Orçamento</button>
+        <p class="aviso" id="orcamentoFormMsg" role="status"></p>
+      </form>
+      <div class="sucesso" id="orcamento-sucesso" role="status">
+        <h3>Recebemos sua solicitação</h3>
+        <p>Em breve, nosso time entrará em contato com você.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="rodape">
+  <div class="caixa">
+    <a class="marca" href="#topo" aria-label="Villa Mantova, início da página"><b>VILLA MANTOVA</b></a>
+    <p>© <span data-ano>2026</span> Villa Mantova. Todos os direitos reservados.</p>
+    <p class="rodape__credito">Desenvolvido por <a href="https://dmove.com.br" target="_blank" rel="noopener"><img src="/images/logo-dmove.webp" alt="Dmove" width="600" height="134" loading="lazy"></a></p>
+  </div>
+</footer>
+
+  <script>
+    import flatpickr from 'flatpickr';
+    import { Portuguese } from 'flatpickr/dist/l10n/pt.js';
+    import 'flatpickr/dist/flatpickr.min.css';
+    import { initForms } from '../scripts/forms';
+    import '../scripts/eventos-corporativos.js';
+
+    initForms();
+
+    const data = document.querySelector<HTMLInputElement>('[data-datepicker]');
+    if (data) {
+      // máscara dd/mm/aaaa enquanto digita
+      data.addEventListener('input', () => {
+        const d = data.value.replace(/\D/g, '').slice(0, 8);
+        data.value = d.length > 4 ? d.slice(0, 2) + '/' + d.slice(2, 4) + '/' + d.slice(4) : d.length > 2 ? d.slice(0, 2) + '/' + d.slice(2) : d;
+      });
+      flatpickr(data, { locale: Portuguese, dateFormat: 'd/m/Y', minDate: 'today', allowInput: true });
+    }
+  </script>
+</Base>
