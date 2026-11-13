@@ -428,7 +428,7 @@ br.so-celular{display:none}
 /* Mobile: Sobre com foto vertical e retângulo deslocado atrás */
 @media (max-width:860px){
   #experiencia .foto-larga{width:min(84%,360px);margin:26px auto 0;aspect-ratio:4/5;box-shadow:14px 14px 0 var(--salvia-viva);transform-origin:50% 50%}
-  #experiencia .foto-larga img{transform:scale(1.3);transform-origin:45% 100%;object-position:45% 100%}
+  #experiencia .foto-larga img{transform:none;object-position:50% 100%}
   .sobre-cartao{margin:36px 0 0;padding:0;background:none;color:var(--verde);font-size:14px;line-height:1.35}
 }
 @media (prefers-reduced-motion:reduce){
