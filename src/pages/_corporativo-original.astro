@@ -1,0 +1,1431 @@
+---
+// ============================================================================
+// PÁGINA DESATIVADA — réplica de villamantova.com.br/corporativo/
+// ----------------------------------------------------------------------------
+// O prefixo "_" no nome do arquivo faz o Astro ignorar esta página: ela NÃO é publicada
+// e fica guardada para uso futuro. Para ativar, renomeie sem o "_":
+//     git mv src/pages/_corporativo-original.astro src/pages/corporativo-original.astro
+// (a URL passa a ser /corporativo-original). Antes de ativar, considere:
+//   - Formulários: o JS original monta uma mensagem e abre o WhatsApp 5511981001030 (número do site
+//     original; o do projeto ainda está pendente). Para enviar ao n8n, ligar ao padrão Dmove (forms.ts).
+//   - noIndex está ligado para não duplicar o conteúdo do site no ar; remova se esta virar a oficial.
+// Imagens e vídeo já estão no CDN: photos/corporativo/ e videos/equipe.mp4.
+// ============================================================================
+import Base from '../layouts/Base.astro';
+import '../styles/corporativo-original.css';
+
+const title = "Villa Mantova Corporativo · Eventos Corporativos Premium em Alphaville";
+const description = "Espaço premium para eventos corporativos a 20 minutos de Alphaville. Estrutura validada de 3.750m² para workshops, congressos, convenções e treinamentos.";
+const hero = 'https://media.dmove.com.br/clients/villa-mantova/photos/corporativo/hero-principal.webp';
+---
+
+<Base title={title} description={description} ogImage={hero} theme="light" hideWhatsApp={true} noIndex={true}>
+  <link rel="preconnect" href="https://fonts.googleapis.com" slot="head" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin slot="head" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" slot="head" />
+  <link rel="preload" as="image" href={hero} fetchpriority="high" slot="head" />
+
+<div id="inicio" style="position:absolute; top:0; left:0; width:1px; height:1px; pointer-events:none;"></div>
+
+  <!-- ==========================================================================
+       1. TARJA SUPERIOR (TOP BAR)
+       ========================================================================== -->
+  <div id="top-bar">
+    <div class="top-bar-inner">
+      <div class="top-bar-text">
+        <svg class="icon icon-sm top-bar-icon" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>PARA EVENTOS CORPORATIVOS PREMIUM, ESPAÇO ÚNICO 3.750M², MULTI-AMBIENTE COM NATUREZA INCLUSA</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       2. MENU FIXO / STICKY HEADER
+       ========================================================================== -->
+  <header id="main-header">
+    <div class="container header-container">
+      <!-- Logotipo da Marca -->
+      <a href="#inicio" class="brand-logo" aria-label="Villa Mantova Corporativo">
+        <img src="https://media.dmove.com.br/clients/villa-mantova/photos/corporativo/villa-mantova-corp-logo-transp.png" alt="Villa Mantova Corporativo" class="brand-logo-img">
+      </a>
+
+      <!-- Navegação Desktop -->
+      <nav class="desktop-nav" aria-label="Navegação Principal">
+        <a href="#inicio" class="nav-link">Início</a>
+        <a href="#o-espaco" class="nav-link">O Espaço</a>
+        <a href="#formatos" class="nav-link">Formatos de Evento</a>
+        <a href="#por-que-villa-mantova" class="nav-link">Por que Villa Mantova</a>
+        <a href="#galeria" class="nav-link">Galeria</a>
+        <a href="#depoimentos" class="nav-link">Depoimentos</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+        <a href="#rodape" class="nav-link">Contato</a>
+      </nav>
+
+      <!-- Ações do Cabeçalho & Redes -->
+      <div class="header-actions">
+        <a href="https://instagram.com/villamantova.eventos" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram Villa Mantova" title="@villamantova.eventos">
+          <svg class="icon icon-sm" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <button type="button" class="btn btn-primary btn-sm" data-open-modal>
+          <svg class="icon icon-sm" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span>Solicitar Orçamento</span>
+        </button>
+      </div>
+
+      <!-- Gatilho do Menu Mobile -->
+      <div class="mobile-nav-toggle">
+        <button type="button" class="mobile-cta-sm" data-open-modal>Orçamento</button>
+        <button type="button" id="menu-toggle-btn" class="menu-btn" aria-label="Alternar menu">
+          <svg class="icon" viewBox="0 0 24 24"><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Drawer Mobile -->
+    <div id="mobile-drawer" class="mobile-drawer">
+      <div class="mobile-drawer-links">
+        <a href="#inicio" class="mobile-nav-link">Início</a>
+        <a href="#o-espaco" class="mobile-nav-link">O Espaço</a>
+        <a href="#formatos" class="mobile-nav-link">Formatos de Evento</a>
+        <a href="#por-que-villa-mantova" class="mobile-nav-link">Por que Villa Mantova</a>
+        <a href="#galeria" class="mobile-nav-link">Galeria</a>
+        <a href="#depoimentos" class="mobile-nav-link">Depoimentos</a>
+        <a href="#faq" class="mobile-nav-link">FAQ</a>
+        <a href="#rodape" class="mobile-nav-link">Contato</a>
+      </div>
+      <div class="mobile-drawer-actions">
+        <a href="https://instagram.com/villamantova.eventos" target="_blank" rel="noopener noreferrer" class="mobile-nav-link" style="display:flex; align-items:center; gap:0.5rem;">
+          <svg class="icon icon-sm" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          <span>@villamantova.eventos</span>
+        </a>
+        <button type="button" class="btn btn-primary btn-block" data-open-modal>Solicitar Orçamento</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==========================================================================
+         3. HERO SECTION
+         ========================================================================== -->
+    <section id="hero">
+      <div class="hero-bg-wrapper">
+        <img src="https://media.dmove.com.br/clients/villa-mantova/photos/corporativo/hero-principal.webp" alt="Villa Mantova Espaço Corporativo em Santana de Parnaíba" class="hero-bg-img">
+        <div class="hero-gradient-overlay"></div>
+        <div class="hero-vignette-overlay"></div>
+      </div>
+
+      <div class="container hero-content">
+        <div class="pill-badge">
+          <span class="pulsing-dot"></span>
+          <span>Espaço para eventos corporativos · Alphaville</span>
+        </div>
+
+        <h1 class="hero-headline">
+          Evento premium não se improvisa. Se realiza em estrutura validada.
+        </h1>
+
+        <p class="hero-subpromise">
+          3.750m² a 20 minutos de Alphaville, com ambientes independentes para sessões simultâneas, espaços de descompressão totalmente equipados<br>e mais de 500 eventos de lastro.
+        </p>
+
+        <p class="hero-pain">
+          Sem coordenar cinco fornecedores. Sem encolher a programação para caber no espaço.
+        </p>
+
+        <div class="hero-ctas">
+          <button type="button" class="btn btn-primary" data-open-modal>
+            <span>Solicitar proposta corporativa</span>
+            <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+          <a href="#galeria" class="btn btn-outline-light">
+            <svg class="icon icon-sm" viewBox="0 0 24 24" style="stroke: #c3935b;"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+            <span>Conhecer as instalações</span>
+          </a>
+        </div>
+
+        <div class="hero-data-bar">
+          20 min de Alphaville · Até 300 pessoas · 3.750m² de área total
+        </div>
+      </div>
+
+      <a href="#autoridade" class="hero-scroll-btn" aria-label="Rolar para baixo">
+        <svg class="icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </a>
+    </section>
+
+    <!-- ==========================================================================
+         4. FAIXA DE AUTORIDADE
+         ========================================================================== -->
+    <section id="autoridade">
+      <div class="container">
+        <div class="metrics-grid">
+          <div class="metric-item">
+            <div class="metric-value">500+</div>
+            <div class="metric-label">Eventos realizados</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-value">3.750m²</div>
+            <div class="metric-label">De área total</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-value">300</div>
+            <div class="metric-label">Pessoas de capacidade</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-value">4,9★</div>
+            <div class="metric-label">Avaliação no Google</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         5. O PROBLEMA (TENSÃO)
+         ========================================================================== -->
+    <section id="o-problema" class="section">
+      <div class="container-medium">
+        <div class="section-header">
+          <span class="section-tag section-tag-dark">O Desafio da Produção</span>
+          <h2 class="section-title">A programação sempre nasce maior do que o espaço permite</h2>
+        </div>
+
+        <div class="problem-grid">
+          <div class="problem-card">
+            <div class="problem-icon-wrapper">
+              <svg class="icon" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+            </div>
+            <p class="problem-card-text">Duas trilhas de conteúdo viram uma, porque só existe um auditório.</p>
+          </div>
+
+          <div class="problem-card">
+            <div class="problem-icon-wrapper">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <p class="problem-card-text">O intervalo encolhe, porque não tem onde as pessoas ficarem além do corredor.</p>
+          </div>
+
+          <div class="problem-card">
+            <div class="problem-icon-wrapper">
+              <svg class="icon" viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
+            </div>
+            <p class="problem-card-text">Som vem de um fornecedor. Projeção de outro. Catering de um terceiro.</p>
+          </div>
+
+          <div class="problem-card">
+            <div class="problem-icon-wrapper">
+              <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <p class="problem-card-text">E alguém do seu time passa o dia do evento coordenando fornecedor em vez de participar dele.</p>
+          </div>
+        </div>
+
+        <div class="climax-callout">
+          <p class="climax-text">“Não é o evento que estava grande demais. É o espaço que não foi feito para ele.”</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         6. A VIRADA (POSICIONAMENTO)
+         ========================================================================== -->
+    <section id="a-virada" class="section">
+      <div class="container">
+        <div class="turnaround-grid">
+          <!-- Imagem com Selo -->
+          <div class="turnaround-image-container">
+            <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/corporativo/posicionamento-operacao.webp" alt="Estrutura e operação validada no Villa Mantova" class="turnaround-img">
+            <div class="turnaround-stamp">
+              <div class="stamp-icon-box">
+                <svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+              </div>
+              <div>
+                <h4 class="stamp-title">Operação Blindada Contra Falhas</h4>
+                <p class="stamp-desc">Planejamento técnico testado em mais de 500 execuções reais.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Conteúdo em Texto -->
+          <div class="turnaround-text-content">
+            <div>
+              <span class="section-tag section-tag-dark">Posicionamento & Lastro</span>
+              <h2 class="section-title">Mais de 500 eventos construíram essa operação</h2>
+            </div>
+
+            <div class="turnaround-paragraphs">
+              <p>O Villa Mantova não começou no corporativo. Começou em um formato que não admite falha — onde não existe "a gente ajusta na próxima" e o imprevisto precisa ser resolvido em minutos, não em reunião.</p>
+              <p>Foram mais de 500 eventos aprendendo som, projeção, fluxo de pessoas, clima, mudança de última hora.</p>
+              <p>É essa mesma estrutura que hoje recebe empresas.</p>
+            </div>
+
+            <div class="highlight-quote-card">
+              <p class="highlight-quote-text">“Para fazer evento premium, não basta o espaço ser bonito. Ele precisa ter sido testado.”</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         7. O ESPAÇO (EXPERIÊNCIA)
+         ========================================================================== -->
+    <section id="o-espaco" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Experiência</span>
+          <h2 class="section-title">O Espaço</h2>
+        </div>
+
+        <div class="space-grid">
+          <div class="space-card">
+            <div>
+              <div class="space-icon-box">
+                <svg class="icon icon-lg" viewBox="0 0 24 24"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+              </div>
+              <h3 class="space-card-title">Ambientes independentes</h3>
+              <p class="space-card-desc">Palestra numa sala, workshop na outra — ao mesmo tempo, sem improviso de divisória</p>
+            </div>
+          </div>
+
+          <div class="space-card">
+            <div>
+              <div class="space-icon-box">
+                <svg class="icon icon-lg" viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+              </div>
+              <h3 class="space-card-title">Áreas cobertas e ao ar livre</h3>
+              <p class="space-card-desc">3.750m² que mudam de configuração conforme a programação define</p>
+            </div>
+          </div>
+
+          <div class="space-card">
+            <div>
+              <div class="space-icon-box">
+                <svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+              </div>
+              <h3 class="space-card-title">Espaços de descompressão equipados</h3>
+              <p class="space-card-desc">O intervalo deixa de ser tempo morto e passa a ser ambiente projetado</p>
+            </div>
+          </div>
+
+          <div class="space-card">
+            <div>
+              <div class="space-icon-box">
+                <svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M10 10v.2A3 3 0 0 1 8.9 16v0H5v0h0a3 3 0 0 1-1-5.8V10a3 3 0 0 1 6 0Z"/><path d="M7 16v6"/><path d="M13 19v3"/><path d="M12 19h8.3a1 1 0 0 0 .7-1.7L18 14h.3a1 1 0 0 0 .7-1.7L16 9h.2a1 1 0 0 0 .8-1.7L13 3l-4 4.3a1 1 0 0 0 .8 1.7H10l-3 3.3a1 1 0 0 0 .7 1.7H10l-3 3.3a1 1 0 0 0 .7 1.7H12"/></svg>
+              </div>
+              <h3 class="space-card-title">Natureza real</h3>
+              <p class="space-card-desc">Cenário que existe — não construído para foto</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align: center;">
+          <button type="button" class="btn btn-dark" data-open-modal>
+            <span>Agendar visita técnica</span>
+            <svg class="icon icon-sm" viewBox="0 0 24 24" style="stroke: #c3935b;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         8. FORMATOS DE EVENTO
+         ========================================================================== -->
+    <section id="formatos" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Versatilidade Estrutural</span>
+          <h2 class="section-title">Formatos de Evento</h2>
+        </div>
+
+        <div class="formats-grid">
+          <!-- 1. Treinamentos -->
+          <div class="format-card">
+            <div class="format-img-box">
+              <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/corporativo/formato-treinamentos.webp" alt="Treinamentos e Workshops" class="format-img">
+              <span class="format-badge">Sessões Simultâneas</span>
+            </div>
+            <div class="format-body">
+              <div>
+                <h3 class="format-title">Treinamentos e Workshops</h3>
+                <p class="format-desc">Ambiente fora da rotina, com estrutura técnica que sustenta o dia inteiro</p>
+              </div>
+              <button type="button" class="format-action-btn" data-open-modal data-format="Treinamentos e Workshops">
+                <span>Solicitar preview deste formato</span>
+                <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. Congressos -->
+          <div class="format-card">
+            <div class="format-img-box">
+              <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/corporativo/formato-congressos.webp" alt="Congressos e Palestras" class="format-img">
+              <span class="format-badge">Projeção e Som</span>
+            </div>
+            <div class="format-body">
+              <div>
+                <h3 class="format-title">Congressos e Palestras</h3>
+                <p class="format-desc">Som, projeção e iluminação para apresentações de grande porte</p>
+              </div>
+              <button type="button" class="format-action-btn" data-open-modal data-format="Congressos e Palestras">
+                <span>Solicitar preview deste formato</span>
+                <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- 3. Lançamentos -->
+          <div class="format-card">
+            <div class="format-img-box">
+              <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/corporativo/formato-lancamentos.webp" alt="Lançamentos de Produto" class="format-img">
+              <span class="format-badge">Cenário Natural</span>
+            </div>
+            <div class="format-body">
+              <div>
+                <h3 class="format-title">Lançamentos de Produto</h3>
+                <p class="format-desc">Cenário à altura do que a marca está apresentando</p>
+              </div>
+              <button type="button" class="format-action-btn" data-open-modal data-format="Lançamentos de Produto">
+                <span>Solicitar preview deste formato</span>
+                <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- 4. Convenções -->
+          <div class="format-card">
+            <div class="format-img-box">
+              <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/corporativo/formato-convencoes.webp" alt="Convenções" class="format-img">
+              <span class="format-badge">Multi-ambiente</span>
+            </div>
+            <div class="format-body">
+              <div>
+                <h3 class="format-title">Convenções</h3>
+                <p class="format-desc">Capacidade para até 300 pessoas com sessões paralelas</p>
+              </div>
+              <button type="button" class="format-action-btn" data-open-modal data-format="Convenções">
+                <span>Solicitar preview deste formato</span>
+                <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- 5. Confraternizações -->
+          <div class="format-card">
+            <div class="format-img-box">
+              <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/corporativo/formato-confraternizacoes.webp" alt="Confraternizações" class="format-img">
+              <span class="format-badge">Até 300 pessoas</span>
+            </div>
+            <div class="format-body">
+              <div>
+                <h3 class="format-title">Confraternizações</h3>
+                <p class="format-desc">Celebração de equipe em ambiente que muda de clima sem trocar de endereço</p>
+              </div>
+              <button type="button" class="format-action-btn" data-open-modal data-format="Confraternizações">
+                <span>Solicitar preview deste formato</span>
+                <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- 6. Team Building -->
+          <div class="format-card">
+            <div class="format-img-box">
+              <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/corporativo/formato-teambuilding.webp" alt="Team Building" class="format-img">
+              <span class="format-badge">Dinâmicas em Grupo</span>
+            </div>
+            <div class="format-body">
+              <div>
+                <h3 class="format-title">Team Building</h3>
+                <p class="format-desc">Áreas ao ar livre para dinâmicas de grupo e atividades de integração</p>
+              </div>
+              <button type="button" class="format-action-btn" data-open-modal data-format="Team Building">
+                <span>Solicitar preview deste formato</span>
+                <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align: center;">
+          <button type="button" class="btn btn-primary" data-open-modal>
+            <span>Falar com um especialista</span>
+            <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         9. SISTEMA VILLA MANTOVA DE FORMATO CONTÍNUO
+         ========================================================================== -->
+    <section id="sistema-continuo" class="section">
+      <div class="ambient-glow-1"></div>
+      <div class="ambient-glow-2"></div>
+
+      <div class="container" style="position:relative; z-index:10;">
+        <div class="section-header">
+          <span class="section-tag section-tag-gold">Como um evento acontece aqui</span>
+          <h2 class="section-title section-title-light">Sistema Villa Mantova de Formato Contínuo</h2>
+        </div>
+
+        <div class="system-steps-grid">
+          <!-- Step 01 -->
+          <div class="system-step-card">
+            <div>
+              <div class="step-card-header">
+                <span class="step-num">01</span>
+                <span class="step-dot"></span>
+              </div>
+              <h3 class="step-title">Diagnóstico de Formato</h3>
+              <p class="step-desc">Antes de qualquer proposta, mapeamos o tipo de evento e o resultado que a empresa busca. É o formato que define a configuração — não o contrário.</p>
+            </div>
+          </div>
+
+          <!-- Step 02 -->
+          <div class="system-step-card">
+            <div>
+              <div class="step-card-header">
+                <span class="step-num">02</span>
+                <span class="step-dot"></span>
+              </div>
+              <h3 class="step-title">Configuração Modular</h3>
+              <p class="step-desc">Ambientes ajustados para rodar sessões simultâneas. A programação inteira acontece dentro do mesmo endereço.</p>
+            </div>
+          </div>
+
+          <!-- Step 03 -->
+          <div class="system-step-card">
+            <div>
+              <div class="step-card-header">
+                <span class="step-num">03</span>
+                <span class="step-dot"></span>
+              </div>
+              <h3 class="step-title">Operação Assistida</h3>
+              <p class="step-desc">Equipe dedicada assume som, projeção, wi-fi e execução técnica. Sem fornecedor externo para coordenar no dia.</p>
+            </div>
+          </div>
+
+          <!-- Step 04 -->
+          <div class="system-step-card">
+            <div>
+              <div class="step-card-header">
+                <span class="step-num">04</span>
+                <span class="step-dot"></span>
+              </div>
+              <h3 class="step-title">Pausa Estruturada</h3>
+              <p class="step-desc">Espaços de descompressão totalmente equipados, ativados nos intervalos como parte da programação.</p>
+            </div>
+          </div>
+
+          <!-- Step 05 -->
+          <div class="system-step-card">
+            <div>
+              <div class="step-card-header">
+                <span class="step-num">05</span>
+                <span class="step-dot"></span>
+              </div>
+              <h3 class="step-title">Fechamento sem Loose Ends</h3>
+              <p class="step-desc">O evento termina quando termina. Não na semana seguinte, resolvendo pendência operacional.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         10. POR QUE VILLA MANTOVA
+         ========================================================================== -->
+    <section id="por-que-villa-mantova" class="section">
+      <div class="container-medium">
+        <div class="section-header">
+          <span class="section-tag">Diferenciais de Infraestrutura</span>
+          <h2 class="section-title">Por que Villa Mantova</h2>
+        </div>
+
+        <div class="why-bullets-grid">
+          <div class="why-bullet-card">
+            <div class="check-badge">
+              <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/><path d="M16 11a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"/><path d="M6 19a6 6 0 0 1 12 0"/></svg>
+            </div>
+            <p class="why-bullet-text">3.750m² configuráveis para até 300 pessoas, entre áreas cobertas e ao ar livre</p>
+          </div>
+
+          <div class="why-bullet-card">
+            <div class="check-badge">
+              <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1.5"/><rect width="7" height="7" x="14" y="3" rx="1.5"/><rect width="7" height="7" x="3" y="14" rx="1.5"/><rect width="7" height="7" x="14" y="14" rx="1.5"/></svg>
+            </div>
+            <p class="why-bullet-text">Ambientes independentes para sessões simultâneas</p>
+          </div>
+
+          <div class="why-bullet-card">
+            <div class="check-badge">
+              <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="12" x="3" y="3" rx="2"/><path d="M7 21h10"/><path d="M12 15v6"/><path d="M9 10.5a3 3 0 0 1 6 0"/></svg>
+            </div>
+            <p class="why-bullet-text">Infraestrutura técnica completa: som, projeção, wi-fi, iluminação</p>
+          </div>
+
+          <div class="why-bullet-card">
+            <div class="check-badge">
+              <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>
+            </div>
+            <p class="why-bullet-text">Espaços de descompressão totalmente equipados durante todo o evento</p>
+          </div>
+
+          <div class="why-bullet-card">
+            <div class="check-badge">
+              <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+            </div>
+            <p class="why-bullet-text">Equipe dedicada de operação e suporte técnico</p>
+          </div>
+
+          <div class="why-bullet-card">
+            <div class="check-badge">
+              <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+            </div>
+            <p class="why-bullet-text">Estacionamento e acessibilidade</p>
+          </div>
+
+          <div class="why-bullet-card">
+            <div class="check-badge">
+              <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.563-2.512 5.563-5.563C22 6.5 17.5 2 12 2Z"/></svg>
+            </div>
+            <p class="why-bullet-text">Personalização completa de ambientes, decoração e catering</p>
+          </div>
+
+          <div class="why-bullet-card">
+            <div class="check-badge">
+              <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/><path d="m22 2-6 6"/></svg>
+            </div>
+            <p class="why-bullet-text">A 20 minutos de Alphaville, sem pernoite obrigatório</p>
+          </div>
+        </div>
+
+        <div class="differentiator-banner">
+          <span class="differentiator-tag">O Que Realmente Faz a Diferença</span>
+          <p class="differentiator-text">
+            “O que diferencia: não é salão que se aluga por hora. É estrutura que assume a programação inteira — incluindo os intervalos, que é justamente onde a maioria dos espaços não pensou em nada.”
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         11. DIVISOR DE IMPACTO
+         ========================================================================== -->
+    <section id="divisor-impacto">
+      <!-- Vídeo de Fundo Equipe -->
+      <video class="impact-bg-video" autoplay muted loop playsinline preload="auto">
+        <source src="https://media.dmove.com.br/clients/villa-mantova/videos/equipe.mp4" type="video/mp4">
+      </video>
+      <div class="impact-overlay"></div>
+
+      <div class="container-medium">
+        <h2 class="impact-title">
+          <span class="impact-title-white">EXISTEM ESPAÇOS QUE ALUGAM METRO QUADRADO.</span>
+          <span class="impact-title-gold">E EXISTEM ESTRUTURAS QUE ASSUMEM O EVENTO INTEIRO.</span>
+        </h2>
+
+        <p class="impact-subtext">
+          A diferença aparece no dia — quando algo muda, e alguém já resolveu antes de você perceber.
+        </p>
+
+        <button type="button" class="btn btn-primary" data-open-modal>
+          <span>Falar com um especialista</span>
+          <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         12. PARA QUEM É
+         ========================================================================== -->
+    <section id="para-quem-e" class="section">
+      <div class="container-narrow">
+        <div class="section-header">
+          <span class="section-tag">Perfil de Empresa</span>
+          <h2 class="section-title">Para quem é</h2>
+        </div>
+
+        <div class="target-list">
+          <div class="target-card">
+            <svg class="icon target-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="9 12 12 15 15 9"/></svg>
+            <p class="target-text">Para empresas que desenham a programação antes de escolher o espaço</p>
+          </div>
+
+          <div class="target-card">
+            <svg class="icon target-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="9 12 12 15 15 9"/></svg>
+            <p class="target-text">Para quem precisa de sessões acontecendo ao mesmo tempo</p>
+          </div>
+
+          <div class="target-card">
+            <svg class="icon target-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="9 12 12 15 15 9"/></svg>
+            <p class="target-text">Para quem não quer transformar o RH em coordenador de fornecedor</p>
+          </div>
+
+          <div class="target-card">
+            <svg class="icon target-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="9 12 12 15 15 9"/></svg>
+            <p class="target-text">Para quem quer tirar a equipe da rotina sem consumir meio dia em deslocamento</p>
+          </div>
+
+          <div class="target-card">
+            <svg class="icon target-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="9 12 12 15 15 9"/></svg>
+            <p class="target-text">Para quem entende que evento premium começa pela estrutura, não pela decoração</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         13. GALERIA (FILTROS & LIGHTBOX)
+         ========================================================================== -->
+    <section id="galeria" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Veja de perto</span>
+          <h2 class="section-title">Galeria</h2>
+          <p class="section-subtitle">3.750m² entre natureza, estrutura e ambientes que se transformam. As imagens dão a dimensão — a visita dá o resto.</p>
+        </div>
+
+        <!-- Grade de Fotos -->
+        <div class="gallery-grid">
+          <!-- Item 1 -->
+          <div class="gallery-item" data-category="auditorio" data-src="https://media.dmove.com.br/clients/villa-mantova/photos/corporativo/galeria-1-palestras.webp" data-title="Espaço para palestras" data-desc="Com infra estrutura de luz e som">
+            <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/corporativo/galeria-1-palestras.webp" alt="Espaço para palestras" class="gallery-img">
+            <div class="gallery-overlay"></div>
+            <div class="gallery-zoom-icon"><svg class="icon icon-sm" viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div>
+            <div class="gallery-info">
+              <span class="gallery-cat-tag">Espaço para palestras</span>
+              <p class="gallery-item-desc">Com infra estrutura de luz e som</p>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="gallery-item" data-category="workshop" data-src="https://media.dmove.com.br/clients/villa-mantova/photos/corporativo/galeria-2-workshops.webp" data-title="Workshops ao ar livre" data-desc="Diversas configurações">
+            <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/corporativo/galeria-2-workshops.webp" alt="Workshops ao ar livre" class="gallery-img">
+            <div class="gallery-overlay"></div>
+            <div class="gallery-zoom-icon"><svg class="icon icon-sm" viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div>
+            <div class="gallery-info">
+              <span class="gallery-cat-tag">Workshops ao ar livre</span>
+              <p class="gallery-item-desc">Diversas configurações</p>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="gallery-item" data-category="descompressao" data-src="https://media.dmove.com.br/clients/villa-mantova/photos/corporativo/galeria-3-descompressao.webp" data-title="Áreas de descompressão" data-desc="Lounge e ambientes ao ar livre">
+            <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/corporativo/galeria-3-descompressao.webp" alt="Áreas de descompressão" class="gallery-img">
+            <div class="gallery-overlay"></div>
+            <div class="gallery-zoom-icon"><svg class="icon icon-sm" viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div>
+            <div class="gallery-info">
+              <span class="gallery-cat-tag">Áreas de descompressão</span>
+              <p class="gallery-item-desc">Lounge e ambientes ao ar livre</p>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="gallery-item" data-category="sessoes" data-src="https://media.dmove.com.br/clients/villa-mantova/photos/corporativo/galeria-4-sessoes.webp" data-title="Sessões simultâneas" data-desc="Diversas configurações de espaços">
+            <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/corporativo/galeria-4-sessoes.webp" alt="Sessões simultâneas" class="gallery-img">
+            <div class="gallery-overlay"></div>
+            <div class="gallery-zoom-icon"><svg class="icon icon-sm" viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div>
+            <div class="gallery-info">
+              <span class="gallery-cat-tag">Sessões simultâneas</span>
+              <p class="gallery-item-desc">Diversas configurações de espaços</p>
+            </div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="gallery-item" data-category="coffeebreak" data-src="https://media.dmove.com.br/clients/villa-mantova/photos/corporativo/galeria-5-coffeebreak.webp" data-title="Coffee Break" data-desc="Espaço dedicado ou ilhas">
+            <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/corporativo/galeria-5-coffeebreak.webp" alt="Coffee Break" class="gallery-img">
+            <div class="gallery-overlay"></div>
+            <div class="gallery-zoom-icon"><svg class="icon icon-sm" viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div>
+            <div class="gallery-info">
+              <span class="gallery-cat-tag">Coffee Break</span>
+              <p class="gallery-item-desc">Espaço dedicado ou ilhas</p>
+            </div>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="gallery-item" data-category="aerea" data-src="https://media.dmove.com.br/clients/villa-mantova/photos/corporativo/galeria-6-vista-aerea.webp" data-title="Vista aérea" data-desc="São 3.750m2 para utilização">
+            <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/corporativo/galeria-6-vista-aerea.webp" alt="Vista aérea" class="gallery-img">
+            <div class="gallery-overlay"></div>
+            <div class="gallery-zoom-icon"><svg class="icon icon-sm" viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div>
+            <div class="gallery-info">
+              <span class="gallery-cat-tag">Vista aérea</span>
+              <p class="gallery-item-desc">São 3.750m2 para utilização</p>
+            </div>
+          </div>
+
+          <!-- Item 7 -->
+          <div class="gallery-item" data-category="tecnica" data-src="https://media.dmove.com.br/clients/villa-mantova/photos/corporativo/galeria-7-estrutura-tecnica.webp" data-title="Estrutura Técnica" data-desc="Som, luz, telas e tecnologia">
+            <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/corporativo/galeria-7-estrutura-tecnica.webp" alt="Estrutura Técnica" class="gallery-img">
+            <div class="gallery-overlay"></div>
+            <div class="gallery-zoom-icon"><svg class="icon icon-sm" viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div>
+            <div class="gallery-info">
+              <span class="gallery-cat-tag">Estrutura Técnica</span>
+              <p class="gallery-item-desc">Som, luz, telas e tecnologia</p>
+            </div>
+          </div>
+
+          <!-- Item 8 -->
+          <div class="gallery-item" data-category="descompressao" data-src="https://media.dmove.com.br/clients/villa-mantova/photos/corporativo/galeria-8-ilhas-sunset.webp" data-title="Ilhas e sunset" data-desc="Células de estruturas isoladas">
+            <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/corporativo/galeria-8-ilhas-sunset.webp" alt="Ilhas e sunset" class="gallery-img">
+            <div class="gallery-overlay"></div>
+            <div class="gallery-zoom-icon"><svg class="icon icon-sm" viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div>
+            <div class="gallery-info">
+              <span class="gallery-cat-tag">Ilhas e sunset</span>
+              <p class="gallery-item-desc">Células de estruturas isoladas</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lightbox Modal da Galeria -->
+    <div id="gallery-lightbox" role="dialog" aria-modal="true">
+      <button type="button" id="lightbox-close-btn" class="lightbox-close-btn" aria-label="Fechar galeria">
+        <svg class="icon" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+
+      <button type="button" id="lightbox-prev-btn" class="lightbox-nav-btn lightbox-prev" aria-label="Foto anterior">
+        <svg class="icon" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+
+      <button type="button" id="lightbox-next-btn" class="lightbox-nav-btn lightbox-next" aria-label="Próxima foto">
+        <svg class="icon" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+
+      <div class="lightbox-body">
+        <img id="lightbox-img" src="" alt="" class="lightbox-img">
+        <div class="lightbox-info">
+          <span id="lightbox-cat" class="lightbox-cat"></span>
+          <h3 id="lightbox-title" class="lightbox-title"></h3>
+          <p id="lightbox-desc" class="lightbox-desc"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+         14. DEPOIMENTOS & AVALIAÇÃO GOOGLE
+         ========================================================================== -->
+    <section id="depoimentos" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Experiências Reais</span>
+          <h2 class="section-title">Depoimentos</h2>
+          <div class="google-rating-badge">
+            <div class="stars-row">
+              <svg class="icon icon-sm" viewBox="0 0 24 24" style="fill:#f59e0b; stroke:#f59e0b;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="icon icon-sm" viewBox="0 0 24 24" style="fill:#f59e0b; stroke:#f59e0b;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="icon icon-sm" viewBox="0 0 24 24" style="fill:#f59e0b; stroke:#f59e0b;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="icon icon-sm" viewBox="0 0 24 24" style="fill:#f59e0b; stroke:#f59e0b;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="icon icon-sm" viewBox="0 0 24 24" style="fill:#f59e0b; stroke:#f59e0b;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <span class="google-rating-text">Avaliação Google — 4,9 estrelas</span>
+          </div>
+        </div>
+
+        <div class="testimonials-grid">
+          <!-- Card 1 -->
+          <div class="testimonial-card">
+            <div>
+              <svg class="icon quote-icon" viewBox="0 0 24 24"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.75-2-2-2H4c-1.25 0-2 .75-2 2v6c0 1.25.75 2 2 2h3c-.5 4-2 6-4 6v2zm14 0c3 0 7-1 7-8V5c0-1.25-.75-2-2-2h-4c-1.25 0-2 .75-2 2v6c0 1.25.75 2 2 2h3c-.5 4-2 6-4 6v2z"/></svg>
+              <p class="testimonial-quote">“Realizamos nosso treinamento anual no Villa Mantova e foi uma experiência transformadora. O contato com a natureza trouxe uma energia diferente para a equipe.”</p>
+            </div>
+            <div class="testimonial-footer">
+              <div>
+                <h4 class="author-name">Marcos R.</h4>
+                <p class="author-role">Diretor de RH</p>
+              </div>
+              <div class="stars-row">
+                <svg class="icon icon-sm" viewBox="0 0 24 24" style="fill:#f59e0b; stroke:#f59e0b;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg class="icon icon-sm" viewBox="0 0 24 24" style="fill:#f59e0b; stroke:#f59e0b;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg class="icon icon-sm" viewBox="0 0 24 24" style="fill:#f59e0b; stroke:#f59e0b;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg class="icon icon-sm" viewBox="0 0 24 24" style="fill:#f59e0b; stroke:#f59e0b;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg class="icon icon-sm" viewBox="0 0 24 24" style="fill:#f59e0b; stroke:#f59e0b;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="testimonial-card">
+            <div>
+              <svg class="icon quote-icon" viewBox="0 0 24 24"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.75-2-2-2H4c-1.25 0-2 .75-2 2v6c0 1.25.75 2 2 2h3c-.5 4-2 6-4 6v2zm14 0c3 0 7-1 7-8V5c0-1.25-.75-2-2-2h-4c-1.25 0-2 .75-2 2v6c0 1.25.75 2 2 2h3c-.5 4-2 6-4 6v2z"/></svg>
+              <p class="testimonial-quote">“Já organizei diversos eventos corporativos e o Villa Mantova se destacou pela atenção aos detalhes e pela equipe extremamente profissional. O espaço é versátil e se adapta perfeitamente a qualquer formato de evento.”</p>
+            </div>
+            <div class="testimonial-footer">
+              <div>
+                <h4 class="author-name">Ana Paula M.</h4>
+                <p class="author-role">Gerente de Eventos</p>
+              </div>
+              <div class="stars-row">
+                <svg class="icon icon-sm" viewBox="0 0 24 24" style="fill:#f59e0b; stroke:#f59e0b;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg class="icon icon-sm" viewBox="0 0 24 24" style="fill:#f59e0b; stroke:#f59e0b;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg class="icon icon-sm" viewBox="0 0 24 24" style="fill:#f59e0b; stroke:#f59e0b;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg class="icon icon-sm" viewBox="0 0 24 24" style="fill:#f59e0b; stroke:#f59e0b;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg class="icon icon-sm" viewBox="0 0 24 24" style="fill:#f59e0b; stroke:#f59e0b;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="testimonial-card">
+            <div>
+              <svg class="icon quote-icon" viewBox="0 0 24 24"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.75-2-2-2H4c-1.25 0-2 .75-2 2v6c0 1.25.75 2 2 2h3c-.5 4-2 6-4 6v2zm14 0c3 0 7-1 7-8V5c0-1.25-.75-2-2-2h-4c-1.25 0-2 .75-2 2v6c0 1.25.75 2 2 2h3c-.5 4-2 6-4 6v2z"/></svg>
+              <p class="testimonial-quote">“Qualquer coisa que eu escreva aqui será pouco para descrever a estrutura e a beleza do espaço.”</p>
+            </div>
+            <div class="testimonial-footer">
+              <div>
+                <h4 class="author-name">Priscila S.</h4>
+                <p class="author-role">Autônoma</p>
+              </div>
+              <div class="stars-row">
+                <svg class="icon icon-sm" viewBox="0 0 24 24" style="fill:#f59e0b; stroke:#f59e0b;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg class="icon icon-sm" viewBox="0 0 24 24" style="fill:#f59e0b; stroke:#f59e0b;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg class="icon icon-sm" viewBox="0 0 24 24" style="fill:#f59e0b; stroke:#f59e0b;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg class="icon icon-sm" viewBox="0 0 24 24" style="fill:#f59e0b; stroke:#f59e0b;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg class="icon icon-sm" viewBox="0 0 24 24" style="fill:#f59e0b; stroke:#f59e0b;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         15. FAQ (PERGUNTAS FREQUENTES)
+         ========================================================================== -->
+    <section id="faq" class="section">
+      <div class="container-narrow">
+        <div class="section-header">
+          <span class="section-tag">Esclarecimentos</span>
+          <h2 class="section-title">Perguntas Frequentes</h2>
+        </div>
+
+        <div class="faq-list">
+          <!-- FAQ 1 -->
+          <div class="faq-item open">
+            <button type="button" class="faq-trigger">
+              <span>Qual a capacidade máxima?</span>
+              <svg class="icon icon-sm faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer">
+              De 50 a 300 pessoas, com configurações diferentes conforme o formato do evento.
+            </div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="faq-item">
+            <button type="button" class="faq-trigger">
+              <span>É possível rodar sessões simultâneas?</span>
+              <svg class="icon icon-sm faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer">
+              Sim. Os ambientes são independentes — palestra em um espaço e workshop em outro, ao mesmo tempo.
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="faq-item">
+            <button type="button" class="faq-trigger">
+              <span>A infraestrutura técnica está inclusa?</span>
+              <svg class="icon icon-sm faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer">
+              Sim. Som, projeção, wi-fi e iluminação, com equipe própria de operação. Não é necessário contratar fornecedor técnico externo.
+            </div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="faq-item">
+            <button type="button" class="faq-trigger">
+              <span>Como funciona o catering (buffet, alimentação) e a personalização do evento?</span>
+              <svg class="icon icon-sm faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer">
+              Trabalhamos com personalização completa de ambientes, decoração, objetos, equipamentos e catering (buffet, alimentação). Também é possível trazer fornecedor próprio, para serviços e atrações especiais, definido em contrato.
+            </div>
+          </div>
+
+          <!-- FAQ 5 -->
+          <div class="faq-item">
+            <button type="button" class="faq-trigger">
+              <span>Qual a distância de Alphaville e São Paulo?</span>
+              <svg class="icon icon-sm faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer">
+              20 minutos de Alphaville. Acesso direto de Barueri, Santana de Parnaíba e São Paulo, sem necessidade de pernoite.
+            </div>
+          </div>
+
+          <!-- FAQ 6 -->
+          <div class="faq-item">
+            <button type="button" class="faq-trigger">
+              <span>E se chover?</span>
+              <svg class="icon icon-sm faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer">
+              O espaço tem áreas cobertas amplas. A programação não depende de tempo bom para acontecer.
+            </div>
+          </div>
+
+          <!-- FAQ 7 -->
+          <div class="faq-item">
+            <button type="button" class="faq-trigger">
+              <span>Como é o processo de contratação?</span>
+              <svg class="icon icon-sm faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer">
+              Agendamos uma visita técnica, entendemos o formato do seu evento e apresentamos uma proposta configurada para ele.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-callout-box">
+          <div>
+            <h4 class="faq-callout-title">Ainda tem dúvidas?</h4>
+            <p class="faq-callout-desc">Converse diretamente com a equipe técnica de eventos.</p>
+          </div>
+          <button type="button" class="btn btn-dark" data-open-modal>
+            <span>Falar com um especialista</span>
+            <svg class="icon icon-sm" viewBox="0 0 24 24" style="stroke: #c3935b;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         16. CTA FINAL (BRIEFING CORPORATIVO)
+         ========================================================================== -->
+    <section id="contato">
+      <div class="container-medium" style="position:relative; z-index:10;">
+        <div class="section-header">
+          <span class="section-tag section-tag-gold">Atendimento Corporativo Exclusivo</span>
+          <h2 class="section-title section-title-light">Seu evento não precisa caber. Ele acontece inteiro.</h2>
+          <p class="section-subtitle section-subtitle-light">Agende uma visita técnica e veja como 3.750m² se configuram para a sua programação.</p>
+        </div>
+
+        <div id="quick-contact-form-container" class="form-card">
+          <!-- Formulário -->
+          <form id="quick-contact-form">
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label for="contact-name" class="form-label">Seu Nome *</label>
+                <input type="text" id="contact-name" required placeholder="Ex: Carlos Eduardo" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="contact-company" class="form-label">Empresa *</label>
+                <input type="text" id="contact-company" required placeholder="Nome da empresa" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label for="contact-email" class="form-label">E-mail Corporativo *</label>
+                <input type="email" id="contact-email" required placeholder="carlos@empresa.com.br" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="contact-phone" class="form-label">WhatsApp Corporativo *</label>
+                <input type="tel" id="contact-phone" required placeholder="(11) 98765-4321" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-event-type" class="form-label">Formato de Evento Planejado</label>
+              <select id="contact-event-type" class="form-control">
+                <option value="Treinamentos e Workshops">Treinamentos e Workshops</option>
+                <option value="Congressos e Palestras">Congressos e Palestras</option>
+                <option value="Lançamentos de Produto">Lançamentos de Produto</option>
+                <option value="Convenções">Convenções</option>
+                <option value="Confraternizações">Confraternizações</option>
+                <option value="Team Building">Team Building</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block" style="padding: 1.1rem; font-size: 1rem; margin-top: 0.5rem;">
+              <svg class="icon-whatsapp icon-whatsapp-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.39-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.25-.75-.67-1.26-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.78 2.72 4.31 3.81.6.26 1.07.42 1.44.53.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.1-.21-.17-.46-.3"/></svg>
+              <span>Falar com um especialista</span>
+            </button>
+
+            <p class="form-hint">Atendimento consultivo com retorno em até 2 horas úteis.</p>
+          </form>
+
+          <!-- Sucesso -->
+          <div id="quick-contact-success" style="display:none; text-align:center; padding: 2rem 0;">
+            <div style="width:4rem; height:4rem; border-radius:50%; background-color:rgba(195,147,91,0.2); color:var(--gold-light); display:flex; align-items:center; justify-content:center; margin: 0 auto 1.25rem auto;">
+              <svg class="icon icon-lg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="9 12 12 15 15 9"/></svg>
+            </div>
+            <h3 style="font-family:var(--font-serif); font-size:1.85rem; color:#ffffff; margin-bottom:0.5rem;">Solicitação Recebida com Sucesso!</h3>
+            <p style="font-size:0.95rem; color:#cfc7bc; max-width:440px; margin:0 auto 1.5rem auto;">Nossa equipe de especialistas entrará em contato via WhatsApp e e-mail com a proposta formatada para sua empresa.</p>
+            <button type="button" id="quick-contact-reset-btn" class="btn btn-primary btn-sm">Enviar nova solicitação</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         17. MAPA GOOGLE
+         ========================================================================== -->
+    <section id="localizacao">
+      <!-- Iframe Responsivo do Mapa (Perfil Oficial do Cliente) -->
+      <div class="map-wrapper">
+        <iframe title="Localização Villa Mantova Eventos" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3659.886026859567!2d-46.9997266!3d-23.4921923!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cf0fd8c6c02aef%3A0x1606d49b4de52e6f!2sVilla%20Mantova%20Eventos%20%7C%20Buffet%20de%20Casamento%20em%20Alphaville%20%7C%20Santana%20de%20Parna%C3%ADba%2FSP!5e0!3m2!1spt-BR!2sbr!4v1710000000000!5m2!1spt-BR!2sbr" class="map-iframe" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       18. RODAPÉ & BARRA PADRÃO ENM
+       ========================================================================== -->
+  <footer id="rodape">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Coluna 1 -->
+        <div>
+          <div class="footer-brand-header">
+            <a href="#inicio" class="brand-logo" aria-label="Villa Mantova Corporativo">
+              <img src="https://media.dmove.com.br/clients/villa-mantova/photos/corporativo/villa-mantova-corp-logo-transp.png" alt="Villa Mantova Corporativo" class="brand-logo-img footer-logo-img">
+            </a>
+            <a href="https://villamantova.com.br/" target="_blank" rel="noopener noreferrer" class="footer-wedding-tag" title="Conheça também o site de casamentos">
+              <span class="wedding-tag-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="9" cy="13" r="5"/>
+                  <circle cx="15" cy="11" r="5"/>
+                </svg>
+              </span>
+              <span class="wedding-tag-text">
+                <span class="wedding-tag-label">Conheça também o</span>
+                <span class="wedding-tag-title">site de casamentos</span>
+              </span>
+              <svg class="wedding-tag-arrow" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M7 17L17 7M17 7H9M17 7V15"/>
+              </svg>
+            </a>
+          </div>
+          <p class="footer-desc">Villa Mantova Espaço para eventos corporativos em Santana de Parnaíba/SP. Natureza, infraestrutura e experiências premium.</p>
+          <div class="footer-meta">
+            <p>CNPJ: 37.540.933/0001-81</p>
+          </div>
+        </div>
+
+        <!-- Coluna 2 -->
+        <div>
+          <h4 class="footer-col-title">Navegação</h4>
+          <ul class="footer-links-list">
+            <li><a href="#o-espaco">O Espaço</a></li>
+            <li><a href="#formatos">Formatos de Evento</a></li>
+            <li><a href="#por-que-villa-mantova">Por que Villa Mantova</a></li>
+            <li><a href="#galeria">Galeria</a></li>
+            <li><a href="#depoimentos">Depoimentos</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#rodape">Contato</a></li>
+          </ul>
+        </div>
+
+        <!-- Coluna 3 -->
+        <div>
+          <h4 class="footer-col-title">Contato Corporativo</h4>
+          <ul class="footer-links-list">
+            <li>
+              <a href="https://wa.me/5511981001030?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20eventos%20corporativos%20no%20Villa%20Mantova." target="_blank" rel="noopener noreferrer" class="footer-contact-item">
+                <svg class="icon-whatsapp icon-whatsapp-sm" viewBox="0 0 24 24" style="color:#c3935b;" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.39-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.25-.75-.67-1.26-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.78 2.72 4.31 3.81.6.26 1.07.42 1.44.53.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.1-.21-.17-.46-.3"/></svg>
+                <span>(11) 98100-1030</span>
+              </a>
+            </li>
+            <li>
+              <a href="mailto:contato@villamantova.com.br" class="footer-contact-item">
+                <svg class="icon icon-sm" viewBox="0 0 24 24" style="stroke:#c3935b;"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                <span>contato@villamantova.com.br</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://instagram.com/villamantova.eventos" target="_blank" rel="noopener noreferrer" class="footer-contact-item">
+                <svg class="icon icon-sm" viewBox="0 0 24 24" style="stroke:#c3935b;"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                <span>@villamantova.eventos</span>
+              </a>
+            </li>
+            <li>
+              <div class="footer-contact-item" style="cursor:default;">
+                <svg class="icon icon-sm" viewBox="0 0 24 24" style="stroke:#c3935b;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span>Segunda a sexta, das 9h às 18h</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Coluna 4 -->
+        <div>
+          <h4 class="footer-col-title">Localização</h4>
+          <div style="font-size:0.875rem; color:#c8bfb4; display:flex; flex-direction:column; gap:0.5rem;">
+            <p style="display:flex; align-items:flex-start; gap:0.5rem;">
+              <svg class="icon icon-sm" viewBox="0 0 24 24" style="stroke:#c3935b; margin-top:3px;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>R. Romênia, 21 - Maravilha lll, Santana de Parnaíba - SP, 06523-045</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra Final Padrão ENM -->
+      <div class="enm-copyright-bar">
+        <div class="enm-copyright-inner">
+          <p class="enm-copyright-text">
+            © 2026 Villa Mantova · Todos os direitos reservados
+          </p>
+
+          <div class="enm-credits-group">
+            <a href="#" class="enm-privacy-link" data-open-privacy>Política de privacidade</a>
+            <span class="enm-sep">|</span>
+            <span class="enm-dev-text">Desenvolvido por <a href="https://www.entrenomapa.com.br" target="_blank" rel="noopener noreferrer" class="enm-agency-link"><strong>Entre no Mapa</strong></a> - Estratégias digitais que vendem</span>
+          </div>
+
+          <a href="#inicio" class="enm-back-to-top" aria-label="Voltar ao topo">
+            <svg class="icon icon-sm" viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       19. WHATSAPP FLUTUANTE
+       ========================================================================== -->
+  <div class="floating-whatsapp">
+    <a href="https://wa.me/5511981001030?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20eventos%20corporativos%20no%20Villa%20Mantova." target="_blank" rel="noopener noreferrer" class="floating-whatsapp-link" aria-label="Falar no WhatsApp">
+      <svg class="icon-whatsapp" viewBox="0 0 24 24" width="18" height="18" style="margin-right: 0.35rem;" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.39-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.25-.75-.67-1.26-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.78 2.72 4.31 3.81.6.26 1.07.42 1.44.53.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.1-.21-.17-.46-.3"/></svg>
+      <span class="floating-whatsapp-text">Falar no WhatsApp</span>
+    </a>
+  </div>
+
+  <!-- ==========================================================================
+       20. POPUP LGPD / COOKIES CONSENT
+       ========================================================================== -->
+  <div id="lgpd-banner" class="lgpd-banner" role="region" aria-label="Consentimento de Cookies">
+    <div class="lgpd-accent-bar"></div>
+    <div class="lgpd-body">
+      <p class="lgpd-text">
+        Usamos cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa <a href="#" class="lgpd-link" data-open-privacy>Política de Privacidade</a>.
+      </p>
+      <div class="lgpd-actions">
+        <button type="button" id="lgpd-accept-btn" class="btn btn-primary lgpd-btn">Aceitar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       21. MODAL INTERATIVO DE PROPOSTA E VISITA TÉCNICA
+       ========================================================================== -->
+  <div id="proposal-modal" role="dialog" aria-modal="true">
+    <div class="modal-dialog">
+      <!-- Botão Fechar -->
+      <button type="button" id="modal-close-btn" class="modal-close-btn" aria-label="Fechar janela">
+        <svg class="icon" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+
+      <!-- Vista Formulário -->
+      <div id="modal-form-view">
+        <span class="modal-header-tag">Atendimento Técnico Corporativo</span>
+        <h3 class="modal-title">Solicitar Proposta ou Agendar Visita</h3>
+        <p class="modal-desc">Estrutura de 3.750m² a 20 minutos de Alphaville. Resposta com estudo de formato em até 2 horas.</p>
+
+        <form id="proposal-form">
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="modal-name" class="form-label">Nome Completo *</label>
+              <input type="text" id="modal-name" required placeholder="Seu nome" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="modal-company" class="form-label">Empresa *</label>
+              <input type="text" id="modal-company" required placeholder="Nome da sua empresa" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="modal-email" class="form-label">E-mail Corporativo *</label>
+              <input type="email" id="modal-email" required placeholder="voce@empresa.com.br" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="modal-phone" class="form-label">WhatsApp *</label>
+              <input type="tel" id="modal-phone" required placeholder="(11) 99999-9999" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="modal-format-select" class="form-label">Formato do Evento</label>
+              <select id="modal-format-select" class="form-control">
+                <option value="Treinamentos e Workshops">Treinamentos e Workshops</option>
+                <option value="Congressos e Palestras">Congressos e Palestras</option>
+                <option value="Lançamentos de Produto">Lançamentos de Produto</option>
+                <option value="Convenções">Convenções</option>
+                <option value="Confraternizações">Confraternizações</option>
+                <option value="Team Building">Team Building</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="modal-attendees" class="form-label">Estimativa de Pessoas</label>
+              <select id="modal-attendees" class="form-control">
+                <option value="Até 50 pessoas">Até 50 pessoas</option>
+                <option value="50 a 100 pessoas">50 a 100 pessoas</option>
+                <option value="100 a 200 pessoas">100 a 200 pessoas</option>
+                <option value="200 a 300 pessoas">200 a 300 pessoas (Capacidade máx)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="modal-date" class="form-label">Previsão de Data / Mês Pretendido</label>
+            <input type="text" id="modal-date" placeholder="Ex: Outubro / 2026 ou Data Específica" class="form-control">
+          </div>
+
+          <div class="form-group">
+            <label for="modal-notes" class="form-label">Detalhes ou Necessidades Específicas</label>
+            <textarea id="modal-notes" rows="2" placeholder="Ex: Precisamos de 2 salas simultâneas e coffee break completo..." class="form-control" style="resize:none;"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block" style="padding: 1rem; font-size: 0.95rem; margin-top: 0.5rem;">
+            <svg class="icon-whatsapp icon-whatsapp-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.39-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.25-.75-.67-1.26-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.78 2.72 4.31 3.81.6.26 1.07.42 1.44.53.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.1-.21-.17-.46-.3"/></svg>
+            <span>Enviar Briefing e Iniciar Atendimento</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Vista Sucesso -->
+      <div id="modal-success-view" class="modal-success-view">
+        <div class="modal-success-icon">
+          <svg class="icon icon-lg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="9 12 12 15 15 9"/></svg>
+        </div>
+        <h3 class="modal-success-title">Briefing Encaminhado!</h3>
+        <p class="modal-success-desc">Seu briefing foi registrado e você será direcionado para o WhatsApp da equipe técnica do Villa Mantova para atendimento imediato.</p>
+        <button type="button" id="modal-success-done-btn" class="btn btn-primary btn-sm">Concluir</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       21. MODAL DE POLÍTICA DE PRIVACIDADE
+       ========================================================================== -->
+  <div id="privacy-modal" class="privacy-modal" role="dialog" aria-modal="true" aria-labelledby="privacy-modal-title">
+    <div class="privacy-dialog">
+      <!-- Cabeçalho do Modal -->
+      <div class="privacy-header">
+        <div class="privacy-logo-box">
+          <img src="https://media.dmove.com.br/clients/villa-mantova/photos/corporativo/villa-mantova-corp-logo-transp.png" alt="Villa Mantova" class="privacy-logo-img">
+        </div>
+        <button type="button" id="privacy-close-btn" class="privacy-close-btn" aria-label="Fechar Política de Privacidade">
+          <svg class="icon" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <!-- Conteúdo com Rolagem -->
+      <div class="privacy-content">
+        <h2 id="privacy-modal-title" class="privacy-title font-serif">POLÍTICA DE PRIVACIDADE</h2>
+        <div class="privacy-updated">ÚLTIMA ATUALIZAÇÃO: 06/09/2026</div>
+
+        <div class="privacy-body">
+          <p>A <strong>VILLA MANTOVA</strong> respeita a sua privacidade e está comprometida com a proteção dos dados pessoais de clientes, visitantes do site, fornecedores e demais pessoas que interagem conosco.</p>
+          
+          <p>Esta Política de Privacidade explica, de forma simples e transparente, quais informações podemos coletar, como utilizamos esses dados e quais são os seus direitos.</p>
+
+          <h3>1. Quais dados podemos coletar</h3>
+          <p>Podemos coletar dados pessoais fornecidos diretamente por você ao preencher formulários, entrar em contato pelo WhatsApp, solicitar orçamento, agendar visita ou contratar nossos serviços.</p>
+          <p>Entre os dados coletados podem estar:</p>
+          <ul>
+            <li>Nome completo;</li>
+            <li>Telefone e WhatsApp;</li>
+            <li>E-mail;</li>
+            <li>Data do evento;</li>
+            <li>Tipo de evento;</li>
+            <li>Quantidade estimada de convidados;</li>
+            <li>Local do evento;</li>
+            <li>Preferências relacionadas ao buffet, cardápio, decoração ou estrutura;</li>
+            <li>Informações enviadas voluntariamente em mensagens, formulários ou atendimentos.</li>
+          </ul>
+          <p>Também poderemos coletar informações automáticas de navegação, como endereço IP, tipo de dispositivo, navegador utilizado, páginas acessadas e cookies, quando aplicável.</p>
+
+          <h3>2. Para que usamos seus dados</h3>
+          <p>Os dados pessoais coletados podem ser utilizados para:</p>
+          <ul>
+            <li>Responder solicitações de orçamento;</li>
+            <li>Entrar em contato por telefone, e-mail ou WhatsApp;</li>
+            <li>Agendar visitas, reuniões ou degustações;</li>
+            <li>Elaborar propostas comerciais personalizadas;</li>
+            <li>Organizar informações relacionadas ao evento;</li>
+            <li>Prestar os serviços contratados;</li>
+            <li>Enviar comunicações sobre nossos serviços, quando autorizado;</li>
+            <li>Melhorar a experiência de navegação no site;</li>
+            <li>Cumprir obrigações legais, contratuais ou regulatórias.</li>
+          </ul>
+          <p><strong>Não vendemos seus dados pessoais.</strong></p>
+
+          <h3>3. Compartilhamento de dados</h3>
+          <p>A <strong>VILLA MANTOVA</strong> poderá compartilhar dados pessoais apenas quando necessário para a execução dos serviços, cumprimento de obrigações legais ou operação do negócio.</p>
+          <p>Esse compartilhamento pode ocorrer com:</p>
+          <ul>
+            <li>Equipe interna responsável pelo atendimento e organização do evento;</li>
+            <li>Fornecedores e parceiros envolvidos na execução do serviço, quando necessário;</li>
+            <li>Plataformas de atendimento, formulário, CRM, hospedagem, e-mail ou WhatsApp;</li>
+            <li>Profissionais de contabilidade, jurídico ou tecnologia;</li>
+            <li>Autoridades públicas, quando houver obrigação legal.</li>
+          </ul>
+          <p>Sempre que possível, compartilhamos apenas as informações necessárias para a finalidade específica.</p>
+
+          <h3>4. Uso de fotos, vídeos e imagens de eventos</h3>
+          <p>Durante eventos realizados pela <strong>VILLA MANTOVA</strong>, poderão ser registradas fotos e vídeos para fins de organização, portfólio, divulgação institucional ou redes sociais.</p>
+          <p>Quando houver uso de imagem de clientes, convidados ou noivos de forma identificável para divulgação, a utilização dependerá de autorização, conforme aplicável.</p>
+          <p>Caso você deseje solicitar a remoção de alguma imagem publicada em nossos canais, entre em contato pelo e-mail informado nesta política.</p>
+
+          <h3>5. Cookies e tecnologias de navegação</h3>
+          <p>Nosso site pode utilizar cookies para melhorar a experiência do usuário, analisar estatísticas de acesso, lembrar preferências e apoiar ações de marketing.</p>
+          <p>Você pode configurar seu navegador para bloquear cookies ou alertar quando eles estiverem sendo utilizados. No entanto, algumas funcionalidades do site podem não funcionar corretamente sem esses recursos.</p>
+
+          <h3>6. Armazenamento e segurança dos dados</h3>
+          <p>Adotamos medidas razoáveis de segurança para proteger os dados pessoais contra acessos não autorizados, perda, alteração, divulgação indevida ou uso inadequado.</p>
+          <p>Os dados serão mantidos pelo tempo necessário para cumprir as finalidades descritas nesta política, atender obrigações legais, resolver eventuais disputas ou preservar direitos da <strong>VILLA MANTOVA</strong>.</p>
+
+          <h3>7. Direitos do titular dos dados</h3>
+          <p>De acordo com a legislação aplicável, você pode solicitar:</p>
+          <ul>
+            <li>Confirmação sobre o tratamento dos seus dados;</li>
+            <li>Acesso aos dados pessoais;</li>
+            <li>Correção de dados incompletos, inexatos ou desatualizados;</li>
+            <li>Exclusão de dados, quando aplicável;</li>
+            <li>Revogação de consentimento;</li>
+            <li>Informação sobre o compartilhamento de dados;</li>
+            <li>Portabilidade dos dados, quando aplicável;</li>
+            <li>Oposição ao tratamento em determinadas situações.</li>
+          </ul>
+          <p>Para exercer seus direitos, entre em contato conosco pelo canal indicado abaixo.</p>
+
+          <h3>8. Dados de crianças e adolescentes</h3>
+          <p>Nosso site e nossos canais de atendimento não têm como objetivo coletar dados diretamente de crianças ou adolescentes.</p>
+          <p>Caso informações de menores sejam necessárias para a organização do evento, como em cardápios infantis, quantidade de crianças ou necessidades específicas, esses dados deverão ser fornecidos pelos pais, responsáveis legais ou contratantes do evento.</p>
+
+          <h3>9. Links para terceiros</h3>
+          <p>Nosso site pode conter links para redes sociais, plataformas de mapa, aplicativos de mensagens ou outros sites externos.</p>
+          <p>A <strong>VILLA MANTOVA</strong> não se responsabiliza pelas práticas de privacidade, conteúdo ou segurança de sites e plataformas de terceiros. Recomendamos que você leia as políticas de privacidade desses serviços antes de fornecer qualquer informação.</p>
+
+          <h3>10. Alterações nesta Política de Privacidade</h3>
+          <p>Esta Política de Privacidade poderá ser atualizada a qualquer momento para refletir mudanças em nossos processos, serviços ou exigências legais.</p>
+          <p>A versão mais recente estará sempre disponível neste site.</p>
+
+          <h3>11. Canal de contato</h3>
+          <p>Em caso de dúvidas, solicitações ou pedidos relacionados aos seus dados pessoais, entre em contato:</p>
+          <div class="privacy-contact-box">
+            <p><strong>VILLA MANTOVA</strong></p>
+            <p><strong>E-mail:</strong> <a href="mailto:contato@villamantova.com.br">contato@villamantova.com.br</a></p>
+            <p><strong>Telefone/WhatsApp:</strong> <a href="https://wa.me/5511981001030" target="_blank" rel="noopener noreferrer">(11) 9810-01030</a></p>
+            <p><strong>Endereço:</strong> R. Romênia, 21 - Maravilha lll, Santana de Parnaíba - SP, 06523-045</p>
+            <p><strong>CNPJ:</strong> 37.540.933/0001-81</p>
+            <p><strong>Última atualização:</strong> 06/09/2026</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script Principal -->
+
+  <script>
+    import '../scripts/corporativo-original.js';
+  </script>
+</Base>
