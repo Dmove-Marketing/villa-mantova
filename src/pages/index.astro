@@ -4,6 +4,25 @@
 // CSS e JS: src/styles/institucional.css e src/scripts/institucional.js.
 import Base from '../layouts/Base.astro';
 import '../styles/institucional.css';
+import config from '../../config.json';
+import { getPreset } from '../scripts/form-presets';
+
+// Formulário padrão Dmove da seção final ("Agendar visita"). A home é geral (casamentos, eventos sociais
+// e corporativos): usa o preset "corporativo", mas o campo Empresa só aparece, e só é obrigatório,
+// quando o tipo de evento escolhido é corporativo (mesma regra da /bio).
+const campos = getPreset('corporativo');
+const webhook = config.forms['lead-form'].webhooks[0];
+const autoc: Record<string, string> = { nome: 'name', telefone: 'tel', email: 'email', empresa: 'organization' };
+const tiposCorporativos = [
+  'Confraternizacao corporativa',
+  'Corporativo',
+  'Feiras e Exposicoes',
+  'Masterclass e Palestras',
+  'Mentorias e Treinamentos',
+  'Offsite corporativo',
+  'Reunioes de Networking',
+  'Workshops, Conferencias e Seminarios',
+];
 
 const title = 'Villa Mantova — Casamentos ao Ar Livre · Alphaville';
 const description = 'Casar no campo com perfeição, a poucos minutos de Alphaville. Um cenário ao ar livre com natureza real, atmosfera leve e estrutura completa.';
@@ -13,7 +32,7 @@ const hero = 'https://media.dmove.com.br/clients/villa-mantova/photos/institucio
 ---
 
 <!-- noIndex: réplica do site no ar; remova quando esta página for a oficial, para não duplicar conteúdo no Google -->
-<Base title={title} description={description} ogImage={ogImage} theme="light" hideWhatsApp={true} noIndex={true}>
+<Base title={title} description={description} ogImage={ogImage} theme="light" noIndex={true}>
   <link rel="preconnect" href="https://fonts.googleapis.com" slot="head" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin slot="head" />
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Mulish:wght@400;500;600;700&display=swap" rel="stylesheet" slot="head" />
@@ -46,7 +65,7 @@ const hero = 'https://media.dmove.com.br/clients/villa-mantova/photos/institucio
           <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
         </svg>
       </a>
-      <a href="https://wa.me/5511948181301" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Agendar visita <span class="arrow">→</span></a>
+      <a href="#agendar" class="btn btn-primary">Agendar visita <span class="arrow">→</span></a>
     </div>
     <button class="burger" id="burger" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -66,7 +85,7 @@ const hero = 'https://media.dmove.com.br/clients/villa-mantova/photos/institucio
   <a href="#depoimentos">Depoimentos</a>
   <a href="#galeria">Galeria</a>
   <a href="#faq">Faq</a>
-  <a href="https://wa.me/5511948181301" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="color:#fff">Agendar visita →</a>
+  <a href="#agendar" class="btn btn-primary" style="color:#fff">Agendar visita →</a>
 </div>
 
 <!-- ============================= HERO ============================= -->
@@ -202,7 +221,7 @@ const hero = 'https://media.dmove.com.br/clients/villa-mantova/photos/institucio
     </div>
 
     <div class="space-cta reveal">
-      <a href="https://wa.me/5511948181301" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Agendar visita guiada <span class="arrow">→</span></a>
+      <a href="#agendar" class="btn btn-primary">Agendar visita guiada <span class="arrow">→</span></a>
     </div>
   </div>
 </section>
@@ -612,8 +631,47 @@ A singularidade deste espaço conquistou nosso coração de uma forma tão espec
       <h2>Transforme seu casamento em uma experiência natural e memorável</h2>
       <p>Conheça o Villa Mantova e descubra como casar no campo pode ser leve, perto e exclusivo.</p>
       <div class="hero-actions">
-        <a href="https://wa.me/5511948181301" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Agendar visita <span class="arrow">→</span></a>
-        <a href="https://wa.me/5511948181301" target="_blank" rel="noopener noreferrer" class="btn btn-light">Falar com consultor</a>
+        <a href="#agendar" class="btn btn-primary">Agendar visita <span class="arrow">→</span></a>
+      </div>
+
+      <!-- Formulário padrão Dmove: destino de todos os botões "Agendar visita" -->
+      <div class="cta-form" id="agendar">
+        <form class="cta-form__form" id="form-agendar" data-form-id="villa-mantova-home" data-fonte="Landing page/home" data-submit-url={webhook} data-grid-id="form-agendar" data-success-id="form-agendar-sucesso" data-tipos-corporativos={JSON.stringify(tiposCorporativos)} novalidate>
+          <input class="isca" type="text" name="website" aria-hidden="true" tabindex="-1" autocomplete="off" />
+          {campos.map((c) => (
+            <div class:list={['lead-campo', c.full && 'lead-campo--todo']} data-campo-empresa={c.name === 'empresa' ? '' : undefined} hidden={c.name === 'empresa'}>
+              <label for={`form-field-${c.name}`}>{c.label}{c.hint && <span class="lead-campo__hint"> ({c.hint})</span>}</label>
+              {c.type === 'select' ? (
+                <select id={`form-field-${c.name}`} name={c.name} required={c.required}>
+                  {c.options?.map((o) => <option value={o.value} disabled={o.disabled} selected={o.selected}>{o.label}</option>)}
+                </select>
+              ) : c.type === 'textarea' ? (
+                <textarea id={`form-field-${c.name}`} name={c.name} rows="3" required={c.required}></textarea>
+              ) : (
+                <input
+                  id={`form-field-${c.name}`}
+                  name={c.name}
+                  type={c.type}
+                  placeholder={c.placeholder}
+                  required={c.required && c.name !== 'empresa'}
+                  disabled={c.name === 'empresa'}
+                  autocomplete={autoc[c.name]}
+                  inputmode={c.type === 'tel' || c.type === 'number' ? 'numeric' : undefined}
+                  min={c.type === 'number' ? '1' : undefined}
+                  maxlength={c.datepicker ? 10 : undefined}
+                  data-datepicker={c.datepicker ? '' : undefined}
+                />
+              )}
+            </div>
+          ))}
+          <button class="btn btn-primary form-submit" type="submit">Agendar visita <span class="arrow">→</span></button>
+          <p class="cta-form__aviso" id="agendarFormMsg" role="status"></p>
+        </form>
+        <div class="cta-form__sucesso" id="form-agendar-sucesso" role="status">
+          <h3>Recebemos sua solicitação</h3>
+          <p>Em breve, nosso time entrará em contato para agendar a sua visita.</p>
+        </div>
+        <p class="cta-form__privacidade">Usamos seus dados apenas para responder ao seu pedido. Veja nossa política de privacidade no rodapé.</p>
       </div>
     </div>
   </div>
@@ -781,13 +839,39 @@ A singularidade deste espaço conquistou nosso coração de uma forma tão espec
   </div>
 </div>
 
-<a href="https://wa.me/5511948181301" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Fale conosco no WhatsApp">
-  <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.2-.569-.349L17.472 14.382zM12.008 21.75c-1.811 0-3.568-.487-5.132-1.407l-.368-.218-3.82.997 1.018-3.723-.238-.38a9.716 9.716 0 01-1.492-5.14C1.98 6.444 6.489 1.93 12.01 1.93c2.671 0 5.181 1.04 7.072 2.93a9.664 9.664 0 012.929 7.08c-.005 5.545-4.512 10.06-10.003 10.06zm9.02-17.076A11.83 11.83 0 0012.01 0C5.41 0 .038 5.31.033 11.87a11.787 11.787 0 001.6 5.925L0 24l6.335-1.637a11.79 11.79 0 005.672 1.46h.005c6.597 0 11.97-5.314 11.975-11.878a11.844 11.844 0 00-3.506-8.397z"/>
-  </svg>
-</a>
-
   <script>
+    import flatpickr from 'flatpickr';
+    import { Portuguese } from 'flatpickr/dist/l10n/pt.js';
+    import 'flatpickr/dist/flatpickr.min.css';
+    import { initForms } from '../scripts/forms';
     import '../scripts/institucional.js';
+
+    initForms();
+
+    // Empresa: só para tipos de evento corporativos (aparece, vira obrigatória e entra no envio)
+    const formulario = document.querySelector<HTMLFormElement>('#form-agendar');
+    const tipoEvento = formulario?.querySelector<HTMLSelectElement>('[name="tipo_evento"]');
+    const campoEmpresa = formulario?.querySelector<HTMLElement>('[data-campo-empresa]');
+    const empresa = campoEmpresa?.querySelector<HTMLInputElement>('input');
+    if (formulario && tipoEvento && campoEmpresa && empresa) {
+      const corporativos: string[] = JSON.parse(formulario.dataset.tiposCorporativos || '[]');
+      tipoEvento.addEventListener('change', () => {
+        const corporativo = corporativos.includes(tipoEvento.value);
+        campoEmpresa.hidden = !corporativo;
+        empresa.disabled = !corporativo;
+        empresa.required = corporativo;
+        if (!corporativo) empresa.value = '';
+      });
+    }
+
+    const data = document.querySelector<HTMLInputElement>('[data-datepicker]');
+    if (data) {
+      // máscara dd/mm/aaaa enquanto digita
+      data.addEventListener('input', () => {
+        const d = data.value.replace(/\D/g, '').slice(0, 8);
+        data.value = d.length > 4 ? d.slice(0, 2) + '/' + d.slice(2, 4) + '/' + d.slice(4) : d.length > 2 ? d.slice(0, 2) + '/' + d.slice(2) : d;
+      });
+      flatpickr(data, { locale: Portuguese, dateFormat: 'd/m/Y', minDate: 'today', allowInput: true });
+    }
   </script>
 </Base>
