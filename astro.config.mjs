@@ -8,10 +8,6 @@ export default defineConfig({
   build: {
     inlineStylesheets: 'always',
   },
-  // Um único funil por enquanto: a raiz leva à LP. Com mais funis, trocar por home de triagem (docs/home-triagem.md).
-  redirects: {
-    '/': '/eventos-corporativos',
-  },
   server: {
     port: 4321,
   },
