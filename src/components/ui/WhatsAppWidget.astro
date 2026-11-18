@@ -3,7 +3,6 @@ import config from '../../../config.json';
 import { trackingParamKeys, tipoEventoOptions } from '../../scripts/lead-payload';
 
 interface Props {
-  phone?: string;
   displayName?: string;
   avatar?: string;
   submitUrl?: string;
@@ -13,8 +12,6 @@ interface Props {
 }
 
 const {
-  // Sem número configurado o widget só captura o lead (sem redirecionar): nunca usa número de outro cliente.
-  phone = config.whatsapp?.phone || '',
   displayName = config.whatsapp?.display_name || 'Atendimento',
   avatar = config.whatsapp?.avatar || '/images/whatsapp-avatar.jpg',
   submitUrl = config.forms['lead-form']?.webhooks[0] || '',
@@ -131,7 +128,7 @@ const introMessages = [
   </form>
 </div>
 
-<script define:vars={{ submitUrl, project, trackingParamKeys, phone, fields, introMessages, avatar }}>
+<script define:vars={{ submitUrl, project, trackingParamKeys, fields, introMessages, avatar }}>
   /* ── Elementos ─────────────────────────────── */
   const toggle    = document.getElementById('wa-toggle');
   const popup     = document.getElementById('wa-popup');
@@ -343,34 +340,6 @@ const introMessages = [
   dateInput.addEventListener('input', () => { dateInput.value = maskDate(dateInput.value); });
 
   /* ── Roteiro da conversa ────────────────────── */
-  function waMessage() {
-    const a = state.answers;
-    const tipo = a.tipo_evento?.display || 'meu evento';
-    const parts = [`Olá! Sou ${a.nome?.display || ''}`.trim()];
-    if (a.empresa) parts[0] += `, da empresa ${a.empresa.display}`;
-    parts.push(`Gostaria de um orçamento para ${tipo.toLowerCase()}`);
-    if (a.data_evento) parts[parts.length - 1] += ` no dia ${a.data_evento.display}`;
-    if (a.convidados) parts[parts.length - 1] += `, para aproximadamente ${a.convidados.display} convidados`;
-    return `${parts.join('. ')}. 🥂`;
-  }
-  const waUrl = () => `https://wa.me/${phone}?text=${encodeURIComponent(waMessage())}`;
-
-  function ctaBubble() {
-    if (!phone) return; // sem número de WhatsApp configurado não há para onde continuar a conversa
-    const link = document.createElement('a');
-    link.className = 'wa-cta';
-    link.href = waUrl();
-    link.target = '_blank';
-    link.rel = 'noopener';
-    // depois do lead: só GA4 (não é Contact, a pessoa já virou Lead)
-    link.addEventListener('click', () => {
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: 'whatsapp_click', click_type: 'continuar_conversa', link_location: 'popup', project: project });
-    });
-    link.innerHTML = `<svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.852L.057 23.428a.5.5 0 0 0 .614.614l5.576-1.475A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm5.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg> Continuar no WhatsApp`;
-    bubbleHtml('agent', link);
-  }
-
   async function agentSays(text, typingMs) {
     setTyping(true);
     await wait(typingMs || 700);
@@ -457,7 +426,6 @@ const introMessages = [
 
     if (state.done) {
       bubble('agent', 'Recebemos sua solicitação! ✅', true);
-      ctaBubble();
       return;
     }
 
@@ -492,15 +460,9 @@ const introMessages = [
     setTyping(false);
     state.done = true;
     saveState();
-    if (!phone) {
-      // WhatsApp ainda não configurado: o lead já foi enviado ao webhook; encerra sem redirecionar
-      bubble('agent', `Perfeito, ${state.answers.nome?.display.split(/\s+/)[0] || ''}! Recebemos seus dados e nosso time entrará em contato em breve. ✅`.replace(', !', '!'));
-      return;
-    }
-    bubble('agent', `Perfeito, ${state.answers.nome?.display.split(/\s+/)[0] || ''}! Já estou te chamando no WhatsApp 🚀`.replace(', !', '!'));
-    ctaBubble();
-    await wait(1200);
-    window.location.href = waUrl();
+    // O lead já foi enviado ao webhook; a distribuição para o time é feita fora do site (VOE).
+    // Não há redirecionamento para WhatsApp.
+    bubble('agent', `Perfeito, ${state.answers.nome?.display.split(/\s+/)[0] || ''}! Recebemos seus dados e nosso time entrará em contato em breve. ✅`.replace(', !', '!'));
   }
 
   /* ── Mobile: trava o scroll da página atrás do chat ── */
@@ -1043,27 +1005,6 @@ const introMessages = [
   @keyframes wa-dot-bounce {
     0%, 60%, 100% { transform: translateY(0); }
     30%           { transform: translateY(-5px); }
-  }
-
-  /* CTA final dentro de balão */
-  .wa-chat :global(.wa-cta) {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    background: var(--wa-green);
-    color: #fff;
-    font-weight: 600;
-    font-size: 13px;
-    padding: 9px 16px;
-    border-radius: 20px;
-    text-decoration: none;
-    transition: background .2s;
-  }
-  .wa-chat :global(.wa-cta:hover) { background: var(--wa-green-dark); }
-  .wa-chat :global(.wa-row .wa-msg:has(.wa-cta)) {
-    background: transparent;
-    box-shadow: none;
-    padding: 2px 0;
   }
 
   /* ── Barra de input ─────────────────────────── */

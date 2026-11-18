@@ -9,10 +9,9 @@
     "enabled": true
   },
   "whatsapp": {
-    "phone": "",
     "display_name": "Villa Mantova",
     "avatar": "/images/icone.png",
-    "enabled": false
+    "enabled": true
   },
   "forms": {
     "lead-form": {

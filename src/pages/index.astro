@@ -615,8 +615,8 @@ A singularidade deste espaço conquistou nosso coração de uma forma tão espec
       </div>
     </div>
     <div class="faq-foot reveal">
-      <a href="https://wa.me/5511948181301" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Ainda tem dúvidas?</a>
-      <a href="https://wa.me/5511948181301" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Fale com um especialista <span class="arrow">→</span></a>
+      <a href="#agendar" class="btn btn-ghost" data-abrir-popup>Ainda tem dúvidas?</a>
+      <a href="#agendar" class="btn btn-primary" data-abrir-popup>Fale com um especialista <span class="arrow">→</span></a>
     </div>
   </div>
 </section>
@@ -705,7 +705,7 @@ A singularidade deste espaço conquistou nosso coração de uma forma tão espec
       <div>
         <h5>Contato</h5>
         <ul>
-          <li><a href="https://wa.me/5511948181301" target="_blank" rel="noopener noreferrer">(11) 94818-1301</a></li>
+          <li><a href="tel:+5511948181301">(11) 94818-1301</a></li>
         </ul>
       </div>
       <div>
@@ -847,6 +847,17 @@ A singularidade deste espaço conquistou nosso coração de uma forma tão espec
     import '../scripts/institucional.js';
 
     initForms();
+
+    // Botões do FAQ abrem o popup de atendimento (captura de lead). Sem JS, levam ao formulário (#agendar).
+    document.querySelectorAll<HTMLAnchorElement>('[data-abrir-popup]').forEach((a) => {
+      a.addEventListener('click', (e) => {
+        const fab = document.getElementById('wa-toggle');
+        if (!fab) return; // sem widget: segue o link para o formulário
+        e.preventDefault();
+        e.stopPropagation(); // o widget fecha o popup em qualquer clique fora dele
+        if (fab.getAttribute('aria-expanded') !== 'true') fab.click();
+      });
+    });
 
     // Empresa: só para tipos de evento corporativos (aparece, vira obrigatória e entra no envio)
     const formulario = document.querySelector<HTMLFormElement>('#form-agendar');
