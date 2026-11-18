@@ -21,6 +21,14 @@
       "webhooks": [
         "https://server3n8n.dmove.com.br/webhook/villa-mantova"
       ]
+    },
+    "site-form": {
+      "id": "site-form",
+      "preset": "corporativo",
+      "redirect_on_success": "",
+      "webhooks": [
+        "https://server3n8n.dmove.com.br/webhook/villa-mantova-site"
+      ]
     }
   },
   "media": {
