@@ -1,6 +1,6 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
-import { getPosts, formatarData } from '../../lib/blog';
+import { getPosts, formatarData, srcsetCdn } from '../../lib/blog';
 
 export function getStaticPaths() {
   return getPosts().map((post) => ({ params: { slug: post.slug }, props: { post } }));
@@ -34,7 +34,7 @@ const jsonLd = {
         </nav>
         <h1 class="post__titulo">{post.title}</h1>
         <p class="post__data"><time datetime={post.date}>{data.extenso}</time></p>
-        <img class="post__imagem" src={post.image} width="1200" height="800" alt={post.imageAlt} fetchpriority="high" decoding="async" />
+        <img class="post__imagem" src={post.image} srcset={srcsetCdn(post.image, [600, 900])} sizes="(max-width: 1000px) 100vw, 66vw" width="1200" height="800" alt={post.imageAlt} fetchpriority="high" decoding="async" />
 
         <div class="post__compartilhar" data-compartilhar>
           <span>Compartilhe em suas redes:</span>
@@ -63,7 +63,7 @@ const jsonLd = {
           <h2 id="mais-posts">Você pode querer olhar…</h2>
           {outros.map((p) => (
             <a class="post-mini" href={`/blog/${p.slug}`}>
-              <img loading="lazy" decoding="async" src={p.image} width="600" height="400" alt="" />
+              <img loading="lazy" decoding="async" src={p.image} srcset={srcsetCdn(p.image, [200, 400])} sizes="112px" width="600" height="400" alt="" />
               <span class="post-mini__texto"><strong>{p.title}</strong><em>Continuar lendo…</em></span>
             </a>
           ))}

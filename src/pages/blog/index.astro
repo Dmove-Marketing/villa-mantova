@@ -1,6 +1,6 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
-import { getPosts, formatarData } from '../../lib/blog';
+import { getPosts, formatarData, srcsetCdn } from '../../lib/blog';
 
 const posts = getPosts();
 const title = 'Blog | Villa Mantova';
@@ -25,12 +25,12 @@ const jsonLd = {
         <p class="lead" style="margin-top:18px">Ideias e orientações para planejar casamentos, eventos corporativos e celebrações em contato com a natureza.</p>
       </div>
       <div class="blog-grid">
-        {posts.map((p) => {
+        {posts.map((p, n) => {
           const d = formatarData(p.date);
           return (
             <article class="blog-card">
               <a class="blog-card__img" href={`/blog/${p.slug}`} tabindex="-1" aria-hidden="true">
-                <img loading="lazy" decoding="async" src={p.image} width="1200" height="800" alt="" />
+                <img loading={n < 3 ? "eager" : "lazy"} fetchpriority={n === 0 ? "high" : undefined} decoding="async" src={p.image} srcset={srcsetCdn(p.image)} sizes="(max-width: 720px) 100vw, (max-width: 1000px) 50vw, 33vw" width="1200" height="800" alt="" />
                 <span class="blog-card__tag">{p.category}</span>
                 <span class="blog-card__data"><strong>{d.dia}</strong>{d.mes}</span>
               </a>

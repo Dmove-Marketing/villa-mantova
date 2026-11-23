@@ -37,3 +37,11 @@ export function formatarData(iso: string) {
     extenso: d.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' }),
   };
 }
+
+/** srcset responsivo pelo redimensionador do CDN (/api/public/resize/<largura>/clients/...). A imagem original é de 1200px. */
+export function srcsetCdn(url: string, larguras = [400, 800]) {
+  return larguras
+    .map((w) => `${url.replace('/clients/', `/api/public/resize/${w}/clients/`)} ${w}w`)
+    .concat(`${url} 1200w`)
+    .join(', ');
+}
