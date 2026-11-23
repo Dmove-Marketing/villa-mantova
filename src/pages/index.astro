@@ -30,15 +30,14 @@ const title = 'Casamentos e Eventos em Alphaville | Villa Mantova';
 const description = 'Espaço de campo a poucos minutos de Alphaville para casamentos, eventos corporativos e sociais. Natureza, ambientes independentes e estrutura completa.';
 // OG precisa de URL absoluta; o domínio ainda não existe, então usa a imagem do CDN.
 const ogImage = 'https://media.dmove.com.br/clients/villa-mantova/photos/hero.webp';
-const hero = 'https://media.dmove.com.br/clients/villa-mantova/photos/institucional/reception-villa.webp';
+const hero = 'https://media.dmove.com.br/clients/villa-mantova/photos/home/hero.webp';
 
 // FAQ: fonte única do HTML visível e do marcador FAQPage (o Google exige que os dois coincidam).
 const faq = [
-  { q: 'Qual é a capacidade máxima de convidados?', a: 'O Villa Mantova comporta de 50 a 300 convidados, com flexibilidade para diferentes formatos de evento. Podemos adaptar os espaços conforme sua necessidade.' },
-  { q: 'Qual é a melhor época do ano para casar no Villa Mantova?', a: 'Primavera e outono oferecem clima ideal e paisagem exuberante. Mas o espaço é versátil o ano todo, com estrutura para qualquer estação.' },
+  { q: 'Qual é a capacidade máxima de convidados?', a: 'O Villa Mantova comporta de 50 a 300 convidados, com flexibilidade para diferentes formatos de evento.' },
+  { q: 'Vocês oferecem pacotes personalizados?', a: 'Sim! Oferecemos opções personalizadas para diferentes tipos de eventos, considerando suas necessidades, preferências e orçamento.' },
   { q: 'Existe espaço para hospedagem de convidados?', a: 'Temos parcerias com hotéis e pousadas próximas. A localização em Alphaville facilita o acesso para convidados de São Paulo e região.' },
-  { q: 'Como é o processo de reserva?', a: 'Agendamos uma visita guiada, você conhece o espaço, sanamos todas as suas dúvidas e então alinhamos a reserva da data e detalhes. Após aprovação, assinamos contrato e iniciamos o planejamento.' },
-  { q: 'Vocês oferecem pacotes personalizados?', a: 'Sim, cada casamento é único. Criamos pacotes customizados de acordo com sua visão, orçamento e necessidades específicas.' },
+  { q: 'O que acontece se chover no dia do evento?', a: 'O Villa Mantova conta com uma estrutura coberta para acomodar o evento em caso de chuva, permitindo que a programação aconteça com tranquilidade.' },
 ];
 
 // Dados estruturados. Sem `url` (domínio ainda não definido) e sem aggregateRating (a contagem de avaliações
@@ -77,17 +76,13 @@ const jsonLd = {
       <img src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/logo-villa-mantova.png" alt="Villa Mantova">
     </a>
     <nav class="nav-links">
-      <a href="#historia">A História</a>
-      <a href="#espaco">O Espaço</a>
-      <a href="#paraquem">Casamento no campo</a>
-      <div style="display: flex; align-items: center; gap: 6px;">
-        <a href="#eventos">Eventos</a>
-        <span style="color: var(--ink-soft); font-family: var(--font-display); font-size: 0.94rem;">|</span>
-        <a href="/eventos-corporativos" target="_blank" rel="noopener noreferrer">Corporativo</a>
-      </div>
-      <a href="#depoimentos">Depoimentos</a>
+      <a href="#topo">Início</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#espaco">Espaço</a>
+      <a href="#eventos">Eventos</a>
       <a href="#galeria">Galeria</a>
-      <a href="#faq">Faq</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#faq">FAQ</a>
     </nav>
     <div class="nav-cta">
       <a href="https://www.instagram.com/villa.mantova/" target="_blank" rel="noopener noreferrer" class="instagram-circle-link" aria-label="Instagram">
@@ -106,317 +101,290 @@ const jsonLd = {
 </header>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#historia">A História</a>
-  <a href="#espaco">O Espaço</a>
-  <a href="#paraquem">Casamento no campo</a>
-  <div style="display: flex; align-items: center; gap: 6px;">
-    <a href="#eventos">Eventos</a>
-    <span style="color: var(--green-800); font-family: var(--font-display); font-size: 1.5rem; font-weight: 300;">|</span>
-    <a href="/eventos-corporativos" target="_blank" rel="noopener noreferrer">Corporativo</a>
-  </div>
-  <a href="#depoimentos">Depoimentos</a>
+  <a href="#topo">Início</a>
+  <a href="#sobre">Sobre</a>
+  <a href="#espaco">Espaço</a>
+  <a href="#eventos">Eventos</a>
   <a href="#galeria">Galeria</a>
-  <a href="#faq">Faq</a>
+  <a href="#depoimentos">Depoimentos</a>
+  <a href="#faq">FAQ</a>
   <a href="#agendar" class="btn btn-primary" style="color:#fff">Agendar visita →</a>
 </div>
 
 <!-- ============================= HERO ============================= -->
 <section class="hero" id="topo" data-screen-label="Hero">
-  <div class="hero-bg" style="background-image:url('https://media.dmove.com.br/clients/villa-mantova/photos/institucional/reception-villa.webp')"></div>
+  <div class="hero-bg" style="background-image:url('https://media.dmove.com.br/clients/villa-mantova/photos/home/hero.webp')"></div>
   <div class="hero-shade"></div>
   <div class="wrap">
     <div class="hero-inner reveal">
-      <span class="eyebrow" id="heroEyebrow">Casamento no campo · Buffet de casamento · Alphaville</span>
-      <h1 id="heroTitle">Casar no campo com perfeição é um sonho <em>para poucos.</em> E pode ser para você.</h1>
-      <p class="hero-sub" id="heroSub">Um cenário ao ar livre, com natureza real, atmosfera leve e estrutura completa — a poucos minutos de Alphaville.</p>
-      <p class="hero-fine" id="heroFine">Sem deslocamentos longos. Sem transformar seu casamento em algo complexo.</p>
+      <h1 id="heroTitle">Um espaço para celebrar <em>grandes momentos</em></h1>
+      <p class="hero-sub" id="heroSub">Natureza, estrutura e versatilidade para diferentes tipos de eventos</p>
+      <p class="hero-tipos">Casamento • Eventos Corporativos • Eventos Sociais</p>
       <div class="hero-actions">
-        <a href="#historia" class="btn btn-primary" id="heroCta">Conhecer o Villa Mantova <span class="arrow">→</span></a>
-        <a href="#galeria" class="btn btn-light">Ver o espaço</a>
+        <a href="#espaco" class="btn btn-primary" id="heroCta">Conheça o espaço <span class="arrow">→</span></a>
       </div>
     </div>
   </div>
-  <a href="#espaco" class="scroll-hint"><span>Iniciar experiência</span><span class="line"></span></a>
+  <a href="#sobre" class="scroll-hint"><span>Iniciar experiência</span><span class="line"></span></a>
 </section>
 
 <!-- ============================= AUTORIDADE ============================= -->
 <section class="authority">
   <div class="wrap">
-    <div class="stats">
-      <div class="stat reveal"><div class="stat-num">400<span>+</span></div><div class="stat-label">Casamentos realizados</div></div>
-      <div class="stat reveal"><div class="stat-num">500<span>+</span></div><div class="stat-label">Eventos celebrados</div></div>
-      <div class="stat reveal"><div class="stat-num">15</div><div class="stat-label">Anos de experiência</div></div>
-      <div class="stat reveal"><div class="stat-num">98<span>%</span></div><div class="stat-label">Taxa de satisfação</div></div>
+    <div class="stats stats--3">
+      <div class="stat reveal"><div class="stat-num">500<span>+</span></div><div class="stat-label">Eventos realizados</div></div>
+      <div class="stat reveal"><div class="stat-num"><small>Até</small> 300</div><div class="stat-label">Convidados</div></div>
+      <div class="stat reveal"><div class="stat-num">4,9</div><div class="stat-label">Avaliação no Google</div></div>
     </div>
   </div>
 </section>
 
-<!-- ============================= HISTÓRIA ============================= -->
-<section class="section" id="historia">
+<!-- ============================= SOBRE ============================= -->
+<section class="section sobre" id="sobre">
   <div class="wrap">
     <div class="story-grid">
       <div class="story-copy reveal">
-        <span class="eyebrow">A História</span>
-        <h2 class="title">Natureza e estrutura<br>que não competem.<br><span class="accent">Se complementam.</span></h2>
-        <p style="margin-top:28px">Casar no campo sempre foi um desejo. Mas, na prática, quase sempre vem acompanhado de escolhas difíceis: distância, logística e desgaste para quem organiza — e para quem participa.</p>
-        <div class="pull">O Villa Mantova nasce com uma proposta clara: entregar a experiência de um casamento ao ar livre sem afastar você da sua realidade.</div>
-        <p>Um lugar onde o cenário, o ambiente e a experiência já estão alinhados — para que você apenas viva o seu dia.</p>
-        <p>Foi desse desejo de entregar a melhor experiência que nasceu o Villa Mantova, um sonho idealizado por dois irmãos juntamente com sua mãe. Essa origem familiar se reflete em cada canto do espaço, trazendo um acolhimento autêntico e a certeza de que o seu grande dia será cuidado com afeto e dedicação.</p>
+        <span class="eyebrow">Sobre</span>
+        <h2 class="title">A combinação ideal entre natureza e praticidade</h2>
+        <p style="margin-top:28px">O Villa Mantova nasceu da vontade de oferecer um espaço de campo com a conveniência de quem precisa de estrutura. A poucos minutos de Alphaville e perto da Rodovia Castelo Branco, reunimos natureza, ambientes independentes e uma equipe que cuida do evento do planejamento ao encerramento.</p>
+        <div class="sobre-pontos">
+          <div class="sobre-ponto">Eventos corporativos e sociais</div>
+          <div class="sobre-ponto">Solução 360°</div>
+          <div class="sobre-ponto">Integração com a natureza</div>
+        </div>
       </div>
       <div class="story-media reveal">
-        <div class="img-main"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/couple-portrait.webp" alt="Casal no Villa Mantova"></div>
-        <div class="badge">
-          <div class="b-num">400+</div>
-          <div class="b-txt">casamentos, experiências e sonhos celebrados.</div>
-        </div>
+        <div class="img-main"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/sobre.webp" width="1280" height="853" alt="Área coberta e gramado do Villa Mantova com a natureza ao redor"></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================= O ESPAÇO ============================= -->
+<!-- ============================= ESPAÇO ============================= -->
 <section class="section espaco" id="espaco">
   <div class="wrap">
     <div class="section-head center reveal">
       <span class="eyebrow">O Espaço</span>
-      <h2 class="title">Uma experiência, do início ao fim</h2>
-      <p class="lead" style="margin-top:18px">Natureza, arquitetura e atmosfera funcionando juntos — cada ambiente preparado para o seu momento.</p>
+      <h2 class="title">Ambientes versáteis para diferentes momentos</h2>
     </div>
-    <div class="space-grid">
+    <div class="space-grid space-grid--5">
       <div class="space-card reveal">
-        <div class="card-img"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/cerimonia-ao-ar-livre.webp" alt="Cerimônia ao ar livre"></div>
+        <div class="card-img"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/casa-de-apoio.webp" width="1600" height="1066" alt="Casa de apoio do Villa Mantova com mesas montadas no gramado e cordão de luzes"></div>
         <div class="card-body">
           <div class="card-rule"></div>
-          <h3>Cerimônia ao ar livre</h3>
-          <p>Jardins amplos que transformam o ambiente em cenário natural, com a natureza como protagonista.</p>
-        </div>
-      </div>
-      <div class="space-card reveal">
-        <div class="card-img"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/recepcao-integrada.webp" alt="Recepção integrada"></div>
-        <div class="card-body">
-          <div class="card-rule"></div>
-          <h3>Recepção integrada</h3>
-          <p>Espaço preparado para dar continuidade ao momento, sem ruptura entre cerimônia e festa.</p>
+          <h3>Casa de Apoio</h3>
+          <p>Ambiente reservado para os preparativos dos noivos e como camarim e apoio para palestrantes e equipes.</p>
         </div>
       </div>
       <div class="space-card reveal">
-        <div class="card-img"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/casa-dos-noivos.webp" alt="Casa dos noivos"></div>
+        <div class="card-img"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/area-externa.webp" width="1600" height="1067" alt="Área externa do Villa Mantova com cerimônia montada ao ar livre, bancos de madeira e flores brancas"></div>
         <div class="card-body">
           <div class="card-rule"></div>
-          <h3>Casa dos noivos</h3>
-          <p>Um ambiente íntimo e reservado especialmente para os noivos se prepararem para o grande momento.</p>
+          <h3>Área externa</h3>
+          <p>Espaço para cerimônias ao ar livre e eventos em contato com a natureza.</p>
         </div>
       </div>
       <div class="space-card reveal">
-        <div class="card-img"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/solucao-completa.webp" alt="Solução completa"></div>
+        <div class="card-img"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/area-coberta.webp" width="1600" height="1194" alt="Área coberta do Villa Mantova com mesas longas montadas para um evento corporativo"></div>
         <div class="card-body">
           <div class="card-rule"></div>
-          <h3>Solução completa</h3>
-          <p>Natureza, arquitetura e atmosfera funcionando juntos do dia à noite, em perfeita harmonia.</p>
+          <h3>Área coberta</h3>
+          <p>Ambiente versátil para receber convidados, coffee breaks e momentos de convivência.</p>
         </div>
       </div>
       <div class="space-card reveal">
-        <div class="card-img"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/planob.webp" alt="Plano B"></div>
+        <div class="card-img"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/lounge.webp" width="1440" height="957" alt="Lounge ao ar livre do Villa Mantova com sofá e poltronas sob as árvores"></div>
         <div class="card-body">
           <div class="card-rule"></div>
-          <h3>Plano B</h3>
-          <p>E se o tempo atrapalhar, aqui você tem um espaço alternativo para sua cerimônia, sem riscos.</p>
+          <h3>Lounge</h3>
+          <p>Espaço acolhedor ao ar livre, ideal para pausas, conversas e momentos de descontração.</p>
         </div>
       </div>
       <div class="space-card reveal">
-        <div class="card-img"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/balada.webp" alt="Balada"></div>
+        <div class="card-img"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/piscina.webp" width="1600" height="1067" alt="Piscina do Villa Mantova cercada por deque de madeira e jardim"></div>
         <div class="card-body">
           <div class="card-rule"></div>
-          <h3>Balada</h3>
-          <p>Nada melhor do que um ambiente preparado para você comemorar, dançar e ser feliz.</p>
+          <h3>Piscina</h3>
+          <p>Um espaço que amplia as possibilidades de uso e proporciona momentos de convivência ao ar livre.</p>
         </div>
-      </div>
-    </div>
-
-    <div class="solutions-header reveal">
-      <h3>Todas as soluções para seu casamento, festa ou o evento que você quiser experienciar com a família e convidados:</h3>
-    </div>
-    
-    <div class="solutions-grid reveal">
-      <div class="solution-box" style="background-image: url('https://media.dmove.com.br/clients/villa-mantova/photos/institucional/locacao-do-espaco-por-7-horas.webp');">
-        <h4>Locação do espaço por 7 horas</h4>
-      </div>
-      <div class="solution-box" style="background-image: url('https://media.dmove.com.br/clients/villa-mantova/photos/institucional/personalizacao-de-cardapios-a-sua-escolha.webp');">
-        <h4>Personalização de cardápios à sua escolha</h4>
-      </div>
-      <div class="solution-box" style="background-image: url('https://media.dmove.com.br/clients/villa-mantova/photos/institucional/decoracao-completa-deslumbrante.webp');">
-        <h4>Decoração completa deslumbrante</h4>
-      </div>
-      <div class="solution-box" style="background-image: url('https://media.dmove.com.br/clients/villa-mantova/photos/institucional/som-e-iluminacao-incriveis.webp');">
-        <h4>Som e iluminação incríveis</h4>
-      </div>
-    </div>
-
-    <div class="space-cta reveal">
-      <a href="#agendar" class="btn btn-primary">Agendar visita guiada <span class="arrow">→</span></a>
-    </div>
-  </div>
-</section>
-
-<!-- ============================= POR QUE VILLA MANTOVA ============================= -->
-<section class="section" id="porque">
-  <div class="wrap">
-    <div class="split">
-      <div class="reveal">
-        <span class="eyebrow">Por que Villa Mantova</span>
-        <h2 class="title">O campo deixa de ser complexo</h2>
-        <ul class="checklist">
-          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Cenário natural real — não construído artificialmente</li>
-          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Estrutura pronta para cerimônia e festa</li>
-          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Proximidade com Alphaville e São Paulo</li>
-          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Facilidade de acesso para convidados</li>
-          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Espaço versátil para diferentes formatos</li>
-          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Equipe experiente que sustenta a experiência</li>
-        </ul>
-        <div class="note-box">
-          <p>Mas o principal: aqui, o casamento no campo deixa de ser complexo — e passa a ser <span class="hl">natural.</span></p>
-        </div>
-      </div>
-      <div class="split-media reveal">
-        <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/ceremony-day.webp" alt="Cerimônia ao ar livre no Villa Mantova">
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================= PARA QUEM É ============================= -->
-<section class="section espaco" id="paraquem">
-  <div class="wrap">
-    <div class="split reverse">
-      <div class="reveal">
-        <span class="eyebrow">Para quem é</span>
-        <h2 class="title">Feito para quem<br>valoriza a experiência</h2>
-        <ul class="checklist">
-          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Para quem sempre quis casar ao ar livre</li>
-          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Para quem valoriza estética, mas exige conforto</li>
-          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Para quem não quer transformar o casamento em um projeto complicado</li>
-          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Para quem quer receber bem — sem dificultar para os convidados</li>
-          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Para quem entende que o lugar define a experiência</li>
-        </ul>
-      </div>
-      <div class="split-media reveal">
-        <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/balada-experiencia.webp" alt="Recepção de convidados no Villa Mantova">
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================= O QUE VOCÊ VAI TER ============================= -->
-<section class="section" id="vaiter">
-  <div class="wrap">
-    <div class="split">
-      <div class="split-media reveal">
-        <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/aru9460.webp" alt="Casal de noivos abraçados em cerimônia ao ar livre, à noite">
-      </div>
-      <div class="reveal">
-        <span class="eyebrow">O que você vai ter</span>
-        <h2 class="title">Um dia que simplesmente<br>flui</h2>
-        <ul class="checklist">
-          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Um cenário que já entrega impacto visual</li>
-          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Um ambiente que sustenta o evento do início ao fim</li>
-          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Um dia que começa com leveza e continua fluindo</li>
-          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Convidados presentes — não cansados</li>
-          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Um casamento que parece simples… porque tudo funciona</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================= TIPOS DE EVENTO ============================= -->
+<!-- ============================= EVENTOS ============================= -->
 <section class="section eventos" id="eventos">
   <div class="wrap">
     <div class="eventos-head reveal">
       <span class="eyebrow">Diversos tipos de evento</span>
-      <h2>Existem eventos bonitos. E existem experiências que acontecem com naturalidade.</h2>
-      <p>Um ambiente onde o cenário, a estrutura e o momento se encontram — sem esforço, sem adaptação, sem excesso.</p>
+      <h2>Versatilidade para todos os eventos</h2>
     </div>
     <div class="events-grid">
       <div class="event-card reveal">
         <div class="ev-img">
-          <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/casamentos.webp" alt="Casamentos">
+          <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/casamentos.webp" width="1600" height="1067" alt="Casal de noivos no corredor de flores brancas da cerimônia ao ar livre no Villa Mantova">
           <div class="ev-num">01</div>
         </div>
         <div class="ev-content">
           <h3>Casamentos</h3>
-          <p>Celebrações ao ar livre com presença, leveza e significado.</p>
+          <p>Celebrações em meio à natureza, com beleza e significado</p>
+          <a href="#agendar" class="btn btn-primary ev-cta" data-tipo="Casamento">Solicite orçamento</a>
         </div>
       </div>
       <div class="event-card reveal">
         <div class="ev-img">
-          <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/debutantes.webp" alt="Debutantes">
+          <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/corporativos.webp" width="1376" height="768" alt="Apresentação em evento corporativo ao ar livre no Villa Mantova, com plateia e telão">
           <div class="ev-num">02</div>
         </div>
         <div class="ev-content">
-          <h3>Debutantes</h3>
-          <p>Momentos marcantes em um ambiente que valoriza cada detalhe.</p>
+          <h3>Eventos Corporativos</h3>
+          <p>Encontros profissionais com estrutura e novas possibilidades</p>
+          <a href="#agendar" class="btn btn-primary ev-cta" data-tipo="Corporativo">Solicite orçamento</a>
+          <a href="/eventos-corporativos" class="ev-link">Conheça os eventos corporativos</a>
         </div>
       </div>
       <div class="event-card reveal">
         <div class="ev-img">
-          <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/bodas.webp" alt="Bodas">
+          <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/debutantes.webp" width="1000" height="1500" alt="Debutante de vestido azul ao lado da mesa do bolo em festa no Villa Mantova" style="object-position:50% 22%">
           <div class="ev-num">03</div>
         </div>
         <div class="ev-content">
-          <h3>Bodas</h3>
-          <p>Histórias que merecem ser celebradas com elegância e continuidade.</p>
+          <h3>Debutantes</h3>
+          <p>Uma celebração especial para marcar uma nova fase.</p>
+          <a href="#agendar" class="btn btn-primary ev-cta" data-tipo="Aniversario debutante">Solicite orçamento</a>
         </div>
       </div>
       <div class="event-card reveal">
         <div class="ev-img">
-          <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/aniversarios.webp" alt="Aniversários">
+          <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/aniversarios.webp" width="1600" height="1194" alt="Convidados em confraternização ao pôr do sol ao lado da piscina do Villa Mantova">
           <div class="ev-num">04</div>
         </div>
         <div class="ev-content">
           <h3>Aniversários</h3>
-          <p>Encontros que fogem do padrão e criam experiências reais.</p>
+          <p>Bons encontros e momentos especiais para celebrar mais um ano de vida</p>
+          <a href="#agendar" class="btn btn-primary ev-cta" data-tipo="Aniversario">Solicite orçamento</a>
         </div>
       </div>
-      <a href="/eventos-corporativos" target="_blank" rel="noopener noreferrer" class="event-card reveal" style="text-decoration: none;">
+      <div class="event-card reveal">
         <div class="ev-img">
-          <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/corporativo.webp" alt="Corporativo">
+          <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/bodas.webp" width="1080" height="1350" alt="Casal se beijando em celebração de bodas no Villa Mantova" style="object-position:50% 30%">
           <div class="ev-num">05</div>
-          <div style="position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); background: var(--gold); color: #fff; padding: 4px 12px; font-family: var(--font-display); font-size: 0.7rem; font-weight: 500; border-radius: 100px; white-space: nowrap; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 2; letter-spacing: 0.05em; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.2);">Veja o site corporativo</div>
         </div>
         <div class="ev-content">
-          <h3>Corporativo</h3>
-          <p>Eventos que unem natureza, estrutura e uma dinâmica diferente.</p>
+          <h3>Bodas</h3>
+          <p>Uma história compartilhada que merece ser celebrada</p>
+          <a href="#agendar" class="btn btn-primary ev-cta" data-tipo="Bodas">Solicite orçamento</a>
         </div>
-      </a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ============================= PROCESSO ============================= -->
-<section class="section" id="processo">
+<!-- ============================= ESTRUTURA ============================= -->
+<section class="section estrutura" id="estrutura">
   <div class="wrap">
     <div class="section-head center reveal">
-      <span class="eyebrow">Um processo de construção único</span>
-      <h2 class="title">O casamento não é construído do zero</h2>
-      <p class="lead" style="margin-top:18px">Ele já existe — e vai tomando forma, etapa por etapa, até acontecer com naturalidade.</p>
+      <span class="eyebrow">Estrutura</span>
+      <h2 class="title">Estrutura completa para receber e celebrar</h2>
     </div>
-    <div class="process-track">
-      <div class="step reveal"><div class="step-num">01</div><h3>Conhecimento</h3><p>Você chega e reconhece o espaço. Não precisa imaginar — já vê.</p></div>
-      <div class="step reveal"><div class="step-num">02</div><h3>Direcionamento</h3><p>A equipe orienta com clareza. Cada decisão ganha sentido dentro do todo.</p></div>
-      <div class="step reveal"><div class="step-num">03</div><h3>Preparação</h3><p>O dia começa com calma. A casa dos noivos é parte essencial da experiência.</p></div>
-      <div class="step reveal"><div class="step-num">04</div><h3>Fluidez</h3><p>Cerimônia, recepção, momentos — tudo conecta naturalmente, sem esforço.</p></div>
-      <div class="step reveal"><div class="step-num">05</div><h3>Vivência</h3><p>Você não percebe esforço. Você percebe leveza e presença.</p></div>
-      <div class="step reveal"><div class="step-num">06</div><h3>Memória</h3><p>Fica a sensação de que tudo aconteceu exatamente como deveria.</p></div>
+    <div class="estrutura-grid">
+      <div class="estrutura-item reveal"><span class="estrutura-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3"/><path d="M2 11v5a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v2H6v-2a2 2 0 0 0-4 0Z"/><path d="M4 18v2"/><path d="M20 18v2"/></svg></span><p class="estrutura-nome">Mobiliário</p></div>
+      <div class="estrutura-item reveal"><span class="estrutura-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg></span><p class="estrutura-nome">Gastronomia</p></div>
+      <div class="estrutura-item reveal"><span class="estrutura-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/></svg></span><p class="estrutura-nome">Decoração</p></div>
+      <div class="estrutura-item reveal"><span class="estrutura-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span><p class="estrutura-nome">Som e luz</p></div>
+      <div class="estrutura-item reveal"><span class="estrutura-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><p class="estrutura-nome">Locação do espaço por 7 horas</p></div>
+    </div>
+    <div class="space-cta reveal">
+      <a href="#agendar" class="btn btn-primary">Agende uma visita <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= GASTRONOMIA ============================= -->
+<section class="section espaco gastronomia" id="gastronomia">
+  <div class="wrap">
+    <div class="split">
+      <div class="reveal">
+        <span class="eyebrow">Gastronomia</span>
+        <h2 class="title">Quando a gastronomia conduz a experiência</h2>
+        <p class="lead" style="margin-top:24px">O Villa Mantova conta com cozinha industrial e churrasqueira, além de opções de catering que podem ser alinhadas ao formato do evento, à programação e às necessidades dos participantes.</p>
+      </div>
+      <div class="split-media reveal">
+        <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/gastronomia.webp" width="1200" height="800" alt="Buffet com travessas de salgados e saladas decorado com flores brancas e pedras">
+      </div>
+    </div>
+    <div class="gallery-grid-small reveal" id="galleryGastronomia">
+      <div class="g-item"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/g1.webp" alt="Mesa de bolo e doces de casamento decorada com flores rosadas"></div>
+      <div class="g-item"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/g2.webp" alt="Torre dourada de doces finos com docinhos em forminhas de flor"></div>
+      <div class="g-item"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/g3.webp" alt="Mesa de bolo, doces e arranjos de flores brancas em ambiente rústico"></div>
+      <div class="g-item"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/g4.webp" alt="Buffet quente com saladas, arroz e pratos em cubas aquecidas"></div>
+      <div class="g-item"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/g5.webp" alt="Bolo de casamento com flores coloridas e mesa de doces sobre toras de madeira"></div>
+      <div class="g-item"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/g6.webp" alt="Noiva se servindo no buffet, com cubas aquecidas e fundo de folhagens"></div>
+      <div class="g-item"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/g7.webp" alt="Lembrancinhas de casamento azuis em prateleiras de madeira com arranjos de flores"></div>
+      <div class="g-item"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/g8.webp" alt="Noivos se servindo no buffet de casamento, ao lado do jardim"></div>
+      <div class="g-item"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/g9.webp" alt="Mesa de doces com flores secas e docinhos em suportes de madeira"></div>
+      <div class="g-item"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/g10.webp" alt="Docinhos em formato de flor branca em uma bandeja"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= GOOGLE REVIEWS ============================= -->
+<section class="section" id="depoimentos">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Depoimentos</span>
+      <h2 class="title">A experiência de quem já celebrou no Villa Mantova</h2>
+    </div>
+    <div class="reviews-grid">
+      <div class="gscore reveal">
+        <div class="g-logo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle; margin-right: 6px; margin-top: -3px;">
+            <path d="M22.56 12.236c0-.825-.074-1.619-.213-2.384H12v4.512h5.922c-.255 1.458-1.082 2.694-2.264 3.504v2.915h3.666c2.146-1.977 3.38-4.887 3.38-8.163z" fill="#4285F4"/>
+            <path d="M12 23.003c2.97 0 5.466-1.002 7.288-2.693l-3.666-2.915c-1.003.684-2.278 1.084-3.622 1.084-2.784 0-5.143-1.89-5.986-4.428H1.144v2.946A11.967 11.967 0 0 0 12 23.003z" fill="#34A853"/>
+            <path d="M6.014 14.051a7.16 7.16 0 0 1-.374-2.551c0-.882.15-1.742.428-2.551V6.003H1.144A11.956 11.956 0 0 0 0 11.5c0 1.942.464 3.782 1.284 5.426l4.73-2.875z" fill="#FBBC05"/>
+            <path d="M12 4.524c1.616 0 3.067.562 4.208 1.656l3.155-3.155C17.457 1.157 14.961 0 12 0 7.224 0 3.12 2.898 1.144 6.003l4.87 2.946C6.857 6.414 9.216 4.524 12 4.524z" fill="#EA4335"/>
+          </svg>
+          Google Reviews
+        </div>
+        <div class="g-num">4,9</div>
+        <div class="stars">★★★★★</div>
+        <div class="g-count">Avaliação no Google</div>
+      </div>
+      <div class="review-list">
+        <div class="review reveal">
+          <div class="stars">★★★★★</div>
+          <p>"O local é extremamente acolhedor, superam as expectativas e o atendimento da Tânia e Fábio é demais. Trecho asfaltado e ótima localização. Estou muito feliz por realizar meu sonho na Villa Mantova *-*"</p>
+          <div class="r-author">Isabella Sales</div>
+        </div>
+        <div class="review reveal">
+          <div class="stars">★★★★★</div>
+          <p>"Nosso casamento foi realizado em 21/05/22 e não poderíamos ter escolhido espaço melhor para o nosso grande dia. O Mantova possui uma estrutura incrível! A integração com a natureza deixa tudo ainda mais charmoso. Além do espaço, toda a equipe é maravilhosa! Fica aqui nosso agradecimento especial para a Tânia, profissional e amiga que levaremos para a vida!"</p>
+          <div class="r-author">Luciana Andrezza de Oliveira</div>
+        </div>
+        <div class="review reveal">
+          <div class="stars">★★★★★</div>
+          <p>"Simplesmente apaixonada pelo lugar e pelas pessoas. Contando os dias para o Grande dia!! Desde o primeiro dia que estivemos no espaço sentimos calma e felicidades. Como eu e o meu noivo falamos sempre NOSSO LUGAR PERFEITO incrível!! Decorações e cuidados impecáveis"</p>
+          <div class="r-author">Bia Oliveira Boscardini</div>
+        </div>
+        <div class="review reveal">
+          <div class="stars">★★★★★</div>
+          <p>"Espaço incrível, lindo, conservado, a divisão dos locais mto boas. Fui convidada de um casamento e a experiência foi maravilhosa"</p>
+          <div class="r-author">Caroline Melo</div>
+        </div>
+      </div>
+    </div>
+    <div class="reviews-more reveal">
+      <a href="https://maps.app.goo.gl/2MNL6t9TZynSQgs67" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Ver todos os depoimentos <span class="arrow">→</span></a>
     </div>
   </div>
 </section>
 
 <!-- ============================= DEPOIMENTOS ============================= -->
-<section class="section depo" id="depoimentos">
+<section class="section depo" id="depoimentos-clientes">
   <div class="wrap">
     <div class="section-head center reveal">
-      <span class="eyebrow">Depoimentos</span>
-      <h2 class="title">Quem viveu, conta melhor</h2>
+      <span class="eyebrow">Relatos de clientes</span>
+      <h3 class="title">Quem viveu, conta melhor</h3>
     </div>
     <div class="depo-single reveal">
       <div class="depo-slider-container">
@@ -515,64 +483,12 @@ A singularidade deste espaço conquistou nosso coração de uma forma tão espec
   </div>
 </section>
 
-<!-- ============================= GOOGLE REVIEWS ============================= -->
-<section class="section">
-  <div class="wrap">
-    <div class="section-head center reveal">
-      <span class="eyebrow">O que nossos clientes falam</span>
-      <h2 class="title">Avaliações no google</h2>
-    </div>
-    <div class="reviews-grid">
-      <div class="gscore reveal">
-        <div class="g-logo">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle; margin-right: 6px; margin-top: -3px;">
-            <path d="M22.56 12.236c0-.825-.074-1.619-.213-2.384H12v4.512h5.922c-.255 1.458-1.082 2.694-2.264 3.504v2.915h3.666c2.146-1.977 3.38-4.887 3.38-8.163z" fill="#4285F4"/>
-            <path d="M12 23.003c2.97 0 5.466-1.002 7.288-2.693l-3.666-2.915c-1.003.684-2.278 1.084-3.622 1.084-2.784 0-5.143-1.89-5.986-4.428H1.144v2.946A11.967 11.967 0 0 0 12 23.003z" fill="#34A853"/>
-            <path d="M6.014 14.051a7.16 7.16 0 0 1-.374-2.551c0-.882.15-1.742.428-2.551V6.003H1.144A11.956 11.956 0 0 0 0 11.5c0 1.942.464 3.782 1.284 5.426l4.73-2.875z" fill="#FBBC05"/>
-            <path d="M12 4.524c1.616 0 3.067.562 4.208 1.656l3.155-3.155C17.457 1.157 14.961 0 12 0 7.224 0 3.12 2.898 1.144 6.003l4.87 2.946C6.857 6.414 9.216 4.524 12 4.524z" fill="#EA4335"/>
-          </svg>
-          Google Reviews
-        </div>
-        <div class="g-num">4.9</div>
-        <div class="stars">★★★★★</div>
-        <div class="g-count">Baseado em mais de <span class="g-count-num">390</span> avaliações</div>
-      </div>
-      <div class="review-list">
-        <div class="review reveal">
-          <div class="stars">★★★★★</div>
-          <p>"O local é extremamente acolhedor, superam as expectativas e o atendimento da Tânia e Fábio é demais. Trecho asfaltado e ótima localização. Estou muito feliz por realizar meu sonho na Villa Mantova *-*"</p>
-          <div class="r-author">Isabella Sales</div>
-        </div>
-        <div class="review reveal">
-          <div class="stars">★★★★★</div>
-          <p>"Nosso casamento foi realizado em 21/05/22 e não poderíamos ter escolhido espaço melhor para o nosso grande dia. O Mantova possui uma estrutura incrível! A integração com a natureza deixa tudo ainda mais charmoso. Além do espaço, toda a equipe é maravilhosa! Fica aqui nosso agradecimento especial para a Tânia, profissional e amiga que levaremos para a vida!"</p>
-          <div class="r-author">Luciana Andrezza de Oliveira</div>
-        </div>
-        <div class="review reveal">
-          <div class="stars">★★★★★</div>
-          <p>"Simplesmente apaixonada pelo lugar e pelas pessoas. Contando os dias para o Grande dia!! Desde o primeiro dia que estivemos no espaço sentimos calma e felicidades. Como eu e o meu noivo falamos sempre NOSSO LUGAR PERFEITO incrível!! Decorações e cuidados impecáveis"</p>
-          <div class="r-author">Bia Oliveira Boscardini</div>
-        </div>
-        <div class="review reveal">
-          <div class="stars">★★★★★</div>
-          <p>"Espaço incrível, lindo, conservado, a divisão dos locais mto boas. Fui convidada de um casamento e a experiência foi maravilhosa"</p>
-          <div class="r-author">Caroline Melo</div>
-        </div>
-      </div>
-    </div>
-    <div class="reviews-more reveal">
-      <a href="https://maps.app.goo.gl/2MNL6t9TZynSQgs67" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Ver todos os depoimentos <span class="arrow">→</span></a>
-    </div>
-  </div>
-</section>
-
 <!-- ============================= GALERIA ============================= -->
-<section class="section espaco" id="galeria">
+<section class="section" id="galeria">
   <div class="wrap">
     <div class="section-head center reveal">
       <span class="eyebrow">Galeria</span>
-      <h2 class="title">Cada detalhe, do dia à noite</h2>
-      <p class="lead" style="margin-top:18px">Cerimônia ao ar livre, convidados, ambiente, noite e os pequenos detalhes que fazem a diferença.</p>
+      <h2 class="title">Ambientes, cerimônias e celebrações que aconteceram aqui</h2>
     </div>
     <div class="gallery-grid" id="gallery">
       <!-- Bloco 1 (linhas 1 a 3 da galeria) -->
@@ -593,35 +509,126 @@ A singularidade deste espaço conquistou nosso coração de uma forma tão espec
       <div class="g-item"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/mantova-31.webp" alt="Mesa de doces - Villa Mantova"></div>
       <div class="g-item"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/casamento-l-l-439.webp" alt="Ensaio do casal no campo - Villa Mantova"></div>
     </div>
+  </div>
+</section>
 
-    <!-- Segunda Galeria (Gastronomia) -->
-    <div class="section-head center reveal" style="margin-top: 90px; margin-bottom: 40px;">
-      <span class="eyebrow">Gastronomia</span>
-      <h2 class="title">Personalização completa e memória afetiva</h2>
-      <p class="lead" style="margin-top:18px">Traduzimos seu sonho e seu momento, para que seja lembrado por anos</p>
+<!-- ============================= HISTÓRIA ============================= -->
+<section class="section espaco" id="historia">
+  <div class="wrap">
+    <div class="story-grid">
+      <div class="story-copy reveal">
+        <span class="eyebrow">A História</span>
+        <h2 class="title">Natureza e estrutura<br>que não competem.<br><span class="accent">Se complementam.</span></h2>
+        <p style="margin-top:28px">Casar no campo sempre foi um desejo. Mas, na prática, quase sempre vem acompanhado de escolhas difíceis: distância, logística e desgaste para quem organiza — e para quem participa.</p>
+        <div class="pull">O Villa Mantova nasce com uma proposta clara: entregar a experiência de um casamento ao ar livre sem afastar você da sua realidade.</div>
+        <p>Um lugar onde o cenário, o ambiente e a experiência já estão alinhados — para que você apenas viva o seu dia.</p>
+        <p>Foi desse desejo de entregar a melhor experiência que nasceu o Villa Mantova, um sonho idealizado por dois irmãos juntamente com sua mãe. Essa origem familiar se reflete em cada canto do espaço, trazendo um acolhimento autêntico e a certeza de que o seu grande dia será cuidado com afeto e dedicação.</p>
+      </div>
+      <div class="story-media reveal">
+        <div class="img-main"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/couple-portrait.webp" alt="Casal no Villa Mantova"></div>
+        <div class="badge">
+          <div class="b-num">400+</div>
+          <div class="b-txt">casamentos, experiências e sonhos celebrados.</div>
+        </div>
+      </div>
     </div>
-    
-    <div class="gallery-grid-small" id="galleryGastronomia">
-      <div class="g-item"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/g1.webp" alt="Mesa de bolo e doces de casamento decorada com flores rosadas"></div>
-      <div class="g-item"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/g2.webp" alt="Torre dourada de doces finos com docinhos em forminhas de flor"></div>
-      <div class="g-item"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/g3.webp" alt="Mesa de bolo, doces e arranjos de flores brancas em ambiente rústico"></div>
-      <div class="g-item"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/g4.webp" alt="Buffet quente com saladas, arroz e pratos em cubas aquecidas"></div>
-      <div class="g-item"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/g5.webp" alt="Bolo de casamento com flores coloridas e mesa de doces sobre toras de madeira"></div>
-      <div class="g-item"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/g6.webp" alt="Noiva se servindo no buffet, com cubas aquecidas e fundo de folhagens"></div>
-      <div class="g-item"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/g7.webp" alt="Lembrancinhas de casamento azuis em prateleiras de madeira com arranjos de flores"></div>
-      <div class="g-item"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/g8.webp" alt="Noivos se servindo no buffet de casamento, ao lado do jardim"></div>
-      <div class="g-item"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/g9.webp" alt="Mesa de doces com flores secas e docinhos em suportes de madeira"></div>
-      <div class="g-item"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/g10.webp" alt="Docinhos em formato de flor branca em uma bandeja"></div>
+  </div>
+</section>
+
+<!-- ============================= POR QUE VILLA MANTOVA ============================= -->
+<section class="section" id="porque">
+  <div class="wrap">
+    <div class="split">
+      <div class="reveal">
+        <span class="eyebrow">Por que Villa Mantova</span>
+        <h2 class="title">O campo deixa de ser complexo</h2>
+        <ul class="checklist">
+          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Cenário natural real — não construído artificialmente</li>
+          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Estrutura pronta para cerimônia e festa</li>
+          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Proximidade com Alphaville e São Paulo</li>
+          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Facilidade de acesso para convidados</li>
+          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Espaço versátil para diferentes formatos</li>
+          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Equipe experiente que sustenta a experiência</li>
+        </ul>
+        <div class="note-box">
+          <p>Mas o principal: aqui, o casamento no campo deixa de ser complexo — e passa a ser <span class="hl">natural.</span></p>
+        </div>
+      </div>
+      <div class="split-media reveal">
+        <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/ceremony-day.webp" alt="Cerimônia ao ar livre no Villa Mantova">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= PARA QUEM É ============================= -->
+<section class="section espaco" id="paraquem">
+  <div class="wrap">
+    <div class="split reverse">
+      <div class="reveal">
+        <span class="eyebrow">Para quem é</span>
+        <h2 class="title">Feito para quem<br>valoriza a experiência</h2>
+        <ul class="checklist">
+          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Para quem sempre quis casar ao ar livre</li>
+          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Para quem valoriza estética, mas exige conforto</li>
+          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Para quem não quer transformar o casamento em um projeto complicado</li>
+          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Para quem quer receber bem — sem dificultar para os convidados</li>
+          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Para quem entende que o lugar define a experiência</li>
+        </ul>
+      </div>
+      <div class="split-media reveal">
+        <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/balada-experiencia.webp" alt="Recepção de convidados no Villa Mantova">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= O QUE VOCÊ VAI TER ============================= -->
+<section class="section" id="vaiter">
+  <div class="wrap">
+    <div class="split">
+      <div class="split-media reveal">
+        <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/aru9460.webp" alt="Casal de noivos abraçados em cerimônia ao ar livre, à noite">
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">O que você vai ter</span>
+        <h2 class="title">Um dia que simplesmente<br>flui</h2>
+        <ul class="checklist">
+          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Um cenário que já entrega impacto visual</li>
+          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Um ambiente que sustenta o evento do início ao fim</li>
+          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Um dia que começa com leveza e continua fluindo</li>
+          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Convidados presentes — não cansados</li>
+          <li><span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span> Um casamento que parece simples… porque tudo funciona</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= PROCESSO ============================= -->
+<section class="section espaco" id="processo">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Um processo de construção único</span>
+      <h2 class="title">O casamento não é construído do zero</h2>
+      <p class="lead" style="margin-top:18px">Ele já existe — e vai tomando forma, etapa por etapa, até acontecer com naturalidade.</p>
+    </div>
+    <div class="process-track">
+      <div class="step reveal"><div class="step-num">01</div><h3>Conhecimento</h3><p>Você chega e reconhece o espaço. Não precisa imaginar — já vê.</p></div>
+      <div class="step reveal"><div class="step-num">02</div><h3>Direcionamento</h3><p>A equipe orienta com clareza. Cada decisão ganha sentido dentro do todo.</p></div>
+      <div class="step reveal"><div class="step-num">03</div><h3>Preparação</h3><p>O dia começa com calma. A casa dos noivos é parte essencial da experiência.</p></div>
+      <div class="step reveal"><div class="step-num">04</div><h3>Fluidez</h3><p>Cerimônia, recepção, momentos — tudo conecta naturalmente, sem esforço.</p></div>
+      <div class="step reveal"><div class="step-num">05</div><h3>Vivência</h3><p>Você não percebe esforço. Você percebe leveza e presença.</p></div>
+      <div class="step reveal"><div class="step-num">06</div><h3>Memória</h3><p>Fica a sensação de que tudo aconteceu exatamente como deveria.</p></div>
     </div>
   </div>
 </section>
 
 <!-- ============================= FAQ ============================= -->
-<section class="section faq" id="faq">
+<section class="section faq faq--claro" id="faq">
   <div class="wrap">
     <div class="section-head center reveal">
-      <span class="eyebrow">Perguntas frequentes</span>
-      <h2 class="title">Tudo o que você precisa saber</h2>
+      <h2 class="title">Perguntas frequentes sobre o Villa Mantova</h2>
     </div>
     <div class="faq-wrap reveal">
       {faq.map(({ q, a }) => (
@@ -637,15 +644,35 @@ A singularidade deste espaço conquistou nosso coração de uma forma tão espec
   </div>
 </section>
 
+<!-- ============================= LOCALIZAÇÃO ============================= -->
+<section class="section espaco localizacao" id="localizacao">
+  <div class="wrap">
+    <div class="localizacao-grid">
+      <div class="localizacao-texto reveal">
+        <span class="eyebrow">Como chegar</span>
+        <h2 class="title">Localização estratégica, cercada pela natureza</h2>
+        <address>R. Romênia, 21 - Maravilha lll<br>Santana de Parnaíba - SP, 06523-045</address>
+        <p>A poucos minutos de Alphaville e perto da Rodovia Castelo Branco.</p>
+        <a class="btn btn-primary" href="https://maps.app.goo.gl/2MNL6t9TZynSQgs67" target="_blank" rel="noopener noreferrer">Ver no mapa <span class="arrow">→</span></a>
+      </div>
+      <div class="localizacao-mapa reveal">
+        <iframe
+          title="Mapa com a localização do Villa Mantova"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3659.1195322284107!2d-46.9997171!3d-23.4922037!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cf0fd8c6c02aef%3A0x1606d49b4de52e6f!2sVilla%20Mantova%20Eventos!5e0!3m2!1spt-BR!2sbr!4v1717980000000!5m2!1spt-BR!2sbr"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============================= CTA FINAL ============================= -->
 <section class="section cta-final" id="cta">
   <div class="cta-bg" style="background-image:url('https://media.dmove.com.br/clients/villa-mantova/photos/institucional/bouquet-toss.webp')"></div>
   <div class="cta-shade"></div>
   <div class="wrap">
     <div class="reveal">
-      <span class="eyebrow">Pronto para viver isso?</span>
-      <h2>Transforme seu casamento em uma experiência natural e memorável</h2>
-      <p>Conheça o Villa Mantova e descubra como casar no campo pode ser leve, perto e exclusivo.</p>
+      <h2>Vamos conversar sobre o seu evento?</h2>
+      <p>Preencha o formulário para receber nosso contato</p>
       <!-- Formulário padrão Dmove: destino de todos os botões "Agendar visita" -->
       <div class="cta-form" id="agendar">
         <form class="cta-form__form" id="form-agendar" data-form-id="villa-mantova-home" data-fonte="Landing page/home" data-submit-url={webhook} data-grid-id="form-agendar" data-success-id="form-agendar-sucesso" data-tipos-corporativos={JSON.stringify(tiposCorporativos)} novalidate>
@@ -676,12 +703,12 @@ A singularidade deste espaço conquistou nosso coração de uma forma tão espec
               )}
             </div>
           ))}
-          <button class="btn btn-primary form-submit" type="submit">Agendar visita <span class="arrow">→</span></button>
+          <button class="btn btn-primary form-submit" type="submit">Solicitar orçamento <span class="arrow">→</span></button>
           <p class="cta-form__aviso" id="agendarFormMsg" role="status"></p>
         </form>
         <div class="cta-form__sucesso" id="form-agendar-sucesso" role="status">
           <h3>Recebemos sua solicitação</h3>
-          <p>Em breve, nosso time entrará em contato para agendar a sua visita.</p>
+          <p>Em breve, nosso time entrará em contato com você.</p>
         </div>
         <p class="cta-form__privacidade">Usamos seus dados apenas para responder ao seu pedido. Veja nossa política de privacidade no rodapé.</p>
       </div>
@@ -689,21 +716,13 @@ A singularidade deste espaço conquistou nosso coração de uma forma tão espec
   </div>
 </section>
 
-<!-- ============================= MAPA ============================= -->
-<div class="map-wrap">
-  <iframe
-    title="Localização Villa Mantova"
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3659.1195322284107!2d-46.9997171!3d-23.4922037!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cf0fd8c6c02aef%3A0x1606d49b4de52e6f!2sVilla%20Mantova%20Eventos!5e0!3m2!1spt-BR!2sbr!4v1717980000000!5m2!1spt-BR!2sbr"
-    loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-</div>
-
 <!-- ============================= FOOTER ============================= -->
 <footer class="footer">
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-brand">
         <img src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/logo-villa-mantova.png" alt="Villa Mantova">
-        <p>Casamentos ao ar livre com perfeição natural, a poucos minutos de Alphaville.</p>
+        <p>Espaço para casamentos, eventos corporativos e sociais, a poucos minutos de Alphaville.</p>
         <div style="margin-top: 15px;">
           <a href="https://www.instagram.com/villa.mantova/" target="_blank" rel="noopener noreferrer" class="instagram-circle-link" aria-label="Instagram">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -724,9 +743,9 @@ A singularidade deste espaço conquistou nosso coração de uma forma tão espec
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 Villa Mantova Eventos. Todos os direitos reservados.</p>
+      <p>Copyright © 2026 Villa Mantova — Todos os direitos reservados</p>
       <p style="margin-top: 8px; font-size: 0.82rem; opacity: 0.7;">
-        <a href="#" id="privacyBtn" style="text-decoration: underline;">Política de privacidade</a> | Desenvolvido por <a href="https://www.entrenomapa.com.br" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">Entre no Mapa - Estratégias digitais que vendem</a>
+        <a href="#" id="privacyBtn" style="text-decoration: underline;">Política de privacidade</a> | Desenvolvido por <a href="https://dmove.com.br" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">Dmove Marketing</a>
       </p>
     </div>
   </div>
@@ -865,6 +884,16 @@ A singularidade deste espaço conquistou nosso coração de uma forma tão espec
         e.preventDefault();
         e.stopPropagation(); // o widget fecha o popup em qualquer clique fora dele
         if (fab.getAttribute('aria-expanded') !== 'true') fab.click();
+      });
+    });
+
+    // Cards "Solicite orçamento": levam ao formulário com o tipo de evento já selecionado.
+    document.querySelectorAll<HTMLAnchorElement>('[data-tipo]').forEach((a) => {
+      a.addEventListener('click', () => {
+        const select = document.querySelector<HTMLSelectElement>('#form-agendar [name="tipo_evento"]');
+        if (!select) return;
+        select.value = a.dataset.tipo || '';
+        select.dispatchEvent(new Event('change', { bubbles: true })); // mostra o campo Empresa se for corporativo
       });
     });
 
