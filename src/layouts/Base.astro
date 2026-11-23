@@ -63,7 +63,8 @@ const defaultJsonLd = {
   '@type': 'WebPage',
   name: title,
   description: description,
-  url: canonical || Astro.url.href,
+  // sem `site` no astro.config (domínio ainda não definido), Astro.url aponta para localhost: nesse caso omite o url
+  url: canonical || (Astro.site ? Astro.url.href : undefined),
 };
 ---
 

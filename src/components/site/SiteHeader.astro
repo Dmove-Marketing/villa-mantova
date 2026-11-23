@@ -1,0 +1,51 @@
+---
+// Cabeçalho único do site (home, blog, política). Links de âncora apontam para a home.
+interface Props {
+  /** true na home: âncoras locais (#sobre) e o JS da home controla o estado "scrolled" */
+  home?: boolean;
+  /** página ativa no menu */
+  active?: 'blog';
+  /** true nas páginas internas (sem hero): cabeçalho com sombra desde o início */
+  solid?: boolean;
+}
+const { home = false, active, solid = false } = Astro.props;
+const p = home ? '' : '/';
+const links = [
+  { href: home ? '#topo' : '/', label: 'Início' },
+  { href: `${p}#sobre`, label: 'Sobre' },
+  { href: `${p}#espaco`, label: 'Espaço' },
+  { href: `${p}#eventos`, label: 'Eventos' },
+  { href: `${p}#galeria`, label: 'Galeria' },
+  { href: `${p}#depoimentos`, label: 'Depoimentos' },
+  { href: '/blog', label: 'Blog', key: 'blog' },
+  { href: `${p}#faq`, label: 'FAQ' },
+];
+---
+<header class:list={['header', solid && 'scrolled']} id="header">
+  <div class="wrap nav">
+    <a class="brand" href={home ? '#topo' : '/'} aria-label="Villa Mantova">
+      <img src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/logo-villa-mantova.png" width="178" height="178" alt="Villa Mantova">
+    </a>
+    <nav class="nav-links" aria-label="Principal">
+      {links.map((l) => <a href={l.href} aria-current={active && l.key === active ? 'page' : undefined}>{l.label}</a>)}
+    </nav>
+    <div class="nav-cta">
+      <a href="https://www.instagram.com/villa.mantova/" target="_blank" rel="noopener noreferrer" class="instagram-circle-link" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </svg>
+      </a>
+      <a href={`${p}#agendar`} class="btn btn-primary">Agendar visita <span class="arrow">→</span></a>
+    </div>
+    <button class="burger" id="burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  {links.map((l) => <a href={l.href}>{l.label}</a>)}
+  <a href={`${p}#agendar`} class="btn btn-primary" style="color:#fff">Agendar visita →</a>
+</div>

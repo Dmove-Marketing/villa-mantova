@@ -1,0 +1,49 @@
+---
+// Layout das páginas internas do site (blog, política de privacidade): mesmo cabeçalho, rodapé e widget da home.
+import Base from './Base.astro';
+import SiteHeader from '../components/site/SiteHeader.astro';
+import SiteFooter from '../components/site/SiteFooter.astro';
+import WhatsAppWidget from '../components/ui/WhatsAppWidget.astro';
+import '../styles/institucional.css';
+import '../styles/blog.css';
+import config from '../../config.json';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  noIndex?: boolean;
+  jsonLd?: Record<string, any>;
+  active?: 'blog';
+}
+const { title, description, ogImage = 'https://media.dmove.com.br/clients/villa-mantova/photos/hero.webp', noIndex = false, jsonLd, active } = Astro.props;
+// Popup de atendimento: mesmo webhook da home (config.json > forms.site-form)
+const webhook = config.forms['site-form'].webhooks[0];
+---
+<Base title={title} description={description} ogImage={ogImage} theme="light" hideWhatsApp={true} noIndex={noIndex} jsonLd={jsonLd}>
+  <link rel="preload" href="/fonts/jost-latin.woff2" as="font" type="font/woff2" crossorigin slot="head" />
+  <link rel="preload" href="/fonts/mulish-latin.woff2" as="font" type="font/woff2" crossorigin slot="head" />
+  <meta name="twitter:card" content="summary_large_image" slot="head" />
+  <slot name="head" slot="head" />
+
+  <SiteHeader solid active={active} />
+  <main class="pagina-interna">
+    <slot />
+  </main>
+  <SiteFooter />
+  <WhatsAppWidget submitUrl={webhook} />
+
+  <script>
+    // menu mobile (na home isso fica no institucional.js)
+    const burger = document.getElementById('burger');
+    const menu = document.getElementById('mobileMenu');
+    if (burger && menu) {
+      const fechar = () => { menu.classList.remove('open'); document.body.style.overflow = ''; };
+      burger.addEventListener('click', () => {
+        const aberto = menu.classList.toggle('open');
+        document.body.style.overflow = aberto ? 'hidden' : '';
+      });
+      menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', fechar));
+    }
+  </script>
+</Base>

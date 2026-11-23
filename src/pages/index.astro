@@ -7,6 +7,8 @@ import '../styles/institucional.css';
 import config from '../../config.json';
 import { getPreset } from '../scripts/form-presets';
 import WhatsAppWidget from '../components/ui/WhatsAppWidget.astro';
+import SiteHeader from '../components/site/SiteHeader.astro';
+import SiteFooter from '../components/site/SiteFooter.astro';
 
 // Formulário padrão Dmove da seção final ("Agendar visita"). A home é geral (casamentos, eventos sociais
 // e corporativos): usa o preset "corporativo", mas o campo Empresa só aparece, e só é obrigatório,
@@ -31,6 +33,9 @@ const description = 'Espaço de campo a poucos minutos de Alphaville para casame
 // OG precisa de URL absoluta; o domínio ainda não existe, então usa a imagem do CDN.
 const ogImage = 'https://media.dmove.com.br/clients/villa-mantova/photos/hero.webp';
 const hero = 'https://media.dmove.com.br/clients/villa-mantova/photos/home/hero.webp';
+// O CDN redimensiona sob demanda (/api/public/resize/<largura>/clients/...): o mobile não baixa o arquivo de 1440px.
+const redim = (url: string, w: number) => url.replace('/clients/', `/api/public/resize/${w}/clients/`);
+const heroSrcset = [480, 800, 1200].map((w) => `${redim(hero, w)} ${w}w`).concat(`${hero} 1440w`).join(', ');
 
 // FAQ: fonte única do HTML visível e do marcador FAQPage (o Google exige que os dois coincidam).
 const faq = [
@@ -63,57 +68,16 @@ const jsonLd = {
 
 <!-- noIndex: réplica do site no ar; remova quando esta página for a oficial, para não duplicar conteúdo no Google -->
 <Base title={title} description={description} ogImage={ogImage} theme="light" hideWhatsApp={true} noIndex={true} jsonLd={jsonLd}>
-  <link rel="preconnect" href="https://fonts.googleapis.com" slot="head" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin slot="head" />
-  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Mulish:wght@400;500;600;700&display=swap" rel="stylesheet" slot="head" />
-  <link rel="preload" as="image" href={hero} fetchpriority="high" slot="head" />
+  <link rel="preload" href="/fonts/jost-latin.woff2" as="font" type="font/woff2" crossorigin slot="head" />
+  <link rel="preload" href="/fonts/mulish-latin.woff2" as="font" type="font/woff2" crossorigin slot="head" />
+  <link rel="preload" as="image" href={hero} imagesrcset={heroSrcset} imagesizes="100vw" fetchpriority="high" slot="head" />
   <meta name="twitter:card" content="summary_large_image" slot="head" />
 
-<!-- ============================= HEADER ============================= -->
-<header class="header" id="header">
-  <div class="wrap nav">
-    <a class="brand" href="#topo" aria-label="Villa Mantova">
-      <img src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/logo-villa-mantova.png" alt="Villa Mantova">
-    </a>
-    <nav class="nav-links">
-      <a href="#topo">Início</a>
-      <a href="#sobre">Sobre</a>
-      <a href="#espaco">Espaço</a>
-      <a href="#eventos">Eventos</a>
-      <a href="#galeria">Galeria</a>
-      <a href="#depoimentos">Depoimentos</a>
-      <a href="#faq">FAQ</a>
-    </nav>
-    <div class="nav-cta">
-      <a href="https://www.instagram.com/villa.mantova/" target="_blank" rel="noopener noreferrer" class="instagram-circle-link" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-        </svg>
-      </a>
-      <a href="#agendar" class="btn btn-primary">Agendar visita <span class="arrow">→</span></a>
-    </div>
-    <button class="burger" id="burger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</header>
-
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#topo">Início</a>
-  <a href="#sobre">Sobre</a>
-  <a href="#espaco">Espaço</a>
-  <a href="#eventos">Eventos</a>
-  <a href="#galeria">Galeria</a>
-  <a href="#depoimentos">Depoimentos</a>
-  <a href="#faq">FAQ</a>
-  <a href="#agendar" class="btn btn-primary" style="color:#fff">Agendar visita →</a>
-</div>
+<SiteHeader home />
 
 <!-- ============================= HERO ============================= -->
 <section class="hero" id="topo" data-screen-label="Hero">
-  <div class="hero-bg" style="background-image:url('https://media.dmove.com.br/clients/villa-mantova/photos/home/hero.webp')"></div>
+  <img class="hero-bg" src={hero} srcset={heroSrcset} sizes="100vw" width="1440" height="958" alt="" fetchpriority="high" decoding="async" />
   <div class="hero-shade"></div>
   <div class="wrap">
     <div class="hero-inner reveal">
@@ -154,7 +118,7 @@ const jsonLd = {
         </div>
       </div>
       <div class="story-media reveal">
-        <div class="img-main"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/sobre.webp" width="1280" height="853" alt="Área coberta e gramado do Villa Mantova com a natureza ao redor"></div>
+        <div class="img-main"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/sobre.webp" srcset="https://media.dmove.com.br/api/public/resize/400/clients/villa-mantova/photos/home/sobre.webp 400w, https://media.dmove.com.br/api/public/resize/800/clients/villa-mantova/photos/home/sobre.webp 800w, https://media.dmove.com.br/api/public/resize/1200/clients/villa-mantova/photos/home/sobre.webp 1200w, https://media.dmove.com.br/clients/villa-mantova/photos/home/sobre.webp 1280w" sizes="(max-width: 720px) 100vw, 50vw" width="1280" height="853" alt="Área coberta e gramado do Villa Mantova com a natureza ao redor"></div>
       </div>
     </div>
   </div>
@@ -169,7 +133,7 @@ const jsonLd = {
     </div>
     <div class="space-grid space-grid--5">
       <div class="space-card reveal">
-        <div class="card-img"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/casa-de-apoio.webp" width="1600" height="1066" alt="Casa de apoio do Villa Mantova com mesas montadas no gramado e cordão de luzes"></div>
+        <div class="card-img"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/casa-de-apoio.webp" srcset="https://media.dmove.com.br/api/public/resize/400/clients/villa-mantova/photos/home/casa-de-apoio.webp 400w, https://media.dmove.com.br/api/public/resize/800/clients/villa-mantova/photos/home/casa-de-apoio.webp 800w, https://media.dmove.com.br/api/public/resize/1200/clients/villa-mantova/photos/home/casa-de-apoio.webp 1200w, https://media.dmove.com.br/clients/villa-mantova/photos/home/casa-de-apoio.webp 1600w" sizes="(max-width: 720px) 100vw, (max-width: 1000px) 50vw, 40vw" width="1600" height="1066" alt="Casa de apoio do Villa Mantova com mesas montadas no gramado e cordão de luzes"></div>
         <div class="card-body">
           <div class="card-rule"></div>
           <h3>Casa de Apoio</h3>
@@ -177,7 +141,7 @@ const jsonLd = {
         </div>
       </div>
       <div class="space-card reveal">
-        <div class="card-img"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/area-externa.webp" width="1600" height="1067" alt="Área externa do Villa Mantova com cerimônia montada ao ar livre, bancos de madeira e flores brancas"></div>
+        <div class="card-img"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/area-externa.webp" srcset="https://media.dmove.com.br/api/public/resize/400/clients/villa-mantova/photos/home/area-externa.webp 400w, https://media.dmove.com.br/api/public/resize/800/clients/villa-mantova/photos/home/area-externa.webp 800w, https://media.dmove.com.br/api/public/resize/1200/clients/villa-mantova/photos/home/area-externa.webp 1200w, https://media.dmove.com.br/clients/villa-mantova/photos/home/area-externa.webp 1600w" sizes="(max-width: 720px) 100vw, (max-width: 1000px) 50vw, 40vw" width="1600" height="1067" alt="Área externa do Villa Mantova com cerimônia montada ao ar livre, bancos de madeira e flores brancas"></div>
         <div class="card-body">
           <div class="card-rule"></div>
           <h3>Área externa</h3>
@@ -185,7 +149,7 @@ const jsonLd = {
         </div>
       </div>
       <div class="space-card reveal">
-        <div class="card-img"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/area-coberta.webp" width="1600" height="1194" alt="Área coberta do Villa Mantova com mesas longas montadas para um evento corporativo"></div>
+        <div class="card-img"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/area-coberta.webp" srcset="https://media.dmove.com.br/api/public/resize/400/clients/villa-mantova/photos/home/area-coberta.webp 400w, https://media.dmove.com.br/api/public/resize/800/clients/villa-mantova/photos/home/area-coberta.webp 800w, https://media.dmove.com.br/api/public/resize/1200/clients/villa-mantova/photos/home/area-coberta.webp 1200w, https://media.dmove.com.br/clients/villa-mantova/photos/home/area-coberta.webp 1600w" sizes="(max-width: 720px) 100vw, (max-width: 1000px) 50vw, 40vw" width="1600" height="1194" alt="Área coberta do Villa Mantova com mesas longas montadas para um evento corporativo"></div>
         <div class="card-body">
           <div class="card-rule"></div>
           <h3>Área coberta</h3>
@@ -193,7 +157,7 @@ const jsonLd = {
         </div>
       </div>
       <div class="space-card reveal">
-        <div class="card-img"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/lounge.webp" width="1440" height="957" alt="Lounge ao ar livre do Villa Mantova com sofá e poltronas sob as árvores"></div>
+        <div class="card-img"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/lounge.webp" srcset="https://media.dmove.com.br/api/public/resize/400/clients/villa-mantova/photos/home/lounge.webp 400w, https://media.dmove.com.br/api/public/resize/800/clients/villa-mantova/photos/home/lounge.webp 800w, https://media.dmove.com.br/api/public/resize/1200/clients/villa-mantova/photos/home/lounge.webp 1200w, https://media.dmove.com.br/clients/villa-mantova/photos/home/lounge.webp 1440w" sizes="(max-width: 720px) 100vw, (max-width: 1000px) 50vw, 40vw" width="1440" height="957" alt="Lounge ao ar livre do Villa Mantova com sofá e poltronas sob as árvores"></div>
         <div class="card-body">
           <div class="card-rule"></div>
           <h3>Lounge</h3>
@@ -201,7 +165,7 @@ const jsonLd = {
         </div>
       </div>
       <div class="space-card reveal">
-        <div class="card-img"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/piscina.webp" width="1600" height="1067" alt="Piscina do Villa Mantova cercada por deque de madeira e jardim"></div>
+        <div class="card-img"><img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/piscina.webp" srcset="https://media.dmove.com.br/api/public/resize/400/clients/villa-mantova/photos/home/piscina.webp 400w, https://media.dmove.com.br/api/public/resize/800/clients/villa-mantova/photos/home/piscina.webp 800w, https://media.dmove.com.br/api/public/resize/1200/clients/villa-mantova/photos/home/piscina.webp 1200w, https://media.dmove.com.br/clients/villa-mantova/photos/home/piscina.webp 1600w" sizes="(max-width: 720px) 100vw, (max-width: 1000px) 50vw, 40vw" width="1600" height="1067" alt="Piscina do Villa Mantova cercada por deque de madeira e jardim"></div>
         <div class="card-body">
           <div class="card-rule"></div>
           <h3>Piscina</h3>
@@ -222,7 +186,7 @@ const jsonLd = {
     <div class="events-grid">
       <div class="event-card reveal">
         <div class="ev-img">
-          <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/casamentos.webp" width="1600" height="1067" alt="Casal de noivos no corredor de flores brancas da cerimônia ao ar livre no Villa Mantova">
+          <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/casamentos.webp" srcset="https://media.dmove.com.br/api/public/resize/400/clients/villa-mantova/photos/home/casamentos.webp 400w, https://media.dmove.com.br/api/public/resize/800/clients/villa-mantova/photos/home/casamentos.webp 800w, https://media.dmove.com.br/api/public/resize/1200/clients/villa-mantova/photos/home/casamentos.webp 1200w, https://media.dmove.com.br/clients/villa-mantova/photos/home/casamentos.webp 1600w" sizes="(max-width: 720px) 100vw, (max-width: 1000px) 50vw, 20vw" width="1600" height="1067" alt="Casal de noivos no corredor de flores brancas da cerimônia ao ar livre no Villa Mantova">
           <div class="ev-num">01</div>
         </div>
         <div class="ev-content">
@@ -233,7 +197,7 @@ const jsonLd = {
       </div>
       <div class="event-card reveal">
         <div class="ev-img">
-          <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/corporativos.webp" width="1376" height="768" alt="Apresentação em evento corporativo ao ar livre no Villa Mantova, com plateia e telão">
+          <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/corporativos.webp" srcset="https://media.dmove.com.br/api/public/resize/400/clients/villa-mantova/photos/home/corporativos.webp 400w, https://media.dmove.com.br/api/public/resize/800/clients/villa-mantova/photos/home/corporativos.webp 800w, https://media.dmove.com.br/api/public/resize/1200/clients/villa-mantova/photos/home/corporativos.webp 1200w, https://media.dmove.com.br/clients/villa-mantova/photos/home/corporativos.webp 1376w" sizes="(max-width: 720px) 100vw, (max-width: 1000px) 50vw, 20vw" width="1376" height="768" alt="Apresentação em evento corporativo ao ar livre no Villa Mantova, com plateia e telão">
           <div class="ev-num">02</div>
         </div>
         <div class="ev-content">
@@ -245,7 +209,7 @@ const jsonLd = {
       </div>
       <div class="event-card reveal">
         <div class="ev-img">
-          <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/debutantes.webp" width="1000" height="1500" alt="Debutante de vestido azul ao lado da mesa do bolo em festa no Villa Mantova" style="object-position:50% 22%">
+          <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/debutantes.webp" srcset="https://media.dmove.com.br/api/public/resize/400/clients/villa-mantova/photos/home/debutantes.webp 400w, https://media.dmove.com.br/api/public/resize/800/clients/villa-mantova/photos/home/debutantes.webp 800w, https://media.dmove.com.br/clients/villa-mantova/photos/home/debutantes.webp 1000w" sizes="(max-width: 720px) 100vw, (max-width: 1000px) 50vw, 20vw" width="1000" height="1500" alt="Debutante de vestido azul ao lado da mesa do bolo em festa no Villa Mantova" style="object-position:50% 22%">
           <div class="ev-num">03</div>
         </div>
         <div class="ev-content">
@@ -256,7 +220,7 @@ const jsonLd = {
       </div>
       <div class="event-card reveal">
         <div class="ev-img">
-          <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/aniversarios.webp" width="1600" height="1194" alt="Convidados em confraternização ao pôr do sol ao lado da piscina do Villa Mantova">
+          <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/aniversarios.webp" srcset="https://media.dmove.com.br/api/public/resize/400/clients/villa-mantova/photos/home/aniversarios.webp 400w, https://media.dmove.com.br/api/public/resize/800/clients/villa-mantova/photos/home/aniversarios.webp 800w, https://media.dmove.com.br/api/public/resize/1200/clients/villa-mantova/photos/home/aniversarios.webp 1200w, https://media.dmove.com.br/clients/villa-mantova/photos/home/aniversarios.webp 1600w" sizes="(max-width: 720px) 100vw, (max-width: 1000px) 50vw, 20vw" width="1600" height="1194" alt="Convidados em confraternização ao pôr do sol ao lado da piscina do Villa Mantova">
           <div class="ev-num">04</div>
         </div>
         <div class="ev-content">
@@ -267,7 +231,7 @@ const jsonLd = {
       </div>
       <div class="event-card reveal">
         <div class="ev-img">
-          <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/bodas.webp" width="1080" height="1350" alt="Casal se beijando em celebração de bodas no Villa Mantova" style="object-position:50% 30%">
+          <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/bodas.webp" srcset="https://media.dmove.com.br/api/public/resize/400/clients/villa-mantova/photos/home/bodas.webp 400w, https://media.dmove.com.br/api/public/resize/800/clients/villa-mantova/photos/home/bodas.webp 800w, https://media.dmove.com.br/clients/villa-mantova/photos/home/bodas.webp 1080w" sizes="(max-width: 720px) 100vw, (max-width: 1000px) 50vw, 20vw" width="1080" height="1350" alt="Casal se beijando em celebração de bodas no Villa Mantova" style="object-position:50% 30%">
           <div class="ev-num">05</div>
         </div>
         <div class="ev-content">
@@ -310,7 +274,7 @@ const jsonLd = {
         <p class="lead" style="margin-top:24px">O Villa Mantova conta com cozinha industrial e churrasqueira, além de opções de catering que podem ser alinhadas ao formato do evento, à programação e às necessidades dos participantes.</p>
       </div>
       <div class="split-media reveal">
-        <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/gastronomia.webp" width="1200" height="800" alt="Buffet com travessas de salgados e saladas decorado com flores brancas e pedras">
+        <img loading="lazy" decoding="async" src="https://media.dmove.com.br/clients/villa-mantova/photos/home/gastronomia.webp" srcset="https://media.dmove.com.br/api/public/resize/400/clients/villa-mantova/photos/home/gastronomia.webp 400w, https://media.dmove.com.br/api/public/resize/800/clients/villa-mantova/photos/home/gastronomia.webp 800w, https://media.dmove.com.br/clients/villa-mantova/photos/home/gastronomia.webp 1200w" sizes="(max-width: 720px) 100vw, 50vw" width="1200" height="800" alt="Buffet com travessas de salgados e saladas decorado com flores brancas e pedras">
       </div>
     </div>
     <div class="gallery-grid-small reveal" id="galleryGastronomia">
@@ -710,46 +674,13 @@ A singularidade deste espaço conquistou nosso coração de uma forma tão espec
           <h3>Recebemos sua solicitação</h3>
           <p>Em breve, nosso time entrará em contato com você.</p>
         </div>
-        <p class="cta-form__privacidade">Usamos seus dados apenas para responder ao seu pedido. Veja nossa política de privacidade no rodapé.</p>
+        <p class="cta-form__privacidade">Usamos seus dados apenas para responder ao seu pedido. Veja nossa <a href="/politica-de-privacidade">política de privacidade</a>.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================= FOOTER ============================= -->
-<footer class="footer">
-  <div class="wrap">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <img src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/logo-villa-mantova.png" alt="Villa Mantova">
-        <p>Espaço para casamentos, eventos corporativos e sociais, a poucos minutos de Alphaville.</p>
-        <div style="margin-top: 15px;">
-          <a href="https://www.instagram.com/villa.mantova/" target="_blank" rel="noopener noreferrer" class="instagram-circle-link" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-            </svg>
-          </a>
-        </div>
-      </div>
-      <div>
-        <p class="footer-titulo">Localização</p>
-        <ul>
-          <li>R. Romênia, 21 - Maravilha lll</li>
-          <li>Santana de Parnaíba - SP, 06523-045</li>
-          <li style="margin-top: 8px; font-size: 0.85rem; opacity: 0.8;">CNPJ: 37.540.933/0001-81</li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>Copyright © 2026 Villa Mantova — Todos os direitos reservados</p>
-      <p style="margin-top: 8px; font-size: 0.82rem; opacity: 0.7;">
-        <a href="#" id="privacyBtn" style="text-decoration: underline;">Política de privacidade</a> | Desenvolvido por <a href="https://dmove.com.br" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">Dmove Marketing</a>
-      </p>
-    </div>
-  </div>
-</footer>
+<SiteFooter />
 
 <!-- ============================= LIGHTBOX ============================= -->
 <div class="lightbox" id="lightbox">
@@ -757,111 +688,6 @@ A singularidade deste espaço conquistou nosso coração de uma forma tão espec
   <span class="lb-nav lb-prev" id="lbPrev">‹</span>
   <img id="lbImg" alt="Foto Villa Mantova">
   <span class="lb-nav lb-next" id="lbNext">›</span>
-</div>
-
-<!-- ============================= POPUP POLÍTICA DE PRIVACIDADE ============================= -->
-<div class="popup-overlay" id="privacyPopup">
-  <div class="popup-card">
-    <div class="popup-header">
-      <img src="https://media.dmove.com.br/clients/villa-mantova/photos/institucional/logo-villa-mantova.png" alt="Villa Mantova" class="popup-logo">
-      <button class="popup-close" id="closePrivacy" aria-label="Fechar">&times;</button>
-    </div>
-    <div class="popup-body">
-      <p class="popup-h2" role="heading" aria-level="2">VILLA MANTOVA — POLÍTICA DE PRIVACIDADE</p>
-      <p class="popup-subtitle">Última atualização: 09/06/2026</p>
-      
-      <p>A VILLA MANTOVA respeita a sua privacidade e está comprometida com a proteção dos dados pessoais de clientes, visitantes do site, fornecedores e demais pessoas que interagem conosco.</p>
-      <p>Esta Política de Privacidade explica, de forma simples e transparente, quais informações podemos coletar, como utilizamos esses dados e quais são os seus direitos.</p>
-      
-      <p class="popup-h3" role="heading" aria-level="3">1. Quais dados podemos coletar</p>
-      <p>Podemos coletar dados pessoais fornecidos diretamente por você ao preencher formulários, entrar em contato pelo WhatsApp, solicitar orçamento, agendar visita ou contratar nossos serviços.</p>
-      <p>Entre os dados coletados podem estar:</p>
-      <ul>
-        <li>Nome completo;</li>
-        <li>Telefone e WhatsApp;</li>
-        <li>E-mail;</li>
-        <li>Data do evento;</li>
-        <li>Tipo de evento;</li>
-        <li>Quantidade estimada de convidados;</li>
-        <li>Local do evento;</li>
-        <li>Preferências relacionadas ao buffet, cardápio, decoração ou estrutura;</li>
-        <li>Informações enviadas voluntariamente em mensagens, formulários ou atendimentos.</li>
-      </ul>
-      <p>Também poderemos coletar informações automáticas de navegação, como endereço IP, tipo de dispositivo, navegador utilizado, páginas acessadas e cookies, quando aplicável.</p>
-      
-      <p class="popup-h3" role="heading" aria-level="3">2. Para que usamos seus dados</p>
-      <p>Os dados pessoais coletados podem ser utilizados para:</p>
-      <ul>
-        <li>Responder solicitações de orçamento;</li>
-        <li>Entrar em contato por telefone, e-mail ou WhatsApp;</li>
-        <li>Agendar visitas, reuniões ou degustações;</li>
-        <li>Elaborar propostas comerciais personalizadas;</li>
-        <li>Organizar informações relacionadas ao evento;</li>
-        <li>Prestar os serviços contratados;</li>
-        <li>Enviar comunicações sobre nossos serviços, quando autorizado;</li>
-        <li>Melhorar a experiência de navegação no site;</li>
-        <li>Cumprir obrigações legais, contratuais ou regulatórias.</li>
-      </ul>
-      <p>Não vendemos seus dados pessoais.</p>
-      
-      <p class="popup-h3" role="heading" aria-level="3">3. Compartilhamento de dados</p>
-      <p>A VILLA MANTOVA poderá compartilhar dados pessoais apenas quando necessário para a execução dos serviços, cumprimento de obrigações legais ou operação do negócio. Esse compartilhamento pode ocorrer com:</p>
-      <ul>
-        <li>Equipe interna responsável pelo atendimento e organização do evento;</li>
-        <li>Fornecedores e parceiros envolvidos na execução de serviços, quando necessário;</li>
-        <li>Plataformas de atendimento, formulário, CRM, hospedagem, e-mail ou WhatsApp;</li>
-        <li>Profissionais de contabilidade, jurídico ou tecnologia;</li>
-        <li>Autoridades públicas, quando houver obrigação legal.</li>
-      </ul>
-      <p>Sempre que possível, compartilhamos apenas as informações necessárias para a finalidade específica.</p>
-      
-      <p class="popup-h3" role="heading" aria-level="3">4. Uso de fotos, videos e imagens de eventos</p>
-      <p>Durante eventos realizados pela VILLA MANTOVA, poderão ser registradas fotos e vídeos para fins de organização, portfólio, divulgação institucional ou redes sociais.</p>
-      <p>Quando houver uso de imagem de clientes, convidados ou noivos de forma identificável para divulgação, a utilização dependerá de autorização, conforme aplicável.</p>
-      <p>Caso você deseje solicitar a remoção de alguma imagem publicada em nossos canais, entre em contato pelo e-mail informado nesta política.</p>
-      
-      <p class="popup-h3" role="heading" aria-level="3">5. Cookies e tecnologias de navegação</p>
-      <p>Nosso site pode utilizar cookies para melhorar a experiência do usuário, analisar estatísticas de acesso, lembrar preferências e apoiar ações de marketing.</p>
-      <p>Você pode configurar seu navegador para bloquear cookies ou alertar quando eles estiverem sendo utilizados. No entanto, algumas funcionalidades do site podem não funcionar corretamente sem esses recursos.</p>
-      
-      <p class="popup-h3" role="heading" aria-level="3">6. Armazenamento e segurança dos dados</p>
-      <p>Adotamos medidas razoáveis de segurança para proteger os dados pessoais contra acessos não autorizados, perda, alteração, divulgação indevida ou uso inadequado.</p>
-      <p>Os dados serão mantidos pelo tempo necessário para cumprir as finalidades descritas nesta política, atender obrigações legais, resolver eventuais disputas ou preservar direitos da VILLA MANTOVA.</p>
-      
-      <p class="popup-h3" role="heading" aria-level="3">7. Direitos do titular dos dados</p>
-      <p>De acordo com a legislação aplicável, você pode solicitar:</p>
-      <ul>
-        <li>Confirmação sobre o tratamento dos seus dados;</li>
-        <li>Acesso aos dados pessoais;</li>
-        <li>Correção de dados incompletos, inexatos ou desatualizados;</li>
-        <li>Exclusão de dados, quando aplicável;</li>
-        <li>Revogação de consentimento;</li>
-        <li>Informação sobre o compartilhamento de dados;</li>
-        <li>Portabilidade dos dados, quando aplicável;</li>
-        <li>Oposição ao tratamento em determinadas situações.</li>
-      </ul>
-      <p>Para exercer seus direitos, entre em contato conosco pelo canal indicado abaixo.</p>
-      
-      <p class="popup-h3" role="heading" aria-level="3">8. Dados de crianças e adolescentes</p>
-      <p>Nosso site e nossos canais de atendimento não têm como objetivo coletar dados diretamente de crianças ou adolescentes.</p>
-      <p>Caso informações de menores sejam necessárias para a organização do evento, como em cardápios infantis, quantidade de crianças ou necessidades específicas, esses dados deverão ser fornecidos pelos pais, responsáveis legais ou contratantes do evento.</p>
-      
-      <p class="popup-h3" role="heading" aria-level="3">9. Links para terceiros</p>
-      <p>Nosso site pode conter links para redes sociais, plataformas de mapa, aplicativos de mensagens ou outros sites externos.</p>
-      <p>A VILLA MANTOVA não se responsabiliza pelas práticas de privacidade, conteúdo ou segurança de sites e plataformas de terceiros. Recomendamos que você leia as políticas de privacidade desses serviços antes de fornecer qualquer informação.</p>
-      
-      <p class="popup-h3" role="heading" aria-level="3">10. Alterações nesta Política de Privacidade</p>
-      <p>Esta Política de Privacidade poderá ser atualizada a qualquer momento para refletir mudanças em nossos processos, serviços ou exigências legais. A versão mais recente estará sempre disponível neste site.</p>
-      
-      <p class="popup-h3" role="heading" aria-level="3">11. Canal de contato</p>
-      <p>Em caso de dúvidas, solicitações ou pedidos relacionados aos seus dados pessoais, entre em contato:</p>
-      <p><strong>VILLA MANTOVA</strong><br>
-      E-mail: <a href="mailto:contato@villamantova.com.br" style="text-decoration: underline;">contato@villamantova.com.br</a><br>
-      Telefone/WhatsApp: (11) 94818-1301<br>
-      Endereço: R. Romênia, 21 - Maravilha III, Santana de Parnaíba - SP, 06523-045<br>
-      CNPJ: 37.540.933/0001-81</p>
-    </div>
-  </div>
 </div>
 
   <!-- Popup de atendimento (captura de lead) enviando para o webhook da home -->

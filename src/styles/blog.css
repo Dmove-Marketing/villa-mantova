@@ -1,0 +1,111 @@
+/* ============================================================
+   PÁGINAS INTERNAS: blog, post e política de privacidade
+   (usa os tokens e o cabeçalho/rodapé de institucional.css)
+   ============================================================ */
+.pagina-interna { padding-top: 86px; }
+.pagina-interna .section { padding-top: clamp(48px, 6vw, 84px); }
+
+/* ---------- Listagem ---------- */
+.blog-lista .section-head { max-width: 760px; margin-bottom: 54px; }
+.blog-lista .section-head h1.title { font-size: clamp(2.1rem, 4vw, 3.15rem); }
+.blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.blog-card {
+  display: flex; flex-direction: column;
+  background: var(--paper);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--r);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.blog-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.blog-card__img { position: relative; display: block; aspect-ratio: 4 / 5; overflow: hidden; }
+.blog-card__img img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+.blog-card:hover .blog-card__img img { transform: scale(1.04); }
+.blog-card__tag {
+  position: absolute; top: 14px; left: 14px;
+  background: #fff; color: var(--accent);
+  font-family: var(--font-display); font-weight: 500; font-size: .9rem;
+  padding: 6px 14px; border-radius: 3px;
+}
+.blog-card__data {
+  position: absolute; left: 0; bottom: 0;
+  background: var(--green-900); color: #fff;
+  font-family: var(--font-display);
+  text-align: center; text-transform: lowercase;
+  padding: 10px 16px; line-height: 1.1;
+}
+.blog-card__data strong { display: block; font-size: 1.7rem; font-weight: 500; color: var(--gold-soft); }
+.blog-card__corpo { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; padding: 26px 26px 30px; flex: 1; }
+.blog-card__corpo h2 { font-size: 1.4rem; line-height: 1.3; font-weight: 500; }
+.blog-card__corpo h2 a { color: var(--ink); }
+.blog-card__corpo h2 a:hover { color: var(--accent); }
+.blog-card__btn {
+  margin-top: auto;
+  display: inline-block;
+  border: 1px solid var(--ink); color: var(--ink);
+  font-family: var(--font-display); text-transform: uppercase; letter-spacing: .08em; font-size: .82rem;
+  padding: 12px 26px; border-radius: 2px;
+  transition: background .25s ease, color .25s ease;
+}
+.blog-card__btn:hover { background: var(--ink); color: #fff; }
+
+/* ---------- Post ---------- */
+.post__grade { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: clamp(36px, 5vw, 72px); align-items: start; }
+.post__trilha { font-family: var(--font-display); font-size: .85rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 18px; }
+.post__trilha a { color: var(--accent); }
+.post__titulo { font-size: clamp(1.9rem, 3.6vw, 2.9rem); line-height: 1.12; letter-spacing: -0.015em; }
+.post__data { margin: 14px 0 26px; color: var(--ink-soft); font-size: .95rem; }
+.post__imagem { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--r); box-shadow: var(--shadow-md); }
+.post__compartilhar { display: flex; align-items: center; gap: 12px; margin: 26px 0 8px; font-size: .95rem; color: var(--ink-soft); }
+.post__compartilhar a {
+  display: inline-grid; place-items: center;
+  width: 44px; height: 44px; border-radius: 6px;
+  background: var(--green-800); color: #fff;
+  transition: background .25s ease, transform .25s ease;
+}
+.post__compartilhar a:hover { background: var(--accent); transform: translateY(-2px); }
+.post__compartilhar svg { width: 20px; height: 20px; }
+.post__corpo { margin-top: 30px; font-size: 1.1rem; line-height: 1.75; color: var(--ink-soft); }
+.post__corpo p { margin: 0 0 20px; }
+.post__corpo h2 { font-size: clamp(1.4rem, 2.4vw, 1.8rem); color: var(--ink); margin: 40px 0 14px; line-height: 1.25; }
+.post__corpo a { color: var(--accent); text-decoration: underline; }
+.post__corpo ul { list-style: disc; padding-left: 1.4rem; margin: 0 0 20px; }
+.post__cta {
+  margin-top: 48px; padding: 34px 32px;
+  background: var(--gold-tint);
+  border: 1px solid rgba(180, 144, 79, .25);
+  border-radius: var(--r);
+  text-align: center;
+}
+.post__cta h2 { font-size: 1.6rem; margin-bottom: 8px; }
+.post__cta p { color: var(--ink-soft); margin-bottom: 22px; }
+.post__lateral { position: sticky; top: 110px; }
+.post__lateral > h2 { font-size: 1.4rem; margin-bottom: 20px; }
+.post-mini { display: flex; gap: 16px; align-items: stretch; background: var(--cream); border-radius: var(--r); overflow: hidden; margin-bottom: 18px; transition: box-shadow .25s ease; }
+.post-mini:hover { box-shadow: var(--shadow-sm); }
+.post-mini img { width: 112px; object-fit: cover; flex-shrink: 0; }
+.post-mini__texto { display: flex; flex-direction: column; gap: 8px; padding: 14px 14px 14px 0; }
+.post-mini__texto strong { font-family: var(--font-display); font-weight: 500; font-size: 1.02rem; line-height: 1.3; color: var(--ink); }
+.post-mini__texto em { font-style: normal; font-size: .85rem; color: var(--ink-soft); }
+
+/* ---------- Política de privacidade ---------- */
+.policy { max-width: 800px; margin: 0 auto; }
+.policy h1 { font-size: clamp(1.8rem, 3.4vw, 2.6rem); line-height: 1.15; margin-bottom: 10px; }
+.policy .policy__data { color: var(--ink-soft); font-size: .95rem; margin-bottom: 34px; }
+.policy h2 { font-size: 1.35rem; margin: 36px 0 12px; line-height: 1.25; }
+.policy p { margin: 0 0 16px; color: var(--ink-soft); line-height: 1.75; }
+.policy ul { list-style: disc; padding-left: 1.4rem; margin: 0 0 18px; color: var(--ink-soft); line-height: 1.7; }
+.policy li { margin-bottom: 4px; }
+.policy a { color: var(--accent); text-decoration: underline; }
+
+@media (max-width: 1000px) {
+  .blog-grid { grid-template-columns: repeat(2, 1fr); }
+  .post__grade { grid-template-columns: 1fr; }
+  .post__lateral { position: static; }
+}
+@media (max-width: 720px) {
+  .pagina-interna .section { padding-top: 40px; }
+  .blog-grid { grid-template-columns: 1fr; gap: 26px; }
+  .post__cta { padding: 28px 20px; }
+}

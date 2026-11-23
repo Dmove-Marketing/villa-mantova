@@ -1,0 +1,47 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { getPosts, formatarData } from '../../lib/blog';
+
+const posts = getPosts();
+const title = 'Blog | Villa Mantova';
+const description = 'Dicas para planejar casamentos, eventos corporativos, festas de debutante e aniversários em espaço de campo, a poucos minutos de Alphaville.';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: 'Blog Villa Mantova',
+  description,
+  inLanguage: 'pt-BR',
+  blogPost: posts.map((p) => ({ '@type': 'BlogPosting', headline: p.title, datePublished: p.date, image: p.image })),
+};
+---
+<!-- noIndex enquanto o site não tem domínio (ver docs/lancamento-seo.md) -->
+<SiteLayout title={title} description={description} noIndex={true} jsonLd={jsonLd} active="blog">
+  <section class="section blog-lista">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow">Blog</span>
+        <h1 class="title">Dicas para celebrar no campo</h1>
+        <p class="lead" style="margin-top:18px">Ideias e orientações para planejar casamentos, eventos corporativos e celebrações em contato com a natureza.</p>
+      </div>
+      <div class="blog-grid">
+        {posts.map((p) => {
+          const d = formatarData(p.date);
+          return (
+            <article class="blog-card">
+              <a class="blog-card__img" href={`/blog/${p.slug}`} tabindex="-1" aria-hidden="true">
+                <img loading="lazy" decoding="async" src={p.image} width="1200" height="800" alt="" />
+                <span class="blog-card__tag">{p.category}</span>
+                <span class="blog-card__data"><strong>{d.dia}</strong>{d.mes}</span>
+              </a>
+              <div class="blog-card__corpo">
+                <h2><a href={`/blog/${p.slug}`}>{p.title}</a></h2>
+                <a class="blog-card__btn" href={`/blog/${p.slug}`} aria-label={`Ler mais: ${p.title}`}>Ler mais</a>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+</SiteLayout>

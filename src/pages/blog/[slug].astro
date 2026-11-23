@@ -1,0 +1,89 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { getPosts, formatarData } from '../../lib/blog';
+
+export function getStaticPaths() {
+  return getPosts().map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const outros = getPosts().filter((p) => p.slug !== post.slug).slice(0, 4);
+const data = formatarData(post.date);
+const Content = post.Content;
+
+const title = `${post.title} | Villa Mantova`;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.title,
+  description: post.description,
+  image: post.image,
+  datePublished: post.date,
+  inLanguage: 'pt-BR',
+  author: { '@type': 'Organization', name: 'Villa Mantova' },
+  publisher: { '@type': 'Organization', name: 'Villa Mantova' },
+};
+---
+<!-- noIndex enquanto o site não tem domínio (ver docs/lancamento-seo.md) -->
+<SiteLayout title={title} description={post.description} ogImage={post.image} noIndex={true} jsonLd={jsonLd} active="blog">
+  <article class="section post">
+    <div class="wrap post__grade">
+      <div class="post__principal">
+        <nav class="post__trilha" aria-label="Você está em">
+          <a href="/blog">Blog</a> <span aria-hidden="true">/</span> <span>{post.category}</span>
+        </nav>
+        <h1 class="post__titulo">{post.title}</h1>
+        <p class="post__data"><time datetime={post.date}>{data.extenso}</time></p>
+        <img class="post__imagem" src={post.image} width="1200" height="800" alt={post.imageAlt} fetchpriority="high" decoding="async" />
+
+        <div class="post__compartilhar" data-compartilhar>
+          <span>Compartilhe em suas redes:</span>
+          <a href="https://www.facebook.com/sharer/sharer.php" data-rede="facebook" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar no Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.5l.5-3h-3V8.6c0-.9.3-1.6 1.6-1.6h1.5V4.3c-.3 0-1.2-.1-2.2-.1-2.3 0-3.9 1.4-3.9 4v2.3H8v3h2.5V21h3z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/" data-rede="linkedin" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar no LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5.2 9.2h3v9.6h-3V9.2zM6.7 4.6a1.7 1.7 0 1 1 0 3.5 1.7 1.7 0 0 1 0-3.5zM10.1 9.2H13v1.3c.4-.8 1.4-1.5 2.9-1.5 3 0 3.6 2 3.6 4.6v5.2h-3v-4.6c0-1.1 0-2.5-1.5-2.5s-1.8 1.2-1.8 2.4v4.7h-3V9.2z"/></svg>
+          </a>
+          <a href="https://api.whatsapp.com/send" data-rede="whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar no WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3.2a8.8 8.8 0 0 0-7.5 13.4L3.2 21l4.5-1.2A8.8 8.8 0 1 0 12 3.2zm0 1.7a7.1 7.1 0 1 1-3.8 13.1l-.3-.2-2.6.7.7-2.5-.2-.3A7.1 7.1 0 0 1 12 4.9zm-3 3.2c-.2 0-.5.1-.7.4-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.8 2.2.9 2.6.7 3.1.6.5 0 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.5-.3l-1.6-.8c-.2-.1-.4-.1-.6.1l-.7.9c-.1.2-.3.2-.5.1-.3-.1-1.1-.4-2-1.3-.7-.7-1.2-1.5-1.4-1.8-.1-.3 0-.4.1-.5l.4-.4.3-.5c.1-.2 0-.4 0-.5l-.7-1.7c-.2-.4-.4-.4-.6-.4z"/></svg>
+          </a>
+        </div>
+
+        <div class="post__corpo"><Content /></div>
+
+        <aside class="post__cta">
+          <h2>Vamos conversar sobre o seu evento?</h2>
+          <p>Preencha o formulário para receber nosso contato.</p>
+          <a class="btn btn-primary" href="/#agendar">Solicitar orçamento <span class="arrow">→</span></a>
+        </aside>
+      </div>
+
+      {outros.length > 0 && (
+        <aside class="post__lateral" aria-labelledby="mais-posts">
+          <h2 id="mais-posts">Você pode querer olhar…</h2>
+          {outros.map((p) => (
+            <a class="post-mini" href={`/blog/${p.slug}`}>
+              <img loading="lazy" decoding="async" src={p.image} width="600" height="400" alt="" />
+              <span class="post-mini__texto"><strong>{p.title}</strong><em>Continuar lendo…</em></span>
+            </a>
+          ))}
+        </aside>
+      )}
+    </div>
+  </article>
+
+  <script>
+    // O domínio ainda não existe: os links de compartilhamento usam o endereço da página aberta.
+    const url = encodeURIComponent(location.href);
+    const titulo = encodeURIComponent(document.title);
+    const base: Record<string, string> = {
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+      linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
+      whatsapp: `https://api.whatsapp.com/send?text=${titulo}%20${url}`,
+    };
+    document.querySelectorAll<HTMLAnchorElement>('[data-compartilhar] [data-rede]').forEach((a) => {
+      const href = base[a.dataset.rede || ''];
+      if (href) a.href = href;
+    });
+  </script>
+</SiteLayout>
