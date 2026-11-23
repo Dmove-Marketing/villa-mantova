@@ -1285,15 +1285,6 @@ html.anim .reveal.in { opacity: 1; transform: none; }
   white-space: normal;
   text-align: center;
 }
-.event-card .ev-link {
-  display: block;
-  margin-top: 12px;
-  text-align: center;
-  font-size: .82rem;
-  color: var(--gold-soft);
-  text-decoration: underline;
-}
-.event-card .ev-link:hover { color: #fff; }
 
 /* Estrutura: 5 ícones */
 .estrutura-grid {
