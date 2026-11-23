@@ -58,13 +58,16 @@ const trackingEnabled = config.tracking?.enabled !== false;
 // og:image precisa de URL absoluta para redes sociais e crawlers
 const ogImageAbs = ogImage.startsWith('http') ? ogImage : `https://${config.domain}${ogImage}`;
 
+// Canonical: o informado na página ou, com `site` definido no astro.config, a própria URL da página (sem query string).
+// Sem `site`, Astro.url aponta para localhost: nesse caso não emite canonical.
+const canonicalUrl = canonical || (Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined);
+
 const defaultJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
   name: title,
   description: description,
-  // sem `site` no astro.config (domínio ainda não definido), Astro.url aponta para localhost: nesse caso omite o url
-  url: canonical || (Astro.site ? Astro.url.href : undefined),
+  url: canonicalUrl,
 };
 ---
 
@@ -82,7 +85,7 @@ const defaultJsonLd = {
     <!-- SEO -->
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
-    {canonical && <link rel="canonical" href={canonical} />}
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
     {noIndex && <meta name="robots" content="noindex, nofollow" />}
 
     <!-- Open Graph -->

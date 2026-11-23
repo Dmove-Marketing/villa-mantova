@@ -15,8 +15,7 @@ const jsonLd = {
   blogPost: posts.map((p) => ({ '@type': 'BlogPosting', headline: p.title, datePublished: p.date, image: p.image })),
 };
 ---
-<!-- noIndex enquanto o site não tem domínio (ver docs/lancamento-seo.md) -->
-<SiteLayout title={title} description={description} noIndex={true} jsonLd={jsonLd} active="blog">
+<SiteLayout title={title} description={description} jsonLd={jsonLd} active="blog">
   <section class="section blog-lista">
     <div class="wrap">
       <div class="section-head center">

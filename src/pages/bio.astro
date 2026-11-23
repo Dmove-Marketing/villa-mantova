@@ -45,7 +45,8 @@ const links = [
 ];
 ---
 
-<Base title={title} description={description} ogImage={hero} theme="light" hideWhatsApp={true}>
+<!-- noIndex: a /bio é só um atalho de links do Instagram e não deve concorrer com a home no Google -->
+<Base title={title} description={description} ogImage={hero} theme="light" hideWhatsApp={true} noIndex={true}>
   <script is:inline slot="head">document.documentElement.classList.add('js');</script>
   <link rel="preload" as="image" href={hero} fetchpriority="high" slot="head" />
   <link rel="preconnect" href="https://fonts.googleapis.com" slot="head" />

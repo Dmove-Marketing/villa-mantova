@@ -24,8 +24,7 @@ const jsonLd = {
   publisher: { '@type': 'Organization', name: 'Villa Mantova' },
 };
 ---
-<!-- noIndex enquanto o site não tem domínio (ver docs/lancamento-seo.md) -->
-<SiteLayout title={title} description={post.description} ogImage={post.image} noIndex={true} jsonLd={jsonLd} active="blog">
+<SiteLayout title={title} description={post.description} ogImage={post.image} jsonLd={jsonLd} active="blog">
   <article class="section post">
     <div class="wrap post__grade">
       <div class="post__principal">

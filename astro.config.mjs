@@ -1,8 +1,8 @@
 import { defineConfig } from 'astro/config';
 
-// Domínio ainda não definido: quando existir, adicione `site: 'https://<dominio>'`
-// (usado em canonical/OG/sitemap) e preencha config.json > domain e deploy.remote_path.
+// `site` é usado em canonical e dados estruturados; mantenha igual ao config.json > domain.
 export default defineConfig({
+  site: 'https://villamantova.com.br',
   output: 'static',
   prefetch: true,
   build: {

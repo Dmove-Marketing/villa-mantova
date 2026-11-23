@@ -45,15 +45,17 @@ const faq = [
   { q: 'O que acontece se chover no dia do evento?', a: 'O Villa Mantova conta com uma estrutura coberta para acomodar o evento em caso de chuva, permitindo que a programação aconteça com tranquilidade.' },
 ];
 
-// Dados estruturados. Sem `url` (domínio ainda não definido) e sem aggregateRating (a contagem de avaliações
-// diverge entre as páginas: 390+ na home e 421 na LP); incluir quando houver fonte única.
+// Dados estruturados. Sem aggregateRating (a contagem de avaliações diverge entre as páginas: 390+ na home
+// e 421 na LP) e sem telephone (ainda não há número); incluir quando houver fonte única.
+const siteUrl = Astro.site?.href;
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
-    { '@type': 'WebPage', name: title, description, inLanguage: 'pt-BR' },
+    { '@type': 'WebPage', name: title, description, inLanguage: 'pt-BR', url: siteUrl },
     {
       '@type': ['LocalBusiness', 'EventVenue'],
       name: 'Villa Mantova',
+      url: siteUrl,
       description,
       image: ogImage,
       address: { '@type': 'PostalAddress', streetAddress: 'R. Romênia, 21 - Maravilha III', addressLocality: 'Santana de Parnaíba', addressRegion: 'SP', postalCode: '06523-045', addressCountry: 'BR' },
@@ -66,8 +68,7 @@ const jsonLd = {
 };
 ---
 
-<!-- noIndex: réplica do site no ar; remova quando esta página for a oficial, para não duplicar conteúdo no Google -->
-<Base title={title} description={description} ogImage={ogImage} theme="light" hideWhatsApp={true} noIndex={true} jsonLd={jsonLd}>
+<Base title={title} description={description} ogImage={ogImage} theme="light" hideWhatsApp={true} jsonLd={jsonLd}>
   <link rel="preload" href="/fonts/jost-latin.woff2" as="font" type="font/woff2" crossorigin slot="head" />
   <link rel="preload" href="/fonts/mulish-latin.woff2" as="font" type="font/woff2" crossorigin slot="head" />
   <link rel="preload" as="image" href={hero} imagesrcset={heroSrcset} imagesizes="100vw" fetchpriority="high" slot="head" />
