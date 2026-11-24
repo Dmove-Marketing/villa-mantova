@@ -126,6 +126,9 @@ a { color: inherit; text-decoration: none; }
 .center .eyebrow { margin-left: 0; }
 
 .section-head { max-width: 680px; margin: 0 auto 60px; }
+/* Título mais longo: cabe em duas linhas equilibradas (sem palavra sozinha na última) */
+.section-head--larga { max-width: 860px; }
+.section-head--larga .title { text-wrap: balance; }
 
 /* ---------- Buttons ---------- */
 .btn {
