@@ -115,18 +115,4 @@
     });
   }
 
-  /* ---------- Testimonial Slider ---------- */
-  var depoPrev = document.getElementById('depoPrev');
-  var depoNext = document.getElementById('depoNext');
-  var depoCards = document.querySelectorAll('.depo-card-large');
-  var depoIdx = 0;
-  if (depoPrev && depoNext && depoCards.length > 0) {
-    var showDepo = function (i) {
-      depoCards[depoIdx].classList.remove('active');
-      depoIdx = (i + depoCards.length) % depoCards.length;
-      depoCards[depoIdx].classList.add('active');
-    };
-    depoPrev.addEventListener('click', function () { showDepo(depoIdx - 1); });
-    depoNext.addEventListener('click', function () { showDepo(depoIdx + 1); });
-  }
 })();
