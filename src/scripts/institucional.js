@@ -72,13 +72,21 @@
   }, 220);
 
   /* ---------- Lightbox ---------- */
-  var imgs = Array.prototype.map.call(document.querySelectorAll('.g-item img'), function (i) { return i.src; });
+  // Cada galeria (grade grande e miniaturas da Gastronomia) tem a sua própria sequência de fotos.
+  var imgs = [];
   var lb = document.getElementById('lightbox');
   var lbImg = document.getElementById('lbImg');
   var idx = 0;
   function show(i) { idx = (i + imgs.length) % imgs.length; lbImg.src = imgs[idx]; }
-  document.querySelectorAll('.g-item').forEach(function (item, i) {
-    item.addEventListener('click', function () { show(i); lb.classList.add('open'); document.body.style.overflow = 'hidden'; });
+  document.querySelectorAll('.g-item').forEach(function (item) {
+    item.addEventListener('click', function () {
+      var grupo = item.parentElement;
+      var itens = Array.prototype.slice.call(grupo.querySelectorAll('.g-item'));
+      imgs = itens.map(function (el) { return el.querySelector('img').src; });
+      show(itens.indexOf(item));
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
   });
   function closeLb() { lb.classList.remove('open'); document.body.style.overflow = ''; }
   document.getElementById('lbClose').addEventListener('click', closeLb);
