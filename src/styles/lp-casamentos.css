@@ -19,8 +19,11 @@
 /* Gastronomia: o texto quebra normalmente (a corporativa fixa as quebras de linha) */
 .gastronomia__texto p{white-space:normal;max-width:30em}
 
-/* Hero no celular: título quebra de forma equilibrada e a foto enquadra o casal */
+/* Hero: foto centralizada (desktop e celular) */
+.hero__foto img{object-position:50% 50%;transform-origin:50% 50%}
+
+/* Hero no celular: título quebra de forma equilibrada */
 @media (max-width:860px){
   .hero__texto h1{text-wrap:balance}
-  .hero__foto img{object-position:60% 50%}
+  .hero__foto img{object-position:50% 50%}
 }
