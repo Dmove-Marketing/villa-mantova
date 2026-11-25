@@ -1,0 +1,280 @@
+---
+// Landing page — Casamentos · Villa Mantova (preset social)
+// Duplicada da LP de eventos corporativos: mesmo design (eventos-corporativos.css/js) com a copy de casamento.
+// Ajustes específicos em lp-casamentos.css. Copy: "11.2026 | Copy LP - Casamento [VILLA MANTOVA]".
+import Base from '../layouts/Base.astro';
+import WhatsAppWidget from '../components/ui/WhatsAppWidget.astro';
+import '../styles/eventos-corporativos.css';
+import '../styles/lp-casamentos.css';
+import config from '../../config.json';
+import { getPreset } from '../scripts/form-presets';
+
+const lead = config.forms['casamentos-form'];
+// Tipo de evento já vem com "Casamento" selecionado (a LP é de casamento)
+const campos = getPreset(lead.preset).map((c) =>
+  c.name === 'tipo_evento' ? { ...c, options: c.options?.map((o) => ({ ...o, selected: o.value === 'Casamento' })) } : c,
+);
+const webhook = lead.webhooks[0];
+const autoc: Record<string, string> = { nome: 'name', telefone: 'tel', email: 'email' };
+
+const cdn = 'https://media.dmove.com.br/clients/villa-mantova/photos/';
+const redim = (nome: string, w: number) => `https://media.dmove.com.br/api/public/resize/${w}/clients/villa-mantova/photos/${nome}`;
+const heroNome = 'hero_casamentos.webp';
+const hero = cdn + heroNome;
+const heroSrcset = `${redim(heroNome, 640)} 640w, ${redim(heroNome, 1024)} 1024w, ${redim(heroNome, 1536)} 1536w, ${hero} 2048w`;
+
+const title = 'Casamento ao ar livre perto de Alphaville | Villa Mantova';
+const description = 'Espaço completo para casamento ao ar livre a 20 minutos de Alphaville: cerimônia, recepção e festa no mesmo lugar, com capacidade para até 300 convidados.';
+
+// Galeria: galeria_casamentos01.webp … (enviadas ao CDN em photos/). Dimensões e textos alternativos de cada foto.
+const galeria = [
+  {"nome":"galeria_casamentos01.webp","w":1600,"h":1067,"alt":"Cerimônia ao ar livre ao entardecer, com convidados dos dois lados do corredor de madeira e noiva ao fundo"},
+  {"nome":"galeria_casamentos02.webp","w":1600,"h":1065,"alt":"Noiva e noivo à noite diante de uma estrutura de luzes em forma de cabana no gramado"},
+  {"nome":"galeria_casamentos03.webp","w":1600,"h":1066,"alt":"Noivos saindo da cerimônia entre convidados, com pétalas no ar"},
+  {"nome":"galeria_casamentos04.webp","w":1067,"h":1600,"alt":"Noivos no deck ao lado da piscina, com o sol aparecendo entre as árvores"},
+  {"nome":"galeria_casamentos05.webp","w":1600,"h":1065,"alt":"Mesa do bolo decorada com flores coloridas, lâmpadas suspensas e painel de folhagens"},
+  {"nome":"galeria_casamentos06.webp","w":1600,"h":1066,"alt":"Cerimônia ao entardecer sob cordões de luzes, com os convidados sentados"},
+  {"nome":"galeria_casamentos07.webp","w":1600,"h":1066,"alt":"Noivos se beijando em meio a convidados com sparklers acesos"},
+  {"nome":"galeria_casamentos08.webp","w":1067,"h":1600,"alt":"Noiva de costas no corredor da cerimônia à noite, com luzes suspensas ao fundo"},
+  {"nome":"galeria_casamentos09.webp","w":1600,"h":1065,"alt":"Corredor de madeira da cerimônia, com vasos de capim-dos-pampas e flores"},
+  {"nome":"galeria_casamentos10.webp","w":1600,"h":1066,"alt":"Noivos posando diante do letreiro LOVE iluminado, no gramado à noite"},
+  {"nome":"galeria_casamentos11.webp","w":1067,"h":1600,"alt":"Noivos diante do altar ao ar livre, com convidados e arranjos de capim-dos-pampas"},
+  {"nome":"galeria_casamentos12.webp","w":1600,"h":1067,"alt":"Noivos cortando o bolo ao lado da mesa decorada com flores"},
+  {"nome":"galeria_casamentos13.webp","w":1600,"h":1067,"alt":"Entrada da noiva pelo corredor de flores brancas na área coberta, com convidados sentados"},
+  {"nome":"galeria_casamentos14.webp","w":1600,"h":1066,"alt":"Noivos à beira da piscina à noite, sob luzes suspensas"},
+  {"nome":"galeria_casamentos15.webp","w":1067,"h":1600,"alt":"Noivos de mãos dadas no corredor da cerimônia à noite, entre cordões de luzes"},
+  {"nome":"galeria_casamentos16.webp","w":1600,"h":1066,"alt":"Noiva de costas diante da mesa de doces decorada com flores e folhagens"},
+  {"nome":"galeria_casamentos17.webp","w":1600,"h":1065,"alt":"Letreiro LOVE iluminado diante de painel de troncos e folhagens"},
+  {"nome":"galeria_casamentos18.webp","w":1600,"h":1066,"alt":"Noivos celebrando entre convidados com sparklers acesos"},
+  {"nome":"galeria_casamentos19.webp","w":1600,"h":1065,"alt":"Salão com mesas redondas montadas, cadeiras de madeira e tecidos no teto"},
+  {"nome":"galeria_casamentos20.webp","w":1600,"h":1067,"alt":"Noiva em pé no jardim, entre arranjos de capim-dos-pampas e flores rosas"},
+  {"nome":"galeria_casamentos21.webp","w":1600,"h":1067,"alt":"Mesa do bolo cercada por flores, lanternas e caixotes de madeira"},
+  {"nome":"galeria_casamentos22.webp","w":1024,"h":681,"alt":"Corredor de madeira da cerimônia, ladeado por cestos de capim-dos-pampas"},
+  {"nome":"galeria_casamentos23.webp","w":1024,"h":681,"alt":"Noiva entrando de braços dados no corredor da cerimônia à noite, entre bancos de madeira"},
+  {"nome":"galeria_casamentos24.webp","w":1600,"h":1067,"alt":"Piscina iluminada à noite, com velas flutuantes e jardim ao fundo"},
+  {"nome":"galeria_casamentos25.webp","w":1024,"h":681,"alt":"Lounge com sofás de couro sobre tapete, sob a copa de uma árvore"},
+  {"nome":"galeria_casamentos26.webp","w":1024,"h":681,"alt":"Cadeiras e banco de madeira com mesa de centro, diante do painel de troncos"},
+];
+---
+
+<Base title={title} description={description} ogImage={hero} theme="light" hideWhatsApp={true}>
+  <script is:inline slot="head">document.documentElement.classList.add('js');</script>
+  <link rel="preload" as="image" imagesrcset={heroSrcset} imagesizes="100vw" fetchpriority="high" slot="head" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" slot="head" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin slot="head" />
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600&family=Mulish:wght@300;400;600&display=swap" rel="stylesheet" slot="head" />
+
+<main id="topo">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__texto">
+    <a class="marca" href="#topo" aria-label="Villa Mantova, início da página"><b>VILLA MANTOVA</b></a>
+    <h1>Um espaço completo<br class="so-grande"> para celebrar seu casamento<br class="so-grande"> ao ar livre</h1>
+    <p>Ambientes integrados à natureza para reunir <br class="so-grande">cerimônia, recepção e festa em um só lugar.</p>
+    <a class="botao" href="#contato">Solicite orçamento</a>
+  </div>
+  <figure class="hero__foto"><img src={hero} srcset={heroSrcset} sizes="100vw" alt="Noivos e convidados na cerimônia de casamento ao ar livre no Villa Mantova" width="2048" height="1365" fetchpriority="high"></figure>
+</section>
+
+<!-- AUTORIDADE -->
+<div class="numeros numeros--3">
+  <ul class="caixa">
+    <li><svg viewBox="0 0 32 32" aria-hidden="true"><path class="t" d="M4 7h24v21H4z"/><path d="M4 7h24v21H4zM4 13h24M11 3v7M21 3v7M11 21l3.500 3.500L21 18"/></svg><div><b>500+</b><span>Eventos realizados</span></div></li>
+    <li><svg viewBox="0 0 32 32" aria-hidden="true"><circle class="t" cx="16" cy="11" r="5"/><path class="t" d="M6 28v-3a10 10 0 0 1 20 0v3z"/></svg><div><b>Até 300</b><span>convidados</span></div></li>
+    <li><svg viewBox="0 0 32 32" aria-hidden="true"><path class="t" d="M16 3l4 8.400 9.200 1.200-6.700 6.400 1.700 9.100L16 23.700l-8.200 4.400 1.700-9.100-6.700-6.400 9.200-1.200z"/></svg><div><b>4,9</b><span>Avaliação no Google</span></div></li>
+  </ul>
+  <div class="faixa-numeros" aria-hidden="true"><div class="faixa-numeros__trilho"><div class="faixa-numeros__grupo"><span><b>500+</b> Eventos realizados</span><span><b>Até 300</b> convidados</span><span><b>4,9</b> Avaliação no Google</span></div><div class="faixa-numeros__grupo"><span><b>500+</b> Eventos realizados</span><span><b>Até 300</b> convidados</span><span><b>4,9</b> Avaliação no Google</span></div></div></div>
+</div>
+
+<!-- EXPERIÊNCIA 360° -->
+<section class="secao" id="experiencia">
+  <div class="caixa">
+    <div class="duas surge">
+      <h2>Estrutura e cuidado <br class="so-celular">em cada etapa <br class="so-celular">da celebração</h2>
+      <p>No Villa Mantova, você encontra estrutura e serviços para acompanhar todas as etapas do casamento. Os ambientes integrados permitem realizar a cerimônia, a recepção e a comemoração no mesmo espaço, enquanto soluções de gastronomia, mobiliário, decoração e uma equipe dedicada contribuem para uma organização mais prática. Tudo pensado para que os noivos aproveitem cada momento com tranquilidade.</p>
+    </div>
+    <figure class="foto-larga surge"><img src={cdn + 'hero.webp'} alt="Casa do Villa Mantova com varandas, jardim e céu azul" width="1537" height="1023" loading="lazy"></figure>
+  </div>
+</section>
+
+<!-- DIFERENCIAIS -->
+<section class="secao diferenciais" id="diferenciais">
+  <div class="caixa">
+    <h2 class="surge">Natureza, estrutura e cuidado em todos os momentos</h2>
+    <div class="palco surge" data-palco>
+      <div class="palco__fotos">
+        <img class="ativa" src={cdn + 'cerimonia_ar_livre.webp'} alt="Cerimônia de casamento ao ar livre em jardim, com noivos diante do altar e convidados sentados" style="object-position:50% 70%" width="1366" height="2048" decoding="async">
+        <img src={cdn + 'recepcao_integrada.webp'} alt="Recepção do casamento no Villa Mantova, integrada à cerimônia e à festa" style="object-position:50% 60%" width="2048" height="1365" decoding="async">
+        <img src={cdn + 'institucional/casa-dos-noivos.webp'} alt="Noiva sorrindo diante da porta da casa dos noivos, com as madrinhas de olhos cobertos ao fundo" style="object-position:50% 40%" width="1600" height="1067" decoding="async">
+        <img src={cdn + 'home/sobre.webp'} alt="Jardim e área externa do Villa Mantova, cercados pela natureza" style="object-position:50% 60%" width="1280" height="853" decoding="async">
+      </div>
+      <ul class="trilho trilho--4">
+        <li class="ativo"><h3><button type="button" aria-expanded="true" aria-controls="dif-1">Cerimônia <br>ao ar livre</button></h3><img class="trilho__foto" src={cdn + 'cerimonia_ar_livre.webp'} alt="Cerimônia de casamento ao ar livre em jardim, com noivos diante do altar e convidados sentados" style="object-position:50% 70%" width="1366" height="2048" loading="lazy"><p id="dif-1">Jardins amplos e integrados à natureza para realizar uma cerimônia ao ar livre, com diferentes possibilidades de ambientação.</p></li>
+        <li><h3><button type="button" aria-expanded="false" aria-controls="dif-2">Recepção integrada</button></h3><img class="trilho__foto" src={cdn + 'recepcao_integrada.webp'} alt="Recepção do casamento no Villa Mantova, integrada à cerimônia e à festa" style="object-position:50% 60%" width="2048" height="1365" loading="lazy"><p id="dif-2">Um espaço que dá continuidade à celebração, conectando a cerimônia à recepção e à festa com praticidade.</p></li>
+        <li><h3><button type="button" aria-expanded="false" aria-controls="dif-3">Casa dos noivos</button></h3><img class="trilho__foto" src={cdn + 'institucional/casa-dos-noivos.webp'} alt="Noiva sorrindo diante da porta da casa dos noivos, com as madrinhas de olhos cobertos ao fundo" style="object-position:50% 40%" width="1600" height="1067" loading="lazy"><p id="dif-3">Ambiente reservado para os preparativos, oferecendo conforto e privacidade antes da cerimônia.</p></li>
+        <li><h3><button type="button" aria-expanded="false" aria-controls="dif-4">Localização estratégica</button></h3><img class="trilho__foto" src={cdn + 'home/sobre.webp'} alt="Jardim e área externa do Villa Mantova, cercados pela natureza" style="object-position:50% 60%" width="1280" height="853" loading="lazy"><p id="dif-4">A 20 minutos de Alphaville, o Villa Mantova reúne praticidade de acesso, infraestrutura completa e contato com a natureza.</p></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- GASTRONOMIA -->
+<section class="secao gastronomia" id="gastronomia">
+  <div class="caixa">
+    <div class="duas surge">
+      <figure><img src={cdn + 'gastronomia.webp'} alt="Salgados servidos em bandejas de metal" width="1200" height="800" loading="lazy"></figure>
+      <div class="gastronomia__texto">
+        <h2>Sabores que fazem parte da celebração</h2>
+        <p>No Villa Mantova, os cardápios podem ser personalizados de acordo com as preferências dos noivos e a proposta da celebração.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS: trechos literais de avaliações do Google (ficha e site oficial). Confirmar com o cliente -->
+<section class="secao depoimentos" id="depoimentos">
+  <div class="caixa">
+    <h2 class="surge">Histórias de quem já celebrou no Villa Mantova</h2>
+    <div class="depo surge" data-depo>
+      <div class="depo__nota">
+        <div>
+          <b>4,9</b>
+          <svg class="estrelas" viewBox="0 0 100 18" aria-hidden="true"><path id="estrela" d="M9 0l2.300 5.600 6 .5-4.600 3.900 1.400 5.900L9 12.800 3.900 15.900l1.400-5.900L.7 6.100l6-.5z"/><use href="#estrela" x="20.500"/><use href="#estrela" x="41"/><use href="#estrela" x="61.500"/><use href="#estrela" x="82"/></svg>
+          <p>Avaliação no Google</p>
+        </div>
+        <a href="https://maps.app.goo.gl/2MNL6t9TZynSQgs67" target="_blank" rel="noopener">Ver todas as avaliações</a>
+      </div>
+      <div class="depo__palco">
+        <svg class="depo__aspas" viewBox="0 0 56 40" aria-hidden="true"><path d="M0 40V24C0 10 8 2 22 0l2 6C15 8 11 13 11 20h11v20zm32 0V24c0-14 8-22 22-24l2 6c-9 2-13 7-13 14h11v20z"/></svg>
+        <ul class="depo__lista">
+          <li class="ativo"><blockquote>O Mantova possui uma estrutura incrível! A integração com a natureza deixa tudo ainda mais charmoso.</blockquote><p class="depo__autor"><i aria-hidden="true">L</i>Luciana Andrezza de Oliveira</p></li>
+          <li><blockquote>Desde o primeiro dia que estivemos no espaço sentimos calma e felicidades.</blockquote><p class="depo__autor"><i aria-hidden="true">B</i>Bia Oliveira Boscardini</p></li>
+          <li><blockquote>O local é extremamente acolhedor […] Trecho asfaltado e ótima localização.</blockquote><p class="depo__autor"><i aria-hidden="true">I</i>Isabella Sales</p></li>
+          <li><blockquote>Espaço incrível, lindo, conservado, a divisão dos locais mto boas.</blockquote><p class="depo__autor"><i aria-hidden="true">C</i>Caroline Melo</p></li>
+          <li><blockquote>Essa empresa é demais, desde o primeiro atendimento até a entrega da festa, impecáveis!</blockquote><p class="depo__autor"><i aria-hidden="true">P</i>Priscila Moraes</p></li>
+          <li><blockquote>O espaço é encantador […] o serviço melhor do que o esperado.</blockquote><p class="depo__autor"><i aria-hidden="true">S</i>Sonia Soares</p></li>
+        </ul>
+        <div class="depo__controle">
+          <span class="depo__contador" data-depo-contador aria-live="polite">1 / 6</span>
+          <button type="button" data-depo-seta="-1" aria-label="Depoimento anterior"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.500 3 5.500 10l7 7"/></svg></button>
+          <button type="button" data-depo-seta="1" aria-label="Próximo depoimento"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7.500 3 7 7-7 7"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section class="secao galeria" id="galeria">
+  <div class="caixa galeria__topo surge">
+    <h2>Momentos especiais <br class="so-celular">que ganharam <br class="so-celular">vida aqui</h2>
+    <div class="setas">
+      <button type="button" data-seta="-1" aria-label="Fotos anteriores"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.500 3 5.500 10l7 7"/></svg></button>
+      <button type="button" data-seta="1" aria-label="Próximas fotos"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7.500 3 7 7-7 7"/></svg></button>
+    </div>
+  </div>
+  <div class="carrossel" data-carrossel tabindex="0" role="region" aria-label="Galeria de fotos de casamentos no Villa Mantova">
+    {galeria.map((f) => (
+      <figure><img src={cdn + f.nome} alt={f.alt} width={f.w} height={f.h} loading="lazy" decoding="async"></figure>
+    ))}
+  </div>
+  <div class="galeria__passar">
+    <button type="button" data-seta="-1" aria-label="Foto anterior"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.500 3 5.500 10l7 7"/></svg></button>
+    <span data-galeria-contador>1 / {galeria.length}</span>
+    <button type="button" data-seta="1" aria-label="Próxima foto"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7.500 3 7 7-7 7"/></svg></button>
+  </div>
+</section>
+
+<!-- LOCALIZAÇÃO -->
+<section class="secao localizacao" id="localizacao">
+  <div class="caixa">
+    <div class="duas surge">
+      <div class="localizacao__texto">
+        <h2>Localização estratégica, <br class="so-celular">cercada pela natureza</h2>
+        <address>R. Romênia, 21 - Maravilha lll,<br>Santana de Parnaíba - SP, 06523-045</address>
+        <a class="botao" href="https://maps.app.goo.gl/2MNL6t9TZynSQgs67" target="_blank" rel="noopener">Ver no mapa</a>
+      </div>
+      <div class="mapa"><a class="mapa__link" href="https://maps.app.goo.gl/2MNL6t9TZynSQgs67" target="_blank" rel="noopener" aria-label="Abrir a localização do Villa Mantova no Google Maps"></a><iframe title="Mapa com a localização do Villa Mantova" src="https://www.google.com/maps?q=Villa%20Mantova%20Eventos%2C%20R.%20Rom%C3%AAnia%2C%2021%2C%20Santana%20de%20Parna%C3%ADba%20-%20SP&amp;z=15&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO: formulário padrão Dmove (preset social, config.json > forms.casamentos-form) -->
+<section class="secao contato" id="contato">
+  <div class="caixa">
+    <div class="duas">
+      <div class="contato__texto surge">
+        <h2>Vamos planejar o seu casamento?</h2>
+        <p>Preencha o formulário e, em breve, nosso time entrará em contato com você.</p>
+      </div>
+      <form class="formulario surge" id="orcamento" data-form-id="villa-mantova-casamentos" data-fonte="Landing page/casamentos" data-submit-url={webhook} data-grid-id="orcamento" data-success-id="orcamento-sucesso" novalidate>
+        <input class="isca" type="text" name="website" aria-hidden="true" tabindex="-1" autocomplete="off" />
+        {campos.map((c) => (
+          <div class:list={['campo', c.full && 'campo--todo']}>
+            <label for={`form-field-${c.name}`}>{c.label}{c.hint && <span class="rotulo-hint"> ({c.hint})</span>}</label>
+            {c.type === 'select' ? (
+              <select id={`form-field-${c.name}`} name={c.name} required={c.required}>
+                {c.options?.map((o) => <option value={o.value} disabled={o.disabled} selected={o.selected}>{o.label}</option>)}
+              </select>
+            ) : c.type === 'textarea' ? (
+              <textarea id={`form-field-${c.name}`} name={c.name} rows="4" required={c.required}></textarea>
+            ) : (
+              <input
+                id={`form-field-${c.name}`}
+                name={c.name}
+                type={c.type}
+                placeholder={c.name === 'email' ? 'voce@email.com.br' : c.placeholder}
+                required={c.required}
+                autocomplete={autoc[c.name]}
+                inputmode={c.type === 'tel' || c.type === 'number' ? 'numeric' : undefined}
+                min={c.type === 'number' ? '1' : undefined}
+                maxlength={c.datepicker ? 10 : undefined}
+                data-datepicker={c.datepicker ? '' : undefined}
+              />
+            )}
+          </div>
+        ))}
+        <button class="botao form-submit" type="submit">Solicitar Orçamento</button>
+        <p class="aviso" id="orcamentoFormMsg" role="status"></p>
+      </form>
+      <div class="sucesso" id="orcamento-sucesso" role="status">
+        <h3>Recebemos sua solicitação</h3>
+        <p>Em breve, nosso time entrará em contato com você.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="rodape">
+  <div class="caixa">
+    <a class="marca" href="#topo" aria-label="Villa Mantova, início da página"><b>VILLA MANTOVA</b></a>
+    <p>© <span data-ano>2026</span> Villa Mantova. Todos os direitos reservados.</p>
+    <p class="rodape__credito">Desenvolvido por <a href="https://dmove.com.br" target="_blank" rel="noopener"><img src="/images/logo-dmove.webp" alt="Dmove" width="600" height="134" loading="lazy"></a></p>
+  </div>
+</footer>
+
+  <!-- Botão de WhatsApp (popup de captação de lead, sem redirecionamento), pedido na copy -->
+  <WhatsAppWidget submitUrl={webhook} />
+
+  <script>
+    import flatpickr from 'flatpickr';
+    import { Portuguese } from 'flatpickr/dist/l10n/pt.js';
+    import 'flatpickr/dist/flatpickr.min.css';
+    import { initForms } from '../scripts/forms';
+    import '../scripts/eventos-corporativos.js'; // interações do design (abas, depoimentos, galeria): iguais às da LP corporativa
+
+    initForms();
+
+    const data = document.querySelector<HTMLInputElement>('[data-datepicker]');
+    if (data) {
+      // máscara dd/mm/aaaa enquanto digita
+      data.addEventListener('input', () => {
+        const d = data.value.replace(/\D/g, '').slice(0, 8);
+        data.value = d.length > 4 ? d.slice(0, 2) + '/' + d.slice(2, 4) + '/' + d.slice(4) : d.length > 2 ? d.slice(0, 2) + '/' + d.slice(2) : d;
+      });
+      flatpickr(data, { locale: Portuguese, dateFormat: 'd/m/Y', minDate: 'today', allowInput: true });
+    }
+  </script>
+</Base>

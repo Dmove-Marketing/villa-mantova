@@ -1,0 +1,26 @@
+/* Ajustes da LP de casamentos sobre o design da LP corporativa (eventos-corporativos.css, importado antes). */
+
+/* Autoridade com 3 números (a corporativa tem 4) */
+@media (min-width:861px){
+  .numeros--3 ul{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+
+/* Diferenciais com 4 abas (a corporativa tem 5) */
+@media (min-width:861px){
+  .trilho--4{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+
+/* Experiência 360°: no celular o texto completo da copy aparece (sem o resumo em cartão da corporativa) */
+@media (max-width:860px){
+  #experiencia .duas>p{display:block;margin-top:14px;font-size:15px;line-height:1.4;text-wrap:pretty}
+  #experiencia .duas{row-gap:0}
+}
+
+/* Gastronomia: o texto quebra normalmente (a corporativa fixa as quebras de linha) */
+.gastronomia__texto p{white-space:normal;max-width:30em}
+
+/* Hero no celular: título quebra de forma equilibrada e a foto enquadra o casal */
+@media (max-width:860px){
+  .hero__texto h1{text-wrap:balance}
+  .hero__foto img{object-position:60% 50%}
+}
