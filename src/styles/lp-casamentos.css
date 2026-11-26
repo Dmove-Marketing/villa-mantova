@@ -19,8 +19,13 @@
 /* Gastronomia: o texto quebra normalmente (a corporativa fixa as quebras de linha) */
 .gastronomia__texto p{white-space:normal;max-width:30em}
 
-/* Hero: foto centralizada (desktop e celular) */
-.hero__foto img{object-position:50% 50%;transform-origin:50% 50%}
+/* Hero: foto centralizada na horizontal e um pouco abaixo no desktop (mais do espaço acima do casal) */
+.hero__foto img{object-position:50% 30%;transform-origin:50% 50%}
+
+/* Diferenciais: sem o deslocamento de 44px que a LP corporativa aplica na 1ª foto (o enquadramento fica só no object-position) */
+@media (min-width:861px){
+  .palco__fotos img:first-child{top:0;bottom:0}
+}
 
 /* Hero no celular: título quebra de forma equilibrada */
 @media (max-width:860px){
